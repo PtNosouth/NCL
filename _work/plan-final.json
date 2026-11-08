@@ -1,0 +1,80 @@
+{
+  "outDir": "review/home",
+  "shots": [
+    {
+      "name": "desktop-01",
+      "width": 1440,
+      "height": 900,
+      "wait": 5200
+    },
+    {
+      "name": "desktop-02",
+      "width": 1440,
+      "height": 900,
+      "wait": 18000
+    },
+    {
+      "name": "desktop-03-swan",
+      "width": 1440,
+      "height": 900,
+      "wait": 33000
+    },
+    {
+      "name": "wide-01",
+      "width": 1920,
+      "height": 1080,
+      "wait": 5200
+    },
+    {
+      "name": "small-desk",
+      "width": 1280,
+      "height": 720,
+      "wait": 5200
+    },
+    {
+      "name": "mobile-01",
+      "width": 390,
+      "height": 844,
+      "wait": 5200
+    },
+    {
+      "name": "mobile-menu",
+      "width": 390,
+      "height": 844,
+      "wait": 3600,
+      "setup": "document.getElementById('menu-btn').click()"
+    },
+    {
+      "name": "tablet-01",
+      "width": 834,
+      "height": 1112,
+      "wait": 5200
+    },
+    {
+      "name": "intro-02",
+      "width": 1440,
+      "height": 900,
+      "wait": 1150
+    },
+    {
+      "name": "intro-03",
+      "width": 1440,
+      "height": 900,
+      "wait": 1750
+    },
+    {
+      "name": "reduced-motion",
+      "width": 1440,
+      "height": 900,
+      "wait": 3600,
+      "reducedMotion": true
+    },
+    {
+      "name": "hover-nav",
+      "width": 1440,
+      "height": 900,
+      "wait": 5200,
+      "hover": ".nav-links a:nth-child(2)"
+    }
+  ]
+}
