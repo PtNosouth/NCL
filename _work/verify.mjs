@@ -64,18 +64,20 @@ check('video loops', await ev(`document.getElementById('film-video').loop`), tru
 check('video src is 1080 on desktop', await ev(`document.getElementById('film-video').currentSrc.split('/').pop()`), 'ncl-70086-1080.mp4');
 check('duration read', await ev(`+document.getElementById('film-video').duration.toFixed(1)`), (v) => Math.abs(v - 50.6) < 1.2);
 check('no timecode', await ev(`document.querySelectorAll('#tc-now, #tc-total, .tc').length`), 0);
-check('no footer plinth', await ev(`document.querySelectorAll('footer, .plate').length`), 0);
+check('a footer closes the page', await ev(`document.querySelectorAll('footer').length`), 1);
+check('footer carries the credits', await ev(`/Wikimedia/.test(document.querySelector('footer').textContent)`), true);
 check('no play control', await ev(`document.querySelectorAll('#play, .play, [aria-label*="Play" i], [aria-label*="Pause" i]').length`), 0);
 check('only the menu button remains', await ev(`document.querySelectorAll('button').length`), 1);
 check('film really runs on its own', await ev(`document.getElementById('film-video').currentTime > 0.4`), true);
 check('film wraps at the end', await ev(`(()=>{const v=document.getElementById('film-video');return v.loop && v.currentTime < v.duration})()`), true);
 
 /* removals requested this round */
-check('no chapter ruler', await ev(`document.querySelectorAll('#chapters, .chapters, .rail').length`), 0);
+check('the deck carries eight sheets', await ev(`document.querySelectorAll('#deck .sheet').length`), 8);
 check('no progress tracker', await ev(`(()=>{const p=document.querySelector('.plate');const pseudo=p?getComputedStyle(p,'::before').content:'none';return document.querySelectorAll('[role="progressbar"], .rail-bar, progress, input[type=range]').length + (pseudo!=='none'?1:0)})()`), 0);
-check('no eyebrow field', await ev(`document.querySelectorAll('.eyebrow').length`), 0);
+check('the craft section opens with its eyebrow', await ev(`document.querySelectorAll('.eyebrow').length`), 1);
 check('no fixture number in DOM', await ev(`/70086|Eight lights/i.test(document.body.innerText)`), false);
-check('no raster logo', await ev(`document.querySelectorAll('img, .mark').length`), 0);
+check('the wordmark is still drawn, not raster', await ev(`document.querySelectorAll('.mark, .brand img').length`), 0);
+check('every image is a section photograph', await ev("Array.prototype.every.call(document.images, function(i){ var s=i.getAttribute('src')||''; return s.indexOf('media/rooms/')===0 || s.indexOf('media/crystal/')===0; })"), true);
 /* the "g" descender bug: nothing may clip the headline */
 check('headline does not clip', await ev(`(()=>{const l=document.querySelector('.hero-title .line');const h=document.querySelector('.hero-title');return getComputedStyle(l).overflow+'+'+getComputedStyle(h).overflow})()`), 'visible+visible');
 check('headline is not height-constrained', await ev(`(()=>{const h=document.querySelector('.hero-title');const last=h.querySelectorAll('.line > span')[1];const r1=h.getBoundingClientRect(),r2=last.getBoundingClientRect();return r2.bottom-r1.bottom})()`), (v) => v >= -1);
@@ -83,7 +85,7 @@ check('descender space exists', await ev(`(()=>{const l=document.querySelectorAl
 /* dimensional treatment */
 check('headline carries layered shadow', await ev(`(()=>{const t=getComputedStyle(document.querySelectorAll('.hero-title .line > span')[1]).textShadow;return t==='none'?0:(t.match(/rgb/g)||[]).length})()`), (v) => v >= 3);
 check('gold word carries its own shadow', await ev(`(()=>{const t=getComputedStyle(document.querySelector('.hero-title em')).textShadow;return t==='none'?0:(t.match(/rgb/g)||[]).length})()`), (v) => v >= 3);
-check('wordmark is inline svg NCL', await ev(`(()=>{const s=document.querySelector('svg.wordmark');return s? s.getAttribute('aria-label')+'|'+s.querySelectorAll('rect,path,polygon').length : 'none'})()`), (v) => v.startsWith('NCL|') && +v.split('|')[1] >= 10);
+check('wordmark is the v4 inline svg', await ev(`(()=>{const s=document.querySelector('svg.wordmark');return s? s.getAttribute('aria-label')+'|'+s.querySelectorAll('path').length+'|'+s.querySelectorAll('img').length : 'none'})()`), (v) => v.startsWith('NCL|') && +v.split('|')[1] >= 2 && v.split('|')[2] === '0');
 check('wordmark painted', await ev(`getComputedStyle(document.querySelector('.wordmark')).color`), 'rgb(230, 202, 148)');
 
 /* hover = the type lights up, not a rule */
@@ -103,7 +105,7 @@ check('no control was needed', await ev(`document.querySelectorAll('button').len
 /* a11y basics */
 check('video muted', await ev(`document.getElementById('film-video').muted`), true);
 check('wordmark labelled', await ev(`document.querySelector('.brand').getAttribute('aria-label')`), (v) => /NCL/.test(v));
-check('cta target', await ev(`document.querySelector('.cta').getAttribute('href')`), '#collections');
+check('hero cta leads into the next screen', await ev(`document.querySelector('.hero .cta').getAttribute('href')`), '#bespoke');
 check('no media error', await ev(`document.documentElement.classList.contains('film-failed')`), false);
 check('brand focusable', await ev(`(()=>{const b=document.querySelector('.brand');b.focus();return document.activeElement===b})()`), true);
 
@@ -113,7 +115,8 @@ await s('Page.navigate', { url: `http://127.0.0.1:${PORT}/home/index.html` });
 await sleep(4200);
 check('mobile src is 720', await ev(`document.getElementById('film-video').currentSrc.split('/').pop()`), 'ncl-70086-720.mp4');
 check('mobile no h-scroll', await ev(`document.documentElement.scrollWidth <= innerWidth + 1`), true);
-check('mobile no v-scroll', await ev(`document.documentElement.scrollHeight <= innerHeight + 1`), true);
+check('mobile scrolls instead of clipping', await ev(`document.body.scrollHeight > innerHeight`), true);
+check('mobile has no horizontal overflow', await ev(`document.documentElement.scrollWidth <= innerWidth + 1`), true);
 check('mobile wordmark visible', await ev(`document.querySelector('.wordmark').getBoundingClientRect().height`), (v) => v >= 18);
 await ev(`document.getElementById('menu-btn').click()`);
 await sleep(500);

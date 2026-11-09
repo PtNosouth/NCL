@@ -4,15 +4,19 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>NCL 新构思 — Light, kept in gold</title>
-<meta name="description" content="NCL 新构思 — cast brass and hand-set crystal chandeliers, made to order.">
+<meta name="description" content="NCL 新构思 — cast brass and hand-set crystal chandeliers, drawn to your room and finished by hand.">
 <link rel="preload" href="fonts/InstrumentSerif-Regular.ttf" as="font" type="font/ttf" crossorigin>
 <link rel="preload" href="fonts/sora-latin-300-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="footer.css">
 </head>
 <body class="preload">
 
 <div class="grain" aria-hidden="true"></div>
+<div class="page-veil" id="page-veil" aria-hidden="true"></div>
 
+<!-- ══ 01 · the cover ══════════════════════════════════════ -->
+<div class="cover-wrap" id="top">
 <div class="stage">
   <div class="film" id="film">
     <div class="film-media" id="film-media">
@@ -28,41 +32,7 @@
     <span class="ignite-bloom"></span>
   </div>
 
-  <header class="nav" id="nav">
-    <a class="brand" href="#top" aria-label="NCL 新构思 — home">
-      <svg class="wordmark" viewBox="-8 0 235.5 100" role="img" aria-label="NCL" fill="currentColor"><rect x="0.00" y="0.00" width="14.50" height="100.00"/><rect x="51.50" y="0.00" width="14.50" height="100.00"/><polygon points="0.00,0.00 50.00,100.00 66.00,100.00 16.00,0.00"/><rect x="-8.00" y="0.00" width="30.50" height="3.00"/><rect x="-8.00" y="97.00" width="30.50" height="3.00"/><rect x="43.50" y="0.00" width="30.50" height="3.00"/><rect x="43.50" y="97.00" width="30.50" height="3.00"/><path d="M137.12,10.60 A33.50,50.00 0 1 0 137.12,89.40 L128.51,81.13 A19.50,39.50 0 1 1 128.51,18.87 Z"/><rect x="164.50" y="0.00" width="14.50" height="100.00"/><rect x="164.50" y="94.00" width="63.00" height="6.00"/><rect x="225.10" y="84.50" width="2.40" height="10.00"/><rect x="156.50" y="0.00" width="30.50" height="3.00"/><rect x="156.50" y="97.00" width="30.50" height="3.00"/></svg>
-      <span class="brand-cn">新构思</span>
-    </a>
-
-    <nav class="nav-links" aria-label="Primary">
-      <a href="#collections"><span>Collections</span></a>
-      <a href="#bespoke"><span>Bespoke</span></a>
-      <a href="#projects"><span>Projects</span></a>
-      <a href="#atelier"><span>Atelier</span></a>
-    </nav>
-
-    <div class="nav-end">
-      <span class="nav-meta">Guangdong · Worldwide</span>
-      <a class="enquire" href="#enquire"><span>Enquire</span><i aria-hidden="true"></i></a>
-      <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="menu">
-        <span class="menu-bars" aria-hidden="true"><i></i><i></i></span>
-        <span class="menu-word">Menu</span>
-      </button>
-    </div>
-  </header>
-
-  <div class="menu" id="menu" hidden>
-    <nav class="menu-links" aria-label="Menu">
-      <a href="#collections"><span>Collections</span></a>
-      <a href="#bespoke"><span>Bespoke</span></a>
-      <a href="#projects"><span>Projects</span></a>
-      <a href="#atelier"><span>Atelier</span></a>
-      <a class="menu-enquire" href="#enquire"><span>Enquire</span></a>
-    </nav>
-    <p class="menu-foot">Trade and private commissions · worldwide delivery.</p>
-  </div>
-
-  <main class="hero" id="top">
+  <main class="hero">
     <div class="hero-copy">
       <h1 class="hero-title">
         <span class="line"><span>Light,</span></span>
@@ -75,13 +45,187 @@
       </p>
 
       <p class="hero-action">
-        <a class="cta" href="#collections">
-          <span>Explore the collection</span>
+        <a class="cta" href="#bespoke">
+          <span>Follow the light down</span>
           <svg viewBox="0 0 24 12" aria-hidden="true"><path d="M0 6h21M16 1l5 5-5 5"/></svg>
         </a>
       </p>
     </div>
   </main>
+
+  <div class="stage-veil" id="stage-veil" aria-hidden="true"></div>
+</div>
+</div>
+
+<!-- ══ 02 · commissions: a deck of sheets pulled from the right ══ -->
+<section class="bespoke" id="bespoke" aria-label="Commissions">
+  <div class="bespoke-pin">
+    <div class="deck" id="deck">
+      <figure class="sheet" data-i="0">
+        <img src="media/rooms/room-01.webp" alt="A panelled drawing room with a twelve-arm crystal chandelier" width="1400" height="1750" loading="eager" decoding="async">
+      </figure>
+      <figure class="sheet" data-i="1">
+        <img src="media/rooms/room-05.webp" alt="A dining room with a long crystal bar fixture over the table" width="1400" height="1750" loading="lazy" decoding="async">
+      </figure>
+      <figure class="sheet" data-i="2">
+        <img src="media/rooms/room-02.webp" alt="A long sitting room with a deeper crystal fixture hung lower" width="1400" height="1750" loading="lazy" decoding="async">
+      </figure>
+      <figure class="sheet" data-i="3">
+        <img src="media/rooms/room-06.webp" alt="A double-height entrance hall with a large tiered crystal chandelier" width="1400" height="1750" loading="lazy" decoding="async">
+      </figure>
+      <figure class="sheet" data-i="4">
+        <img src="media/rooms/room-03.webp" alt="A cream sitting room with a wide multi-arm crystal fixture" width="1400" height="1750" loading="lazy" decoding="async">
+      </figure>
+      <figure class="sheet" data-i="5">
+        <img src="media/rooms/room-07.webp" alt="A windowed living room with a crystal fixture over a long table" width="1400" height="1750" loading="lazy" decoding="async">
+      </figure>
+      <figure class="sheet" data-i="6">
+        <img src="media/rooms/room-04.webp" alt="A seating area with a single large lantern-form crystal fixture" width="1400" height="1750" loading="lazy" decoding="async">
+      </figure>
+      <figure class="sheet" data-i="7">
+        <img src="media/rooms/room-08.webp" alt="A living room with a crystal drum fixture and a wide window" width="1400" height="1750" loading="lazy" decoding="async">
+      </figure>
+    </div>
+
+    <div class="deck-copy">
+      <p class="rail-kicker"><span>Commissions</span></p>
+      <p class="rail-claim">Every room here is a commission we built, delivered and hung —
+        private houses, hotels, a few restaurants.</p>
+      <p class="rail-now" id="rail-now"><b id="rail-name">Lights</b><span id="rail-line">Twelve arms or thirty-six. The piece is drawn outward from the fixture count.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 03 · the hand: crystal, on the bench ════════════════ -->
+<section class="craft" id="atelier" aria-labelledby="craft-title">
+  <div class="craft-intro">
+    <p class="eyebrow"><span>The hand</span><i aria-hidden="true"></i><span>Cut · strung · lit</span></p>
+    <h2 class="craft-title" id="craft-title">A chandelier is<br>a thousand decisions<br>made by hand.</h2>
+  </div>
+
+  <div class="craft-plate craft-plate-a">
+    <div class="craft-media px-frame">
+      <img class="px" data-px="0.16" src="media/crystal/pendants.webp" alt="Cut-crystal pendants hanging from a gilt corona" width="1300" height="1099" loading="lazy" decoding="async">
+    </div>
+    <div class="craft-note">
+      <p class="mono">Cut</p>
+      <h3>Every facet is cut,<br>then polished</h3>
+      <p class="craft-body">The edge has to hold light on one side and shadow on the other.
+        Cut too shallow and the crystal turns to glass; cut too deep and it swallows the room.</p>
+    </div>
+  </div>
+
+  <div class="craft-plate craft-plate-b">
+    <div class="craft-note">
+      <p class="mono">Strung</p>
+      <h3>Each drop is drilled,<br>checked, then hung</h3>
+      <p class="craft-body">In the order the drawing calls for. One row out of line and the whole
+        run comes back down — there is no machine that makes that judgement.</p>
+    </div>
+    <div class="craft-media px-frame">
+      <img class="px" data-px="0.16" src="media/crystal/strung.webp" alt="Rows of crystal drops strung on wire, close up" width="1200" height="1126" loading="lazy" decoding="async">
+    </div>
+  </div>
+
+  <div class="craft-close">
+    <div class="craft-media craft-media-wide px-frame">
+      <img class="px" data-px="0.10" src="media/crystal/lit.webp" alt="The 70086 fixture switched on, its flame bulbs lit" width="1600" height="900" loading="lazy" decoding="async">
+    </div>
+    <div class="craft-close-copy">
+      <p class="mono">Lit</p>
+      <h3 class="craft-close-title">It is only finished<br>once it is lit</h3>
+      <p class="craft-body">Frame, balance, switch on. In the light the piece either holds together
+        or it does not — and that is the moment we judge the work, not the drawing.</p>
+      <p class="craft-cta"><a class="cta" href="#enquire"><span>Start an enquiry</span>
+        <svg viewBox="0 0 24 12" aria-hidden="true"><path d="M0 6h21M16 1l5 5-5 5"/></svg></a></p>
+    </div>
+  </div>
+</section>
+
+<footer class="ncl-foot" id="enquire">
+  <div class="ncl-foot-grid">
+    <div>
+      <h4 class="brand-ish">NCL 新构思</h4>
+      <ul>
+        <li><a href="#atelier">Our story</a></li>
+        <li><a href="#bespoke">Made to order</a></li>
+        <li><a href="#bespoke">Projects</a></li>
+        <li><a href="collection.html">The collection</a></li>
+      </ul>
+    </div>
+
+    <div class="ncl-foot-addr">
+      <h4>Factory address</h4>
+      <p>Guangdong, China</p>
+      <p>Workshop visits by appointment</p>
+      <p>Mon — Fri · 09:00–18:00 CST</p>
+    </div>
+
+    <div>
+      <h4>Connect with us</h4>
+      <ul class="ncl-social">
+        <li><a href="https://www.instagram.com/" aria-label="NCL on Instagram" rel="noopener">
+          <svg viewBox="0 0 24 24" role="img" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.2" cy="6.9" r="1.1" fill="currentColor" stroke="none"/></svg>
+        </a></li>
+        <li><a href="https://www.pinterest.com/" aria-label="NCL on Pinterest" rel="noopener">
+          <svg viewBox="0 0 24 24" role="img" aria-hidden="true"><path d="M12 3.6a8.4 8.4 0 0 0-3.1 16.2c-.1-.9-.2-2.2 0-3.1l1.2-4.9s-.3-.6-.3-1.5c0-1.4.8-2.4 1.8-2.4.9 0 1.3.7 1.3 1.5 0 .9-.6 2.3-.9 3.6-.3 1.1.5 2 1.6 2 2 0 3.4-2.5 3.4-5.5 0-2.3-1.5-4-4.1-4-2.8 0-4.6 2.1-4.6 4.4 0 .8.2 1.4.6 1.9.2.2.2.3.2.5l-.2.9c-.1.3-.3.4-.6.3-1.5-.6-2.2-2.3-2.2-4.2 0-3.1 2.6-6.1 7.2-6.1 3.8 0 6.4 2.7 6.4 5.7 0 3.9-2.2 6.9-5.4 6.9-1.1 0-2.1-.6-2.4-1.3l-.7 2.5c-.2.9-.8 2-1.2 2.6A8.4 8.4 0 1 0 12 3.6Z"/></svg>
+        </a></li>
+        <li><a href="mailto:studio@ncl.example" aria-label="Email NCL">
+          <svg viewBox="0 0 24 24" role="img" aria-hidden="true"><rect x="3" y="5.5" width="18" height="13" rx="2"/><path d="m3.8 6.6 8.2 6 8.2-6"/></svg>
+        </a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h4>Useful information</h4>
+      <ul>
+        <li><a href="collection.html">Product photographs</a></li>
+        <li><a href="mailto:studio@ncl.example?subject=Care%20%26%20finishes">Care &amp; finishes</a></li>
+        <li><a href="mailto:studio@ncl.example?subject=Trade%20enquiry">Trade enquiries</a></li>
+        <li><a href="#top">Back to the top</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="ncl-foot-base">
+    <p>© 2024 NCL 新构思 · Guangdong — Worldwide</p>
+    <p>Photography — crystal stills via Wikimedia Commons (CC0)</p>
+    <p><a href="#top">Top ↑</a></p>
+  </div>
+</footer>
+
+<header class="nav" id="nav">
+  <a class="brand" href="#top" aria-label="NCL 新构思 — home">
+    <svg class="wordmark" viewBox="-4 -4 224 104" role="img" aria-label="NCL" preserveAspectRatio="xMinYMid meet"><g transform="translate(-282 -84)"><g transform="translate(282 84) scale(0.8)"><path fill="#F5F0E6" d="M8.00 0.00 L11.00 0.00 L11.00 100.00 L8.00 100.00 Z M68.00 0.00 L71.00 0.00 L71.00 100.00 L68.00 100.00 Z M8.00 0.00 L27.00 0.00 L71.00 100.00 L55.00 100.00 Z M-3.00 0.00 L23.00 0.00 L23.00 3.00 L-3.00 3.00 Z M-3.00 97.00 L23.00 97.00 L23.00 100.00 L-3.00 100.00 Z M57.00 0.00 L82.00 0.00 L82.00 3.00 L57.00 3.00 Z M182.00 82.78 L180.74 84.35 L179.43 85.85 L178.05 87.30 L176.63 88.68 L175.15 90.01 L173.63 91.26 L172.05 92.45 L170.44 93.56 L168.79 94.61 L167.09 95.58 L165.37 96.47 L163.61 97.29 L161.82 98.02 L160.00 98.68 L158.16 99.26 L156.31 99.76 L154.43 100.17 L152.54 100.50 L150.64 100.75 L148.73 100.91 L146.82 100.99 L144.91 100.99 L142.99 100.90 L141.09 100.72 L139.19 100.46 L137.30 100.12 L135.43 99.69 L133.57 99.18 L131.74 98.59 L129.93 97.92 L128.14 97.17 L126.39 96.35 L124.66 95.44 L122.98 94.46 L121.33 93.41 L119.72 92.28 L118.15 91.08 L116.63 89.82 L115.17 88.49 L113.75 87.10 L112.38 85.64 L111.07 84.13 L109.82 82.55 L108.63 80.93 L107.50 79.25 L106.43 77.53 L105.43 75.76 L104.50 73.94 L103.64 72.09 L102.84 70.20 L102.12 68.28 L101.47 66.32 L100.90 64.34 L100.40 62.34 L99.97 60.31 L99.62 58.27 L99.35 56.22 L99.16 54.15 L99.04 52.08 L99.00 50.00 L99.04 47.92 L99.16 45.85 L99.35 43.78 L99.62 41.73 L99.97 39.69 L100.40 37.66 L100.90 35.66 L101.47 33.68 L102.12 31.72 L102.84 29.80 L103.64 27.91 L104.50 26.06 L105.43 24.24 L106.43 22.47 L107.50 20.75 L108.63 19.07 L109.82 17.45 L111.07 15.87 L112.38 14.36 L113.75 12.90 L115.17 11.51 L116.63 10.18 L118.15 8.92 L119.72 7.72 L121.33 6.59 L122.98 5.54 L124.66 4.56 L126.39 3.65 L128.14 2.83 L129.93 2.08 L131.74 1.41 L133.57 0.82 L135.43 0.31 L137.30 -0.12 L139.19 -0.46 L141.09 -0.72 L142.99 -0.90 L144.91 -0.99 L146.82 -0.99 L148.73 -0.91 L150.64 -0.75 L152.54 -0.50 L154.43 -0.17 L156.31 0.24 L158.16 0.74 L160.00 1.32 L161.82 1.98 L163.61 2.71 L165.37 3.53 L167.09 4.42 L168.79 5.39 L170.44 6.44 L172.05 7.55 L173.63 8.74 L175.15 9.99 L176.63 11.32 L178.05 12.70 L179.43 14.15 L180.74 15.65 L182.00 17.22 L178.43 19.47 L177.50 18.01 L176.54 16.61 L175.53 15.26 L174.48 13.97 L173.40 12.74 L172.28 11.57 L171.13 10.47 L169.94 9.43 L168.73 8.46 L167.48 7.55 L166.22 6.72 L164.92 5.96 L163.61 5.27 L162.28 4.66 L160.93 4.12 L159.57 3.66 L158.19 3.27 L156.80 2.96 L155.41 2.73 L154.01 2.58 L152.60 2.51 L151.20 2.51 L149.79 2.60 L148.39 2.76 L147.00 3.00 L145.61 3.32 L144.24 3.72 L142.88 4.19 L141.53 4.74 L140.20 5.36 L138.89 6.06 L137.60 6.83 L136.34 7.68 L135.10 8.59 L133.89 9.57 L132.71 10.62 L131.56 11.73 L130.44 12.91 L129.37 14.15 L128.32 15.45 L127.32 16.81 L126.36 18.22 L125.44 19.68 L124.57 21.19 L123.74 22.76 L122.96 24.36 L122.22 26.01 L121.54 27.70 L120.90 29.43 L120.32 31.19 L119.79 32.98 L119.31 34.80 L118.89 36.64 L118.52 38.51 L118.21 40.39 L117.96 42.30 L117.76 44.21 L117.61 46.14 L117.53 48.07 L117.50 50.00 L117.53 51.93 L117.61 53.86 L117.76 55.79 L117.96 57.70 L118.21 59.61 L118.52 61.49 L118.89 63.36 L119.31 65.20 L119.79 67.02 L120.32 68.81 L120.90 70.57 L121.54 72.30 L122.22 73.99 L122.96 75.64 L123.74 77.24 L124.57 78.81 L125.44 80.32 L126.36 81.78 L127.32 83.19 L128.32 84.55 L129.37 85.85 L130.44 87.09 L131.56 88.27 L132.71 89.38 L133.89 90.43 L135.10 91.41 L136.34 92.32 L137.60 93.17 L138.89 93.94 L140.20 94.64 L141.53 95.26 L142.88 95.81 L144.24 96.28 L145.61 96.68 L147.00 97.00 L148.39 97.24 L149.79 97.40 L151.20 97.49 L152.60 97.49 L154.01 97.42 L155.41 97.27 L156.80 97.04 L158.19 96.73 L159.57 96.34 L160.93 95.88 L162.28 95.34 L163.61 94.73 L164.92 94.04 L166.22 93.28 L167.48 92.45 L168.73 91.54 L169.94 90.57 L171.13 89.53 L172.28 88.43 L173.40 87.26 L174.48 86.03 L175.53 84.74 L176.54 83.39 L177.50 81.99 L178.43 80.53 Z M178.50 11.97 L182.00 11.97 L182.00 32.22 L178.50 32.22 Z M208.00 0.00 L226.00 0.00 L226.00 100.00 L208.00 100.00 Z M197.00 0.00 L237.00 0.00 L237.00 3.00 L197.00 3.00 Z M197.00 97.00 L226.00 97.00 L226.00 100.00 L197.00 100.00 Z M208.00 97.00 L268.00 97.00 L268.00 100.00 L208.00 100.00 Z M265.00 72.00 L268.00 72.00 L268.00 100.00 L252.00 100.00 Z"/><path fill="#B08D57" d="M-3.00 118.00 L268.00 118.00 L268.00 119.50 L-3.00 119.50 Z"/></g></g></svg>
+    <span class="brand-cn">新构思</span>
+  </a>
+  <span class="nav-meta">Guangdong · Worldwide</span>
+
+  <nav class="nav-links" aria-label="Primary">
+    <a href="#top" data-spy="top"><span>Home</span></a>
+    <a href="collection.html"><span>Products</span></a>
+    <a href="#bespoke" data-spy="bespoke"><span>Projects</span></a>
+    <a href="#atelier" data-spy="atelier"><span>Story</span></a>
+  </nav>
+
+  <div class="nav-end">
+    <a class="enquire" href="#enquire"><span>Enquire</span><i aria-hidden="true"></i></a>
+    <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="menu">
+      <span class="menu-bars" aria-hidden="true"><i></i><i></i></span>
+      <span class="menu-word">Menu</span>
+    </button>
+  </div>
+</header>
+
+<div class="menu" id="menu" hidden>
+  <nav class="menu-links" aria-label="Menu">
+    <a href="#top"><span>Home</span></a>
+    <a href="collection.html"><span>Products</span></a>
+    <a href="#bespoke"><span>Projects</span></a>
+    <a href="#atelier"><span>Story</span></a>
+    <a class="menu-enquire" href="#enquire"><span>Enquire</span></a>
+  </nav>
+  <p class="menu-foot">Trade and private commissions · worldwide delivery.</p>
 </div>
 
 <script src="main.js"></script>

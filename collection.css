@@ -1,0 +1,321 @@
+/* NCL 新构思 — the collection
+   Hero, then a left rail of families with one family on screen at a time.
+   Plates open a detail card; the rail switches families with a short transition. */
+
+
+/* ── palette ──────────────────────────────────────────────
+   One set of variables per theme; everything below reads these. */
+body.catalogue{
+  /* the page ground is the same umber the plates were shot on */
+  --page:#1a1613;
+  --ink:#f3ece0;
+  --ink-2:rgba(243,236,224,.66);
+  --ink-3:rgba(243,236,224,.46);
+  --rule:rgba(243,236,224,.13);
+  --accent:#e9d4a6;
+  --accent-2:rgba(201,166,107,.5);
+  --panel:#141110;
+  --foot-bg:#1a1613;
+}
+/* the alternatives below only work if the plates are re-baked on the same ground
+   (work/build_catalogue.py GROUND) — otherwise the cards show as darker rectangles */
+/* warm gallery: umber ground, brass a touch deeper */
+body.catalogue[data-theme="umber"]{
+  --page:#100d09;
+  --ink:#f0e7d7;
+  --ink-2:rgba(240,231,215,.60);
+  --ink-3:rgba(240,231,215,.40);
+  --rule:rgba(240,231,215,.11);
+  --accent:#e0c58f;
+  --accent-2:rgba(190,150,96,.45);
+  --panel:#0b0906;
+}
+/* midnight: cool ground, the brass carries all the warmth */
+body.catalogue[data-theme="midnight"]{
+  --page:#080b11;
+  --ink:#e9eaf0;
+  --ink-2:rgba(233,234,240,.58);
+  --ink-3:rgba(233,234,240,.38);
+  --rule:rgba(233,234,240,.10);
+  --accent:#e3cda2;
+  --accent-2:rgba(160,178,205,.35);
+  --panel:#06080d;
+}
+/* the v4 identity board: deep green, brass reads richest here */
+body.catalogue[data-theme="forest"]{
+  --page:#0b1512;
+  --ink:#eee9dc;
+  --ink-2:rgba(238,233,220,.60);
+  --ink-3:rgba(238,233,220,.40);
+  --rule:rgba(238,233,220,.10);
+  --accent:#e6cd9c;
+  --accent-2:rgba(176,141,87,.45);
+  --panel:#07110e;
+}
+
+body.catalogue{
+  margin:0;
+  background:var(--page);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-weight:300;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  /* clip, not hidden: hidden would turn the body into the wheel's scroll container */
+  overflow-x:clip;
+}
+
+.mono{
+  font-family:var(--mono); font-size:10px; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--ink-2);
+}
+
+/* ── hero ───────────────────────────────────────────────── */
+.col-hero{
+  position:relative; min-height:clamp(520px,86svh,900px);
+  display:grid; align-items:end;
+  padding:calc(var(--nav-h) + 8vh) var(--pad) clamp(34px,6vh,64px);
+  overflow:hidden;
+}
+.col-hero-media{position:absolute; inset:0; background:#070605}
+.col-hero-media img{
+  width:100%; height:100%; object-fit:cover; object-position:50% 42%;
+  filter:brightness(.78) saturate(.92);
+  transform:scale(1.02);
+}
+.col-hero::after{
+  content:""; position:absolute; inset:0; pointer-events:none;
+  background:
+    linear-gradient(to top,rgba(26,22,19,.97) 0%,rgba(26,22,19,.6) 30%,rgba(26,22,19,.16) 62%,rgba(26,22,19,.5) 100%);
+}
+.col-hero-copy{position:relative; z-index:2}
+.col-hero .eyebrow{
+  display:flex; align-items:center; gap:12px; margin:0 0 clamp(14px,2.4vh,26px);
+  font-family:var(--mono); font-size:10px; letter-spacing:.22em; text-transform:uppercase;
+  color:var(--ink-2);
+}
+.col-hero .eyebrow b{font-weight:400; color:var(--gilt-hi)}
+.col-hero .eyebrow i{width:clamp(24px,5vw,70px); height:1px; background:var(--accent-2)}
+.col-hero h1{
+  margin:0; font-family:var(--serif); font-weight:400;
+  font-size:clamp(46px,8.4vw,132px); line-height:.9; letter-spacing:-.022em;
+  text-shadow:0 2px 18px rgba(0,0,0,.5);
+}
+.col-hero-sub{
+  margin:clamp(16px,2.6vh,28px) 0 0; max-width:42ch;
+  font-size:clamp(12.5px,1vw,15px); line-height:1.75; color:var(--ink-2);
+}
+.col-hero-meta{display:flex; gap:clamp(18px,3vw,44px); flex-wrap:wrap; margin-top:clamp(22px,4vh,40px)}
+.col-hero-meta div{display:grid; gap:4px}
+.col-hero-meta b{font-family:var(--serif); font-weight:400; font-size:clamp(20px,2vw,28px); color:var(--ink)}
+
+/* ── body: rail + one family ────────────────────────────── */
+.col-body{
+  display:grid; grid-template-columns:clamp(190px,17vw,260px) 1fr;
+  gap:clamp(24px,3.4vw,58px);
+  padding:clamp(30px,5vh,60px) var(--pad) clamp(40px,7vh,90px);
+  align-items:start;
+}
+.col-rail{position:sticky; top:calc(var(--nav-h) + 24px)}
+.col-rail-kicker{margin:0 0 clamp(12px,2vh,20px); color:var(--ink-3)}
+.col-rail-links{display:grid; gap:2px}
+.col-rail-links a{
+  display:flex; align-items:baseline; justify-content:space-between; gap:10px;
+  padding:11px 0;
+  border-top:1px solid var(--rule);
+  font-size:clamp(10px,.82vw,11.5px); letter-spacing:.2em; text-transform:uppercase;
+  color:var(--ink-3);
+  transition:color .4s var(--ease),text-shadow .4s var(--ease),padding .4s var(--ease);
+}
+.col-rail-links a:last-child{border-bottom:1px solid var(--rule)}
+.col-rail-links a i{
+  font-style:normal; font-family:var(--mono); font-size:9.5px; letter-spacing:.08em;
+  color:rgba(199,163,102,.7);
+}
+.col-rail-links a:hover,.col-rail-links a:focus-visible{color:var(--ink); text-shadow:var(--glow)}
+.col-rail-links a.is-on{color:var(--ink); padding-left:10px}
+.col-rail-links a.is-on::before{
+  content:""; position:absolute; left:0; width:2px; height:1.1em;
+  margin-left:0; margin-top:.15em; background:var(--gilt);
+}
+.col-rail-links a{position:relative}
+.col-rail-note{
+  margin:clamp(16px,3vh,26px) 0 0; max-width:26ch;
+  font-size:12px; line-height:1.7; color:var(--ink-3);
+}
+
+/* ── the families ───────────────────────────────────────── */
+.col-main{min-width:0}
+.col-family[hidden]{display:none}
+.col-family-head{
+  display:flex; align-items:baseline; justify-content:space-between; gap:20px;
+  margin-bottom:clamp(20px,3.4vh,36px); flex-wrap:wrap;
+}
+.col-family-title{
+  margin:0; font-family:var(--serif); font-weight:400;
+  font-size:clamp(30px,4vw,54px); line-height:1; letter-spacing:-.015em;
+}
+.col-family-title span{
+  font-family:var(--mono); font-size:clamp(10px,.8vw,12px); letter-spacing:.2em;
+  color:var(--accent); vertical-align:middle; margin-left:14px;
+}
+.col-family-note{max-width:40ch; font-size:clamp(12px,1vw,13.5px); line-height:1.7;
+  color:var(--ink-2); margin:0}
+
+.col-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(clamp(190px,19vw,270px),1fr));
+  gap:clamp(14px,1.6vw,24px) clamp(12px,1.4vw,20px);
+}
+
+/* ── a plate ────────────────────────────────────────────── */
+.plate{
+  position:relative; margin:0; padding:0; border:0; background:none;
+  display:grid; gap:9px; text-align:left; cursor:pointer; color:inherit;
+  font:inherit;
+}
+.plate-media{position:relative; display:block; overflow:hidden; background:var(--page); aspect-ratio:4/5}
+.plate-media img{
+  width:100%; height:100%; object-fit:cover; display:block;
+  transition:transform 1.1s var(--ease-soft), filter .6s var(--ease);
+  filter:brightness(.93);
+}
+.plate:hover .plate-media img,
+.plate:focus-visible .plate-media img{transform:scale(1.045); filter:brightness(1)}
+.plate-media::after{
+  content:""; position:absolute; inset:0; pointer-events:none;
+  box-shadow:none;
+  transition:box-shadow .5s var(--ease);
+}
+.plate:hover .plate-media::after,.plate:focus-visible .plate-media::after{
+  box-shadow:inset 0 0 0 1px var(--accent-2);
+}
+.plate-cap{display:grid; gap:3px}
+.plate-model{
+  font-family:var(--mono); font-size:10.5px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--ink);
+  transition:color .4s var(--ease),text-shadow .4s var(--ease);
+}
+.plate:hover .plate-model,.plate:focus-visible .plate-model{color:var(--accent); text-shadow:0 0 14px rgba(199,163,102,.45)}
+.plate-spec{font-family:var(--mono); font-size:9.5px; letter-spacing:.12em; color:var(--ink-3)}
+
+/* ── reveal ─────────────────────────────────────────────── */
+.plate.rev{opacity:0; transform:translate3d(0,22px,0); filter:blur(5px)}
+.plate.rev.in{
+  opacity:1; transform:none; filter:none;
+  transition:opacity .8s var(--ease-soft),transform .8s var(--ease-soft),filter .8s var(--ease-soft);
+  transition-delay:var(--d,0ms);
+}
+
+/* the family swap */
+.col-main.is-swapping{opacity:0; transform:translate3d(0,10px,0)}
+.col-main{transition:opacity .3s var(--ease),transform .3s var(--ease)}
+
+/* ── detail card ────────────────────────────────────────── */
+.detail{position:fixed; inset:0; z-index:120; display:grid; place-items:center; padding:clamp(16px,4vh,48px)}
+.detail[hidden]{display:none}
+.detail-backdrop{
+  position:absolute; inset:0; background:rgba(0,0,0,.82);
+  backdrop-filter:blur(10px) saturate(.9);
+  animation:fadein .35s var(--ease) both;
+}
+.detail-panel{
+  position:relative; margin:0;
+  width:min(1080px,100%); max-height:min(86vh,900px);
+  display:grid; grid-template-columns:1.15fr .85fr;
+  background:var(--panel); border:1px solid var(--accent-2);
+  overflow:hidden;
+  animation:panelin .42s var(--ease-soft) both;
+  box-shadow:0 40px 120px rgba(0,0,0,.7);
+}
+@keyframes panelin{from{opacity:0; transform:translate3d(0,18px,0) scale(.985)} to{opacity:1; transform:none}}
+@keyframes fadein{from{opacity:0} to{opacity:1}}
+.detail-media{position:relative; background:var(--panel); overflow:hidden; min-height:0}
+.detail-media img{width:100%; height:100%; object-fit:contain; display:block}
+.detail-copy{
+  padding:clamp(22px,3.4vw,44px);
+  display:grid; align-content:center; gap:clamp(10px,1.8vh,18px);
+  border-left:1px solid var(--rule);
+}
+.detail-copy .mono{color:var(--accent); margin:0}
+.detail-copy h3{
+  margin:0; font-family:var(--serif); font-weight:400;
+  font-size:clamp(26px,3vw,40px); line-height:1.02; letter-spacing:-.01em;
+}
+.detail-spec{
+  margin:0; font-family:var(--mono); font-size:11px; letter-spacing:.14em;
+  color:var(--ink-2);
+}
+.detail-note{margin:0; font-size:12.5px; line-height:1.75; color:var(--ink-2); max-width:34ch}
+.detail-close{
+  position:absolute; top:0; right:0; z-index:2;
+  padding:14px 16px; font-family:var(--mono); font-size:9.5px; letter-spacing:.22em;
+  text-transform:uppercase; color:var(--ink-2); background:none; border:0; cursor:pointer;
+  transition:color .4s var(--ease),text-shadow .4s var(--ease);
+}
+.detail-close:hover,.detail-close:focus-visible{color:var(--ink); text-shadow:var(--glow)}
+
+/* ── closing + footer ───────────────────────────────────── */
+.col-close{
+  padding:clamp(56px,9vh,110px) var(--pad) clamp(46px,7vh,84px);
+  border-top:1px solid var(--rule);
+}
+.col-close h2{
+  margin:0; font-family:var(--serif); font-weight:400;
+  font-size:clamp(34px,5.4vw,84px); line-height:.94; letter-spacing:-.018em;
+}
+.col-close p{margin:clamp(14px,2.2vh,22px) 0 0; max-width:40ch; color:var(--ink-2);
+  font-size:clamp(12.5px,1vw,14.5px); line-height:1.75}
+.col-close .cta{margin-top:clamp(20px,3.4vh,34px)}
+
+.foot{
+  display:flex; flex-wrap:wrap; gap:12px clamp(20px,4vw,60px); justify-content:space-between;
+  padding:clamp(22px,3.6vh,36px) var(--pad) clamp(26px,4vh,44px);
+  border-top:1px solid var(--rule);
+}
+.foot .mono{font-size:9.5px}
+
+/* ── narrow screens ─────────────────────────────────────── */
+@media (max-width:1000px){
+  .detail-panel{grid-template-columns:1fr; max-height:88vh; overflow:auto}
+  .detail-media{aspect-ratio:4/5; max-height:52vh}
+  .detail-copy{border-left:0; border-top:1px solid rgba(239,232,219,.1)}
+}
+@media (max-width:900px){
+  .col-body{grid-template-columns:1fr; gap:clamp(16px,3vh,26px)}
+  .col-rail{position:static}
+  .col-rail-links{
+    display:flex; gap:20px; overflow-x:auto; scrollbar-width:none;
+    padding-bottom:8px; border-bottom:1px solid var(--rule);
+  }
+  .col-rail-links::-webkit-scrollbar{display:none}
+  .col-rail-links a{border-top:0; border-bottom:0; padding:8px 0; flex:none}
+  .col-rail-links a:last-child{border-bottom:0}
+  .col-rail-links a.is-on{padding-left:0}
+  .col-rail-links a.is-on::before{display:none}
+  .col-rail-links a.is-on{color:var(--accent); box-shadow:inset 0 -1px 0 var(--accent)}
+  .col-rail-note{margin-top:12px; max-width:none}
+  .col-grid{grid-template-columns:repeat(2,1fr); gap:12px 10px}
+  .plate-model{font-size:9.5px}
+  .plate-spec{font-size:9px}
+}
+@media (max-width:520px){
+  .col-hero{min-height:76svh}
+  .col-hero::after{
+    background:
+      linear-gradient(to top,rgba(26,22,19,.99) 0%,rgba(26,22,19,.9) 34%,rgba(26,22,19,.42) 62%,rgba(26,22,19,.6) 100%);
+  }
+  .col-hero-media img{filter:brightness(.72) saturate(.9)}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .plate.rev{opacity:1; transform:none; filter:none; transition:none}
+  .plate-media img{transition:none}
+  .col-main{transition:none}
+  .detail-panel,.detail-backdrop{animation:none}
+}
+
+/* the rail already says it on wide screens: one note, not two */
+@media (min-width:901px){
+  .col-family-note{display:none}
+}
