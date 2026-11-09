@@ -191,6 +191,35 @@
   ];
   var activeCard = -1;
 
+  /* the deck's progress is sprung: scrolling sets a target, the rail chases it with
+     a little overshoot, so cards arrive instead of snapping */
+  var deckTarget = 0;
+  var deckT = 0;
+  var deckV = 0;
+  var springRaf = 0;
+  var deckSettled = false;
+  var SPRING_K = 150;
+  var SPRING_DAMP = 0.80;
+
+  function stepSpring() {
+    springRaf = 0;
+    var dt = 1 / 60;
+    deckV = (deckV + (deckTarget - deckT) * SPRING_K * dt) * SPRING_DAMP;
+    deckT += deckV * dt;
+    paintScroll();
+    if (Math.abs(deckTarget - deckT) > 0.0008 || Math.abs(deckV) > 0.0008) {
+      springRaf = window.requestAnimationFrame(stepSpring);
+    } else {
+      deckT = deckTarget;
+      deckV = 0;
+      paintScroll();
+    }
+  }
+  function nudgeSpring() {
+    if (reduce.matches) { deckT = deckTarget; deckV = 0; return; }
+    if (!springRaf) springRaf = window.requestAnimationFrame(stepSpring);
+  }
+
   function clamp01(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
 
   function paintScroll() {
@@ -215,72 +244,94 @@
        the whole screen while the rail itself travels, so only the nearby cards show. */
     if (bespoke && cards.length) {
       var sheetScroll = parseFloat(getComputedStyle(bespoke).getPropertyValue('--sheet-scroll')) / 100 * vh || vh * 0.78;
-      var t = Math.max(0, (y - bespoke.offsetTop) / sheetScroll);
+      deckTarget = Math.max(0, (y - bespoke.offsetTop) / sheetScroll);
+      if (!deckSettled) { deckT = deckTarget; deckSettled = true; }
+      if (reduce.matches) { deckT = deckTarget; deckV = 0; }
+      var t = deckT;
       var n = cards.length;
       var idx = Math.max(0, Math.min(n - 1, Math.round(t)));
       var phone = window.innerWidth <= 900;
 
       // geometry of the rail: one whole step per card, so nothing ever overlaps
-      var sheetH = cards[0].offsetHeight || vh * 0.9;
-      var restCx = cards[0].offsetLeft;            // translate:-50% already centres the sheet here
-      var parkCx = window.innerWidth - (phone ? 44 : 116);
-      var span = phone ? 1.6 : 2.2;                // slots visible either side of the centre
-      var railStep = (vh * 0.86) / (span * 2);
-      var railGap = phone ? 10 : 14;
-      var parkScale = Math.min(0.44, (railStep - railGap) / sheetH);   // step minus the gap sets the height
-
-      // the rail is an ordinary list: it slides with the scroll but stops at its two ends,
-      // so the strip is always full — no empty half at the first or the last card
-      var cardH = sheetH * parkScale;
+            var sheetH = cards[0].offsetHeight || vh * 0.9;
+      var sheetW = cards[0].offsetWidth || window.innerWidth * 0.5;
+      var restCx = cards[0].offsetLeft;                      // translate:-50% centres the box here
       var band = parseFloat(getComputedStyle(bespoke).getPropertyValue('--band')) || 120;
-      // the rail lives inside the same banded area; on a phone it also has to clear the copy
+      var restCy = band + (vh - band) / 2 - 18;
+
+      // the rail: narrow horizontal slivers peeking in from the right edge
+      var span = phone ? 1.6 : 2.2;
+      var railStep = (vh * 0.86) / (span * 2);
+      var railGap = phone ? 8 : 10;
+      var stripH = Math.max(56, railStep - railGap);
+      var stripW = Math.min(window.innerWidth * (phone ? 0.46 : 0.30), phone ? 200 : 380);
+      var stripCx = window.innerWidth - stripW / 2 + (phone ? 12 : 26);
+
+      // the sheet at full open covers the viewport, 4:5 like its source
+      var coverH = Math.max(vh + band, window.innerWidth * (5 / 4));
+      var coverW = coverH * (4 / 5);
+
       var railArea = phone ? vh - band - 216 : vh - band - 36;
-      var stripHalf = railArea / 2 - 10;
+      var stripHalf = railArea / 2 - stripH / 2;
       var stripShift = phone ? (railArea / 2 - (vh - band) / 2) : -18;
-      var edge = stripHalf - cardH / 2;                    // card centre when its edge meets the strip
-      var firstInRail = idx === 0 ? 1 : 0;                 // the card on screen is not in the rail
-      var lastInRail = idx === n - 1 ? n - 2 : n - 1;
-      var topY = (firstInRail - t) * railStep;
-      var botY = (lastInRail - t) * railStep;
-      var hi = -edge - topY;                               // shift range that keeps both ends filled
+      var slotTop = restCy + stripShift;
+      var edge = stripHalf;
+
+      // first pass: how open is each sheet, and which one leads
+      var opensArr = [];
+      var leadIdx = 0, leadOpen = -1;
+      for (var q = 0; q < n; q++) {
+        var dq = t - q;
+        var holdQ = q === 0 ? 0.45 : 0.2;
+        var outQ = q === n - 1 ? 0 : clamp01((dq - holdQ) / (1 - holdQ));
+        var oq = clamp01(1 + dq) * (1 - Math.min(1, outQ * 1.8));
+        oq = oq * oq * (3 - 2 * oq);
+        opensArr[q] = oq;
+        if (oq > leadOpen) { leadOpen = oq; leadIdx = q; }
+      }
+      /* a slot is the card's index minus the opening of everything above it: the rail
+         closes up behind the sheet that leaves, and never jumps when the lead changes */
+      var slotBase = [];
+      var accOpen = 0;
+      for (var q2 = 0; q2 < n; q2++) { slotBase[q2] = q2 - accOpen; accOpen += opensArr[q2]; }
+      var slotOf = function (i) { return slotBase[i]; };
+      var topY = (slotOf(0) - t) * railStep;
+      var botY = (slotOf(n - 1) - t) * railStep;
+      var hi = -edge - topY;
       var lo = edge - botY;
       var shift = Math.min(Math.max(0, Math.min(lo, hi)), Math.max(lo, hi));
 
-      var leadIdx = 0, leadOpen = -1;
       for (var s2 = 0; s2 < n; s2++) {
         var el = cards[s2];
-        var d3 = t - s2;                                 // 0 = this sheet owns the screen
-        var inP = clamp01(1 + d3);
-        // each card dwells before it starts going back; the first one dwells longest,
-        // so landing on the section does not immediately whip the photo away
-        var hold = (s2 === 0) ? 0.45 : 0.2;
-        var outP = (s2 === n - 1) ? 0 : clamp01((d3 - hold) / (1 - hold));
-        var open = inP * (1 - Math.min(1, outP * 1.8));
-        open = open * open * (3 - 2 * open);              // ease it
-
-        // hovering a parked card leans it out of the rail without taking the screen
+        var open = opensArr[s2];
         var hv = hoverAmt[s2] || 0;
-        if (hv > 0) open = Math.max(open, hv * 0.34);
 
-        var railY = (s2 - t) * railStep + shift + stripShift;    // where it sits in the strip
-        var cx = parkCx * (1 - open) + restCx * open;
-        var tx = cx - restCx;
-        var ty = (((s2 - t) * railStep + shift) * (1 - open)) + stripShift * (1 - open);
-        // a hovered card nudges its direct neighbours aside, inside the rail gap
+        var slotY = slotTop + (slotOf(s2) - t) * railStep + shift;
         if (hoverIdx >= 0 && s2 !== hoverIdx) {
           var dh = s2 - hoverIdx;
-          ty += (dh > 0 ? 1 : -1) * 7 * Math.exp(-(dh * dh) / 1.6) * (hoverAmt[hoverIdx] || 0);
+          slotY += (dh > 0 ? 1 : -1) * 6 * Math.exp(-(dh * dh) / 1.6) * (hoverAmt[hoverIdx] || 0);
         }
-        if (open > leadOpen) { leadOpen = open; leadIdx = s2; }
-        var sc = (parkScale + (1 - parkScale) * open) * (1 + hv * 0.04);
 
-        el.style.transform = 'translate3d(' + tx.toFixed(1) + 'px,' + ty.toFixed(1) + 'px,0) scale(' + sc.toFixed(3) + ')';
-        el.style.setProperty('--r', (4 + (1 - open) * 16).toFixed(1) + 'px');
+        var w = stripW + (coverW - stripW) * open;
+        var h = stripH + (coverH - stripH) * open;
+        var cx = stripCx + (window.innerWidth / 2 - stripCx) * open;
+        var cy = slotY + (vh / 2 - slotY) * open;
+        var tx = cx - restCx;
+        var ty = cy - restCy;
+
+        el.style.width = w.toFixed(1) + 'px';
+        el.style.height = h.toFixed(1) + 'px';
+        var lift = 1 + hv * 0.05;
+        el.style.transform = 'translate3d(' + tx.toFixed(1) + 'px,' + ty.toFixed(1) + 'px,0) scale(' + lift.toFixed(3) + ')';
+        el.style.setProperty('--r', ((1 - open) * 18).toFixed(1) + 'px');
         var isUp = open > 0.5;
         if (el.classList.contains('is-open') !== isUp) el.classList.toggle('is-open', isUp);
-        el.style.zIndex = isUp
-          ? String(Math.round(900 + (open - 0.5) * 40))          // opened: on top, the fuller the higher
-          : String(Math.round(500 - Math.abs(s2 - t) * 22) + Math.round(hv * 40));
+        // the parker rail rides above the filling sheet, so the right-hand strip never disappears
+        el.style.zIndex = String(Math.round(
+          open < 0.25
+            ? 900 - Math.abs(s2 - t) * 8 + hv * 40
+            : 600 + open * 120
+        ));
         el.style.boxShadow = open > 0.5
           ? '0 12px 28px rgba(0,0,0,.32)'
           : '0 7px 16px rgba(0,0,0,.42), 0 2px 4px rgba(0,0,0,.28)';
@@ -330,6 +381,7 @@
     if (scrollTick) return;
     scrollTick = true;
     window.requestAnimationFrame(function () { scrollTick = false; paintScroll(); });
+    nudgeSpring();
   }
 
   if (cards && cards.length) {
@@ -378,5 +430,155 @@
     }
   }
 
+  /* ── snap: a wheel gesture moves the deck exactly one sheet ────────────────
+     Crossing into the section from the cover pulls it straight to its top, so the
+     first commission lands full screen no matter how hard the wheel was spun. */
+  var snapBusy = false;
+  var snapTimer = 0;
+
+  function deckMetrics() {
+    if (!bespoke || !cards.length) return null;
+    var vpe = window.innerHeight;
+    var step = (parseFloat(getComputedStyle(bespoke).getPropertyValue('--sheet-scroll')) / 100) * vpe || vpe * 0.78;
+    return { top: bespoke.offsetTop, step: step, n: cards.length, vpe: vpe };
+  }
+
+  /* short push, long settle: fast enough to feel intentional, slow enough to land */
+  function snapTo(target, dur) {
+    dur = dur || 620;
+    snapBusy = true;
+    document.dispatchEvent(new Event('ncl:snap'));
+    var from = window.scrollY;
+    var dist = target - from;
+    var t0 = window.performance.now();
+    function step(now) {
+      var k = Math.min(1, (now - t0) / dur);
+      var e = k < 0.28
+        ? (k / 0.28) * (k / 0.28) * 0.22
+        : 0.22 + 0.78 * (1 - Math.pow(1 - (k - 0.28) / 0.72, 3));
+      window.scrollTo(0, from + dist * e);
+      if (k < 1) window.requestAnimationFrame(step);
+      else { snapBusy = false; window.clearTimeout(snapTimer); }
+    }
+    window.requestAnimationFrame(step);
+  }
+
+  function onWheelSnap(e) {
+    if (reduce.matches) return;
+    var m = deckMetrics();
+    if (!m) return;
+    var y = window.scrollY;
+    var lastTop = m.top + (m.n - 1) * m.step;
+    var inside = y >= m.top - 2 && y <= lastTop + 2;
+    var entering = y < m.top - 2 && e.deltaY > 0 && y > m.top - window.innerHeight;
+    if (!inside && !entering) return;
+    var dir = e.deltaY > 0 ? 1 : (e.deltaY < 0 ? -1 : 0);
+    if (!dir) return;
+    var idx = Math.round((y - m.top) / m.step);
+    /* the ends are open: going up from the first sheet hands back to the cover,
+       going down from the last one carries on to the rest of the page */
+    if (!entering && dir < 0 && idx <= 0) return;
+    if (!entering && dir > 0 && idx >= m.n - 1) return;
+    e.preventDefault();
+    if (snapBusy) return;
+    /* coming in from the cover always lands on the first sheet, never one past it */
+    var target = entering ? 0 : Math.max(0, Math.min(m.n - 1, idx + dir));
+    snapTo(m.top + target * m.step);
+    window.clearTimeout(snapTimer);
+    snapTimer = window.setTimeout(function () { snapBusy = false; }, 1100);
+  }
+
+  window.addEventListener('wheel', onWheelSnap, { passive: false });
+
+
+  /* ── damped scrolling, on every page ──────────────────────────────────────
+     Wheel input moves a target, and the page is pulled toward it by a
+     critically damped spring: it leans in, glides, and settles without overshoot.
+     Any handler that already claimed the event (the deck snap) wins. */
+  function initDampedScroll() {
+    var mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (mq.matches) return;
+    var OMEGA = 15;              // how fast it chases the target
+    var ZETA = 1;                // 1 = critically damped, no overshoot
+    var EASE = 0.9;              // a little resistance on the input itself
+    var target = window.scrollY;
+    var pos = target;
+    var vel = 0;
+    var raf = 0;
+    var running = false;
+    var last = 0;
+
+    function maxY() {
+      return Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+    }
+
+    function frame(now) {
+      var dt = Math.min(0.05, Math.max(0.004, (now - last) / 1000));
+      last = now;
+      var steps = 4;
+      var h = dt / steps;
+      for (var i = 0; i < steps; i++) {
+        var a = -2 * ZETA * OMEGA * vel - OMEGA * OMEGA * (pos - target);
+        vel += a * h;
+        pos += vel * h;
+      }
+      var limit = maxY();
+      if (pos < 0) { pos = 0; vel = 0; }
+      if (pos > limit) { pos = limit; vel = 0; }
+      window.scrollTo(0, pos);
+      if (Math.abs(pos - target) < 0.4 && Math.abs(vel) < 2) {
+        pos = target;
+        window.scrollTo(0, target);
+        running = false;
+        return;
+      }
+      raf = window.requestAnimationFrame(frame);
+    }
+
+    function stop() {
+      if (raf) window.cancelAnimationFrame(raf);
+      raf = 0;
+      running = false;
+    }
+
+    function onWheel(e) {
+      if (e.defaultPrevented || e.ctrlKey || e.metaKey || e.altKey || e.shiftKey) return;
+      if (e.target && e.target.closest && e.target.closest('.menu, .detail, [data-native-scroll]')) return;
+      var limit = maxY();
+      if (limit <= 0) return;
+      if (!running) {
+        pos = window.scrollY;
+        vel = 0;
+        target = pos;
+      }
+      target = Math.min(limit, Math.max(0, target + e.deltaY * EASE));
+      if (Math.abs(target - window.scrollY) < 1) return;
+      e.preventDefault();
+      if (!running) {
+        running = true;
+        last = window.performance.now();
+        raf = window.requestAnimationFrame(frame);
+      }
+    }
+
+    window.addEventListener('wheel', onWheel, { passive: false });
+
+    /* anything else that moves the page takes it back from us */
+    window.addEventListener('scroll', function () {
+      if (!running) target = window.scrollY;
+    }, { passive: true });
+    window.addEventListener('keydown', function (ev) {
+      if (/^(ArrowUp|ArrowDown|PageUp|PageDown|Home|End| )$/.test(ev.key)) stop();
+    });
+    window.addEventListener('touchstart', stop, { passive: true });
+    mq.addEventListener && mq.addEventListener('change', function () {
+      if (mq.matches) stop();
+    });
+
+    /* the deck snap drives its own scroll: hand control over while it runs */
+    document.addEventListener('ncl:snap', stop);
+  }
+
   startIntro();
+  initDampedScroll();
 })();

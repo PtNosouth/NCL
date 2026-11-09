@@ -504,13 +504,20 @@ display:none}
 }
 
 /* ── the deck: sheets are photo-sized cards, parked off the right edge ── */
+.deck::before{
+  content:""; position:absolute; z-index:0; pointer-events:none;
+  right:calc(-1 * var(--pad)); top:-8%; bottom:-8%; width:min(46vw,560px);
+  background:radial-gradient(120% 78% at 100% 52%,
+    rgba(0,0,0,.66) 0%, rgba(0,0,0,.38) 42%, rgba(0,0,0,0) 74%);
+}
 .deck{
-  position:absolute; inset:var(--band) 0 0 0; overflow:hidden;   /* the band stays empty */
+  position:absolute; inset:var(--band) 0 0 0;
+  overflow:visible;   /* the sticky pin does the clipping, so a filling sheet can reach the top */
 }
 .sheet{
   position:absolute; left:55%;
   top:calc((100svh - var(--band)) / 2 - 18px);
-  height:calc(100svh - var(--band) - 36px); aspect-ratio:4/5; margin:0;
+  width:min(34vw,380px); height:120px; margin:0;   /* the engine sets both every frame */
   translate:-50% -50%;
   overflow:hidden; background:#0a0908;
   transform-origin:50% 50%;
@@ -543,8 +550,14 @@ display:none}
 }
 
 /* ── the words sit on the deck ──────────────────────────── */
+.deck-copy::before{
+  content:""; position:absolute; z-index:-1;
+  left:0; top:-40vh; bottom:-40vh; width:min(52vw,640px);
+  background:linear-gradient(to right,rgba(4,3,3,.72) 0%,rgba(4,3,3,.5) 46%,rgba(4,3,3,0) 100%);
+  pointer-events:none;
+}
 .deck-copy{
-  position:absolute; left:0; top:50%; translate:0 -50%; z-index:50;
+  position:absolute; left:0; top:50%; translate:0 -50%; z-index:950;   /* above the open sheet */
   padding:0 var(--pad);
   width:min(34vw,440px);
   pointer-events:none;
@@ -639,15 +652,22 @@ display:none}
 /* ══ responsive ══════════════════════════════════════════════════════════ */
 @media (max-width:900px){
   .bespoke{--sheet-scroll:88svh; --band:clamp(64px,10vh,96px); height:calc(100svh + 8 * var(--sheet-scroll))}
-  .sheet{left:45%; top:calc((100svh - var(--band)) / 2 - 13px); height:auto; width:min(70vw, 380px)}
+  .sheet{left:45%; top:calc((100svh - var(--band)) / 2 - 13px); width:min(62vw, 340px); height:96px}
   /* the rail is clipped above the copy instead of being hidden card by card */
-  .deck{inset:var(--band) 0 216px 0}
+  .deck::before{
+  content:""; position:absolute; z-index:0; pointer-events:none;
+  right:calc(-1 * var(--pad)); top:-8%; bottom:-8%; width:min(46vw,560px);
+  background:radial-gradient(120% 78% at 100% 52%,
+    rgba(0,0,0,.66) 0%, rgba(0,0,0,.38) 42%, rgba(0,0,0,0) 74%);
+}
+.deck{inset:var(--band) 0 216px 0}
   .deck-copy{
     top:auto; bottom:4vh; translate:none;
     left:0; right:0; width:auto;
     padding:18px var(--pad) 0;
     background:linear-gradient(to bottom, rgba(4,4,3,0), rgba(4,4,3,.92) 42%);
   }
+  .deck-copy::before{display:none}   /* the mobile copy carries its own scrim */
   .rail-claim{max-width:none}
   .rail-now span{max-width:none}
   .card{height:clamp(230px,40vh,330px); width:44px}
@@ -681,7 +701,6 @@ body.scrolled .nav{
 body.nav-away .nav{transform:translateY(-104%)}
 
 
-/* the room drops dark, a filament strikes, and the next page is inside the flash.
 /* a camera shutter: two black leaves slide in from above and below and meet on the
    centre line, each with a brass edge that catches the light as it closes */
 .page-veil{
@@ -711,9 +730,4 @@ body.nav-away .nav{transform:translateY(-104%)}
 .page-veil.is-arriving.is-lifting{pointer-events:none}
 @media (prefers-reduced-motion:reduce){
   .page-veil{display:none}
-}
-}
-}
-}
-}
 }

@@ -1,0 +1,301 @@
+/* ══ achievements — four columns, walking ═══════════════════════════════════
+   Each column carries a run of plates at its own speed (two down, two up), and
+   every plate sharpens in over a pulsing skeleton while the page counts them. */
+
+.ach {
+  background: #0a0908;
+  color: var(--ivory);
+}
+
+.ach-hero {
+  padding: calc(var(--nav-h) + clamp(48px, 11vh, 130px)) var(--pad) clamp(30px, 5vh, 56px);
+  max-width: min(1180px, 100%);
+}
+.ach-hero .eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 clamp(14px, 2.4vh, 26px);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(239, 232, 219, 0.55);
+}
+.ach-hero .eyebrow b {
+  font-weight: 400;
+  color: var(--gilt-hi);
+}
+.ach-hero .eyebrow i {
+  width: clamp(24px, 5vw, 70px);
+  height: 1px;
+  background: rgba(199, 163, 102, 0.45);
+}
+.ach-hero h1 {
+  margin: 0;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(42px, 7.4vw, 118px);
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+}
+.ach-lead {
+  margin: clamp(18px, 3vh, 30px) 0 0;
+  max-width: 54ch;
+  font-size: clamp(13px, 1.05vw, 15.5px);
+  line-height: 1.8;
+  color: rgba(239, 232, 219, 0.66);
+}
+.ach-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(22px, 4vw, 64px);
+  margin: clamp(26px, 4.4vh, 46px) 0 0;
+}
+.ach-stats div {
+  display: grid;
+  gap: 6px;
+}
+.ach-stats dt {
+  font-family: var(--serif);
+  font-size: clamp(24px, 2.6vw, 38px);
+  line-height: 1;
+  color: var(--ivory);
+}
+.ach-stats dd {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(239, 232, 219, 0.45);
+}
+
+/* ── the wall ───────────────────────────────────────────── */
+.ach-wall {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(10px, 1.4vw, 22px);
+  height: clamp(460px, 74vh, 860px);
+  padding: clamp(16px, 2.6vh, 30px) var(--pad);
+  overflow: hidden;
+  border-top: 1px solid rgba(239, 232, 219, 0.09);
+  border-bottom: 1px solid rgba(239, 232, 219, 0.09);
+  /* the top and bottom edges fade, so the columns read as endless */
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 9%, #000 91%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 9%, #000 91%, transparent 100%);
+}
+
+.ach-col {
+  min-width: 0;
+  overflow: hidden;
+}
+.ach-colrun {
+  display: grid;
+  gap: clamp(10px, 1.4vw, 22px);
+  animation-name: ach-walk;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform;
+}
+.ach-wall.is-paused .ach-colrun {
+  animation-play-state: paused;
+}
+@keyframes ach-walk {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(0, -50%, 0);
+  }
+}
+
+/* ── a plate ────────────────────────────────────────────── */
+.ach-item {
+  position: relative;
+  margin: 0;
+  border-radius: 2px;
+  overflow: hidden;
+  background: #131110;
+  box-shadow: 0 16px 38px rgba(0, 0, 0, 0.5);
+  transition: transform 0.5s var(--ease-soft), box-shadow 0.5s var(--ease-soft);
+}
+.ach-item img {
+  display: block;
+  width: 100%;
+  height: auto;
+  /* a plate arrives blurred and sharpens as it decodes */
+  filter: blur(16px) saturate(0.96);
+  opacity: 0.25;
+  transform: scale(1.02);
+  transition: filter 0.9s var(--ease-soft), opacity 0.9s var(--ease-soft),
+    transform 0.9s var(--ease-soft);
+}
+.ach-item img.is-in {
+  filter: none;
+  opacity: 1;
+  transform: none;
+}
+
+/* the pulsing skeleton underneath */
+.ach-skel {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    rgba(239, 232, 219, 0.045) 20%,
+    rgba(239, 232, 219, 0.10) 42%,
+    rgba(239, 232, 219, 0.045) 64%
+  );
+  background-size: 220% 100%;
+  animation: ach-pulse 1.7s ease-in-out infinite;
+  pointer-events: none;
+}
+.ach-item:has(img.is-in) .ach-skel {
+  opacity: 0;
+  transition: opacity 0.5s var(--ease);
+}
+@keyframes ach-pulse {
+  from {
+    background-position: 120% 0;
+  }
+  to {
+    background-position: -40% 0;
+  }
+}
+
+.ach-item figcaption {
+  position: absolute;
+  inset: auto 0 0 0;
+  display: grid;
+  gap: 2px;
+  padding: 26px 12px 10px;
+  background: linear-gradient(to top, rgba(4, 3, 3, 0.94), rgba(4, 3, 3, 0));
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.4s var(--ease), transform 0.4s var(--ease-soft);
+  pointer-events: none;
+}
+.ach-title {
+  font-family: var(--sans);
+  font-size: 11.5px;
+  color: var(--ivory);
+}
+.ach-meta {
+  font-family: var(--mono);
+  font-size: 8.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gilt);
+}
+
+/* hover: the columns stop, and this plate steps out of the wall — it grows a little,
+   lifts on the z axis above its neighbours, and throws a deep shadow behind it */
+.ach-wall.is-paused .ach-col {
+  overflow: visible;                 /* let the lifted plate and its shadow escape the column */
+}
+.ach-col {
+  position: relative;
+}
+.ach-col:has(.ach-item.is-up) {
+  z-index: 70;
+}
+.ach-item {
+  transition: transform 0.5s var(--ease-soft), box-shadow 0.5s var(--ease-soft),
+    filter 0.4s var(--ease);
+  will-change: transform;
+}
+.ach-item.is-up {
+  transform: scale(1.09);
+  z-index: 60;
+  box-shadow:
+    0 52px 96px rgba(0, 0, 0, 0.74),
+    0 16px 34px rgba(0, 0, 0, 0.52),
+    0 0 0 1px rgba(199, 163, 102, 0.22);
+}
+.ach-item.is-up img {
+  filter: saturate(1.02) brightness(1.04);
+}
+.ach-item.is-up figcaption {
+  opacity: 1;
+  transform: none;
+}
+
+/* ── the loading meter ──────────────────────────────────── */
+.ach-meter {
+  position: absolute;
+  left: var(--pad);
+  right: var(--pad);
+  bottom: clamp(8px, 1.4vh, 16px);
+  height: 1px;
+  background: rgba(239, 232, 219, 0.12);
+}
+.ach-meter i {
+  display: block;
+  height: 100%;
+  background: linear-gradient(to right, rgba(199, 163, 102, 0.5), var(--gilt-hi));
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+  transition: transform 0.5s var(--ease-soft);
+}
+
+/* ── note under the wall ────────────────────────────────── */
+.ach-note {
+  padding: clamp(40px, 7vh, 90px) var(--pad) clamp(46px, 8vh, 96px);
+  max-width: min(900px, 100%);
+}
+.ach-note h2 {
+  margin: 0;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(26px, 3.4vw, 46px);
+  line-height: 1.06;
+  letter-spacing: -0.01em;
+}
+.ach-note p {
+  margin: clamp(14px, 2.2vh, 22px) 0 0;
+  max-width: 56ch;
+  font-size: clamp(12.5px, 1vw, 14.5px);
+  line-height: 1.8;
+  color: rgba(239, 232, 219, 0.6);
+}
+
+@media (max-width: 900px) {
+  .ach-hero {
+    padding-top: calc(var(--nav-h) + 44px);
+  }
+  .ach-wall {
+    grid-template-columns: repeat(2, 1fr);
+    height: clamp(380px, 62vh, 620px);
+    gap: 10px;
+  }
+  .ach-colrun {
+    gap: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ach-colrun {
+    animation: none;
+  }
+  .ach-col {
+    overflow-y: auto;
+  }
+  .ach-wall {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+  .ach-item,
+  .ach-item img {
+    transition: none;
+  }
+  .ach-item img {
+    filter: none;
+    opacity: 1;
+    transform: none;
+  }
+  .ach-skel {
+    display: none;
+  }
+}

@@ -62,7 +62,7 @@ const scroll = async (y, wait = 800) => { await ev(`window.scrollTo(0,${y})`); a
 await load();
 check('no console errors', errors.length, 0);
 check('title', await ev(`document.title`), (v) => /Collection/i.test(v));
-check('nav is Home / Products / Projects / Story', await ev(`[].map.call(document.querySelectorAll('.nav-links a'), function(a){return a.textContent.trim();}).join(' · ')`), 'Home · Products · Projects · Story');
+check('nav is Home / Products / Achievements / Projects', await ev(`[].map.call(document.querySelectorAll('.nav-links a'), function(a){return a.textContent.trim();}).join(' · ')`), 'Home · Products · Achievements · Projects');
 check('nav marks this page', await ev(`document.querySelector('.nav-links a[aria-current]').textContent.trim()`), 'Products');
 check('hero is the first section', await ev(`document.querySelector('main > section').className`), 'col-hero');
 

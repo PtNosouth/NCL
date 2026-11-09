@@ -1,3 +1,7 @@
+# 工作约定
+
+**当前所有改动只在静态页（`home/`）进行。** React 版（`react/`）暂停维护，保持原样留档；两边动效暂不同步。
+
 # NCL 新构思 — 首页（封面 + 定制/工艺续接）
 
 一个不依赖构建的静态页：`index.html` + `style.css` + `main.js`，字体与影片自带。直接双击 `index.html` 可看；`start.cmd` 起本地服务（端口 5174）更稳妥。
@@ -10,7 +14,7 @@
 - 后面接中文名 `新构思`（≤620px 隐藏）
 - `Guangdong · Worldwide` 移到字标右侧，用一条发丝线与品牌区分开；原来它在导航最右侧
 
-## 页脚（四栏）
+## 页脚（三栏）
 
 `footer.css` 里一个组件，两个页面共用（封面底色 `#000`，产品页跟 Umber 的 `--foot-bg`）。
 
@@ -19,7 +23,7 @@
 | 品牌 | `NCL 新构思`（衬线）+ Our story / Made to order / Projects / The collection |
 | Factory address | Guangdong, China · Workshop visits by appointment · Mon–Fri 09:00–18:00 CST |
 | Connect with us | Instagram / Pinterest / Email 三个圆形描边图标 |
-| Useful information | Product photographs / Care & finishes / Trade enquiries / Back to the top |
+
 
 底部一行小字：版权、图片来源、Top ↑。
 
@@ -122,3 +126,17 @@
 - 没有车间里"手"的照片：工艺术语停在画面能证明的动作（切割、穿挂、点亮），没有出现无凭据的"工台"措辞。
 - 询价是 `mailto:studio@ncl.example` 占位，上线前需换成真实地址或表单页。
 - 尚未做：语言切换、项目/产品列表页、OG 分享图。
+
+## 测试用 Chrome 的清理规则
+
+验证脚本会启动 headless Chrome（`--remote-debugging-port=…`，`--user-data-dir=_work/chrome-profile`）。
+**绝对不能**用 `Get-Process chrome | Stop-Process -Force` 清理——那会连正在使用的浏览器一起关掉。
+
+正确做法：
+
+```powershell
+node work/kill-headless.mjs --dry   # 先看会关掉哪些
+node work/kill-headless.mjs         # 只关带 remote-debugging-port 或 _work/chrome-profile 的进程树
+```
+
+实测：机器上 26 个用户 Chrome 进程 + 我们 1 个 headless（含 12 个子进程），清理后 38 → 26，用户的进程一个没动。
