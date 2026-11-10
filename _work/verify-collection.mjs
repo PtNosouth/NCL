@@ -7,7 +7,7 @@ import { spawn } from 'node:child_process';
 
 const ROOT = path.resolve(process.cwd());
 const CHROME = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
-const PORT = 5185;
+const PORT = 5193;
 const DBG = 9233;
 const MIME = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript', '.jpg': 'image/jpeg', '.png': 'image/png', '.webp': 'image/webp', '.svg': 'image/svg+xml', '.woff2': 'font/woff2', '.ttf': 'font/ttf', '.mp4': 'video/mp4' };
 

@@ -70,6 +70,36 @@ const load = async (w = 1440, h = 900, mobile = false) => {
   await sleep(3000);
 };
 const scroll = async (y, wait = 700) => { await ev(`window.scrollTo(0,${y})`); await sleep(wait); };
+const waitFor = async (expr, ms = 7000) => {
+  const t0 = Date.now();
+  while (Date.now() - t0 < ms) { if (await ev(expr)) return true; await sleep(120); }
+  return false;
+};
+/* the rail is sprung and can overshoot through an index; only accept one that holds */
+const isOpen = (i) => `(function(){var s=document.querySelectorAll('#deck .sheet');return !!(s[${i}] && s[${i}].classList.contains('is-open'));})()`;
+const waitStill = async (expr, ms = 12000, need = 3) => {
+  const t0 = Date.now();
+  let prev = null, same = 0;
+  while (Date.now() - t0 < ms) {
+    const v = await ev(expr);
+    same = (prev !== null && v === prev) ? same + 1 : 0;
+    if (same >= need - 1) return true;
+    prev = v;
+    await sleep(400);
+  }
+  return false;
+};
+const waitIdx = async (i, ms = 9000) => {
+  const t0 = Date.now();
+  while (Date.now() - t0 < ms) {
+    if (await ev(isOpen(i))) {
+      await sleep(320);
+      if (await ev(isOpen(i))) return true;
+    }
+    await sleep(140);
+  }
+  return false;
+};
 
 await load();
 check('no console errors', consoleErrors.length, 0);
@@ -112,117 +142,262 @@ const px1 = await ev(`document.querySelector('.craft-media img.px').style.transf
 check('crystal plates drift', px0 !== px1, true);
 check('crystal drift is vertical only', await ev(`(function(){var t=document.querySelector('.craft-media img.px').style.transform;return t.indexOf('translate3d(0px,') === 0;})()`), true);
 
-/* the deck on a phone */
+/* the deck on a phone: the open sheet is centred, the next waits below, the
+   rest wait in the right rail */
 await s('Emulation.setDeviceMetricsOverride', { width: 390, height: 844, deviceScaleFactor: 1, mobile: true });
 await s('Page.navigate', { url: `http://127.0.0.1:${PORT}/home/index.html` });
 await sleep(3000);
+
+/* the three columns: copy on the left, rail on the right, the card in the gap */
+const stage = async () => ev(`(function(){
+  var copy = document.querySelector('.deck-copy').getBoundingClientRect();
+  var all = document.querySelectorAll('#deck .sheet');
+  var idx = [].findIndex.call(all, function (e) { return e.classList.contains('is-open'); });
+  var parked = all[Math.min(idx + 2, all.length - 1)];
+  var rail = parked.getBoundingClientRect();
+  var open = document.querySelector('#deck .sheet.is-open');
+  var r = open ? open.getBoundingClientRect() : null;
+  return r ? JSON.stringify({ copyRight: Math.round(copy.right), railLeft: Math.round(rail.left),
+                              l: Math.round(r.left), r: Math.round(r.right), t: Math.round(r.top),
+                              b: Math.round(r.bottom), w: Math.round(r.width), h: Math.round(r.height),
+                              vw: innerWidth, vh: innerHeight }) : 'none';
+})()`);
+
+const facts = async () => ev(`(function(){
+  var sheets = [].map.call(document.querySelectorAll('#deck .sheet'), function(e){
+    var r = e.getBoundingClientRect(), cs = getComputedStyle(e);
+    return { open: e.classList.contains('is-open'), z: +cs.zIndex, op: +cs.opacity,
+             left: r.left, right: r.right, top: r.top, bottom: r.bottom,
+             w: r.width, h: r.height, cx: r.left + r.width / 2 };
+  });
+  return { vw: innerWidth, vh: innerHeight, n: sheets.length,
+           idx: sheets.findIndex(function(x){ return x.open; }), s: sheets };
+})()`);
+
 const mTop = await ev(`document.getElementById('bespoke').offsetTop`);
-await scroll(mTop + 30, 900);
-const mState = await ev(`[].map.call(document.querySelectorAll('#deck .sheet'), function(e){var m=getComputedStyle(e).transform;var p=m.slice(m.indexOf('(')+1,-1).split(',').map(parseFloat);var r=e.getBoundingClientRect();return {x:p[4], left:r.left, right:r.right};})`);
-check('mobile: first sheet is pulled out', Math.abs(mState[0].x) <= 12, true);
-check('mobile: the stack waits at the right edge', mState[1].x > 100 && mState[1].left < 520, true);
+await scroll(mTop + 30, 600);
+await waitIdx(0);
+await sleep(400);
+let f = await facts();
+check('mobile: one sheet is open at a time', f.s.filter(x => x.open).length, 1);
+check('mobile: the open sheet is centred', Math.abs(f.s[f.idx].cx - f.vw / 2) <= 2, true);
+check('mobile: the next sheet waits behind the open one', Math.abs(f.s[1].top - f.s[f.idx].top) <= 2, true);
+check('mobile: the rest wait in the right rail', f.s.slice(2).every(x => x.left > f.vw * 0.55), true);
 check('mobile: no horizontal page overflow', await ev(`document.documentElement.scrollWidth <= innerWidth + 1`), true);
 
-/* the deck: sheets park at the right edge and are pulled out one at a time.
-   Back to desktop first — the phone block above left the viewport narrow. */
+/* desktop deck: one sheet fills the frame, the next is pushed up from below, the
+   rest stay in the rail; z order parked > incoming > open > spent */
 await s('Emulation.setDeviceMetricsOverride', { width: 1440, height: 900, deviceScaleFactor: 1, mobile: false });
 await s('Page.navigate', { url: `http://127.0.0.1:${PORT}/home/index.html` });
 await sleep(3000);
 const deckTop = await ev(`document.getElementById('bespoke').offsetTop`);
 const slotPx = await ev(`parseFloat(getComputedStyle(document.getElementById('bespoke')).getPropertyValue('--sheet-scroll'))/100*innerHeight`);
-const deckState = async () => ev(`[].map.call(document.querySelectorAll('#deck .sheet'), function(e){
-  var m = getComputedStyle(e).transform, p = m.slice(m.indexOf('(')+1,-1).split(',').map(parseFloat);
-  var r = e.getBoundingClientRect();
-  return {x:p[4], y:p[5], scale:p[0], top:Math.round(r.top), left:Math.round(r.left), z:+getComputedStyle(e).zIndex};
-})`);
+check('the slot height comes from --sheet-scroll', slotPx, (v) => v > 200);
 
-await scroll(deckTop + 10, 1000);
-let state = await deckState();
-check('eight sheets are in the deck', state.length, 8);
-check('the first sheet is pulled out at rest', Math.abs(state[0].x) <= 14, true);
-check('the rest stay parked to the right', state.map(s => s.left), (v) => v.slice(1).every(l => l > 1100));
-check('the displayed sheet is on top of the stack', state[0].z >= 900, true);
-check('z drops going up and down from the displayed card', (() => {
-  // at rest the displayed card is index 0, so the parked ones should step down by index
-  const parked = state.slice(1);
-  return parked.every((s, i) => i === 0 || s.z <= parked[i - 1].z + 1);
-})(), true);
+await scroll(deckTop + 10, 600);
+await waitIdx(0);
+await sleep(500);
+f = await facts();
+check('eight sheets are in the deck', f.n, 8);
+let st = JSON.parse(await stage());
+check('the open card sits between the copy and the rail', st.l > st.copyRight && st.r < st.railLeft, true);
+check('it is centred in the middle column', Math.abs((st.l + st.r) / 2 - (st.copyRight + st.railLeft) / 2) <= 8, true);
+check('and it is a substantial panel, not a thumbnail', st.w > 400 && st.h > 400, true);
+/* sampled 10 px into the first slot, so the card sits that much above the axis */
+check('the card is centred on the viewport axis', Math.abs((st.t + st.b) / 2 - st.vh / 2) <= 16, true);
+const railCentre = await ev(`(function(){
+  var a = document.querySelectorAll('#deck .sheet');
+  var first = a[2].getBoundingClientRect(), last = a[a.length - 1].getBoundingClientRect();
+  return Math.round((first.top + last.bottom) / 2 - innerHeight / 2);
+})()`);
+check('the next sheet waits behind the active one', Math.abs(f.s[1].top - f.s[f.idx].top) <= 2 && Math.abs(f.s[1].left - f.s[f.idx].left) <= 2, true);
+check('the remaining sheets park in the rail', f.s.slice(2).every(x => x.left > f.vw * 0.78), true);
+check('every visible parked sheet is fully opaque', f.s.slice(2).every(x => x.op < 0.06 || x.op > 0.99), true);
+check('z order: parked above open above the card behind it', f.s[f.idx].z > f.s[f.idx + 1].z && f.s[f.idx].z < Math.min(...f.s.slice(2).map(x => x.z)), true);
 
-await scroll(deckTop + slotPx * 1.02, 1000);
-state = await deckState();
-check('scrolling pulls the next sheet out', [state[0].left, state[1].x], (v) => Math.abs(v[1]) <= 30 && v[0] > 1100);
+await scroll(deckTop + slotPx * 1.04, 400);
+await waitIdx(1);
+await waitStill(`Math.round(document.querySelector('#deck .sheet.is-open').getBoundingClientRect().top)`);
+await sleep(400);
+f = await facts();
+check('scrolling promotes the next sheet', f.idx, 1);
+st = JSON.parse(await stage());
+check('the promoted card keeps the same middle column', st.l > st.copyRight && st.r < st.railLeft && Math.abs((st.l + st.r) / 2 - (st.copyRight + st.railLeft) / 2) <= 8, true);
+check('the sheet it replaced is gone and sunk behind', f.s[0].op < 0.06 && f.s[0].z < 200, true);
+check('nothing but the open card (and the one behind it) is inside the frame', f.s.every((x, i) =>
+  i === f.idx || i === f.idx + 1 || x.op < 0.06 || x.left > f.vw * 0.78 || x.top >= f.vh - 60), true);
 
-/* the rail: no overlap, slides with the scroll, hides what is out of range */
-await scroll(deckTop + slotPx * 4.02, 1000);
-const railState = await ev(`[].map.call(document.querySelectorAll('#deck .sheet'), function(e){
-  var r = e.getBoundingClientRect(), cs = getComputedStyle(e);
-  return {top:Math.round(r.top), bottom:Math.round(r.bottom), left:Math.round(r.left), right:Math.round(r.right),
-          op:+cs.opacity, z:+cs.zIndex};
-})`);
-const shown = railState.filter((s, i) => i !== 4 && s.op > 0.5);
-check('parked cards never overlap each other', shown.every((a, i) => shown.every((b, j) => i === j || a.bottom <= b.top + 1 || b.bottom <= a.top + 1)), true);
-check('cards are clipped, never faded out', railState.every(s => s.op > 0.99), true);
-check('a card half out of the rail is still drawn', await ev(`(function(){
-  var deck=document.getElementById('deck').getBoundingClientRect();
-  return [].some.call(document.querySelectorAll('#deck .sheet'), function(e){var r=e.getBoundingClientRect();
-    return r.top < deck.top + 4 && r.bottom > deck.top + 20;});
+await scroll(deckTop + slotPx * 4.04, 400);
+await waitIdx(4);
+await sleep(400);
+f = await facts();
+const parked = f.s.slice(f.idx + 2);
+const afterRail = f.s.map(x => ({ top: Math.round(x.top) }));
+/* the carousel's focus card is 12% larger than the step on purpose, so it may sit a
+   couple of px over its neighbours; everything else must not overlap */
+const overlapOk = (a, b) => Math.max(a.bottom - b.top, b.bottom - a.top) <= 4;
+check('parked sheets never overlap each other', parked.every((a, i) => parked.every((b, j) => i === j || a.op < 0.06 || b.op < 0.06 || a.bottom <= b.top + 14 || b.bottom <= a.top + 14)), true);
+const railTops = afterRail.map(x => x.top);
+await scroll(deckTop + slotPx * 5.04, 1500);
+const railTops2 = (await facts()).s.map(x => Math.round(x.top));
+check('the rail travels when the page scrolls', railTops2.some((v, i) => Math.abs(v - railTops[i]) > 40), true);
+
+/* the last sheet: it stays open and leaves by scrolling, not by shrinking back */
+await scroll(deckTop + slotPx * 8.4, 400);
+await waitIdx(7);
+await sleep(400);
+f = await facts();
+check('the last sheet is the open one at the end', f.idx, 7);
+check('it never shrinks back as the deck ends', f.s[7].h > 400, true);
+
+/* hover: a parked sheet leans out, grows and rises above the stack */
+await scroll(deckTop + slotPx * 3.02, 400);
+await waitIdx(3);
+await sleep(500);
+const beforeHover = await facts();
+const hoverIdx = beforeHover.idx + 2;
+const target = await ev(`(function(){var r=document.querySelectorAll('#deck .sheet')[${hoverIdx}].getBoundingClientRect();return JSON.stringify({x:Math.round(r.left+r.width/2),y:Math.round(r.top+r.height/2)})})()`);
+const tp = JSON.parse(target);
+/* the page listens for pointerenter/leave on the sheet, so dispatch those rather
+   than a real mouse move (headless coalesces those and the leave can be missed) */
+await ev(`document.querySelectorAll('#deck .sheet')[${hoverIdx}].dispatchEvent(new PointerEvent('pointerenter'))`);
+await waitFor(`+getComputedStyle(document.querySelectorAll('#deck .sheet')[${hoverIdx}]).zIndex === 990`);
+await sleep(400);
+const afterHover = await facts();
+check('hovering pulls that sheet out of the rail', afterHover.s[hoverIdx].left < beforeHover.s[hoverIdx].left - 20, true);
+check('hovering enlarges it', afterHover.s[hoverIdx].w > beforeHover.s[hoverIdx].w * 1.04, true);
+check('the hovered sheet rises above the parked stack', afterHover.s[hoverIdx].z >= Math.max(...afterHover.s.slice(2).map(x => x.z)), true);
+check('its neighbours step aside', Math.abs(afterHover.s[hoverIdx + 1].top - beforeHover.s[hoverIdx + 1].top) > 2, true);
+await ev(`document.querySelectorAll('#deck .sheet')[${hoverIdx}].dispatchEvent(new PointerEvent('pointerleave'))`);
+await sleep(1500);
+const afterLeave = await facts();
+/* the rail keeps settling while it is measured, so compare against a neighbour
+   that is also parked rather than against an absolute value captured earlier */
+const railW = afterLeave.s.slice(afterLeave.idx + 2).map(x => Math.round(x.w)).sort((a, b) => a - b);
+const railLeft = afterLeave.s.slice(afterLeave.idx + 2).map(x => Math.round(x.left)).sort((a, b) => a - b);
+const median = (a) => a[Math.floor(a.length / 2)];
+check('leaving puts it back in the rail',
+  JSON.stringify({ idx: afterLeave.idx, hoverIdx, hovered: [Math.round(afterLeave.s[hoverIdx].left), Math.round(afterLeave.s[hoverIdx].w)], median: [median(railLeft), median(railW)] }),
+  (v) => { const o = JSON.parse(v); return Math.abs(o.hovered[1] - o.median[1]) <= 14 && Math.abs(o.hovered[0] - o.median[0]) <= 14; });
+
+/* the layer's photograph must sit exactly where the deck's open card sits, or the
+   hand-over shows the same picture a second time in a slightly different crop */
+await scroll(0, 400);
+await scroll(300, 700);            /* let the forward pass run */
+await scroll(deckTop, 600);
+await waitIdx(0);
+/* the rail is sprung: wait until the card has stopped travelling to its slot */
+await waitStill(`Math.round(document.querySelector('#deck .sheet.is-open').getBoundingClientRect().top)`);
+await sleep(500);
+const align = await ev(`(function(){
+  var card = document.querySelector('.deck-intro .di-card');
+  var c = { left: parseFloat(card.style.left), top: parseFloat(card.style.top),
+            width: parseFloat(card.style.width), height: parseFloat(card.style.height) };
+  var s = document.querySelector('#deck .sheet.is-open').getBoundingClientRect();
+  return JSON.stringify({ c: [Math.round(c.left), Math.round(c.top), Math.round(c.width), Math.round(c.height)],
+                          s: [Math.round(s.left), Math.round(s.top), Math.round(s.width), Math.round(s.height)] });
+})()`);
+check('the layer card is the same box as the deck card', JSON.parse(align), (v) =>
+  Math.abs(v.c[0] - v.s[0]) <= 1 && Math.abs(v.c[2] - v.s[2]) <= 1 &&
+  Math.abs(v.c[3] - v.s[3]) <= 1 &&
+  /* the top tracks the sprung frac, so allow the couple of px the rail can still
+     be easing through when this is sampled */
+  Math.abs(v.c[1] - v.s[1]) <= 3);
+const railCentreJson = await ev(`(function(){
+  var a = document.querySelectorAll('#deck .sheet');
+  var idx = -1, i;
+  for (i = 0; i < a.length; i++) if (a[i].classList.contains('is-open')) idx = i;
+  var tops = [], bottoms = [];
+  for (i = idx + 2; i < a.length; i++) {
+    if (+getComputedStyle(a[i]).opacity > 0.5) {
+      var r = a[i].getBoundingClientRect();
+      tops.push(r.top); bottoms.push(r.bottom);
+    }
+  }
+  if (!tops.length) return '{"centre":0,"axis":0,"n":0}';
+  var t = Math.min.apply(null, tops), b = Math.max.apply(null, bottoms);
+  return JSON.stringify({ centre: Math.round((t + b) / 2), axis: Math.round(innerHeight / 2), n: tops.length });
+})()`);
+const rc = JSON.parse(railCentreJson || '{}');
+check('the rail column is centred on the same axis', Math.abs(rc.centre - rc.axis) <= 12, true);
+
+check('the rail is on screen as soon as the deck takes over', await ev(`(function(){
+  var r = document.querySelectorAll('#deck .sheet')[2].getBoundingClientRect();
+  return r.top > 0 && r.bottom < innerHeight;
 })()`), true);
 
-/* the strip stays full at both ends: no empty half above the first card or below the last */
-const railFill = async (at) => {
-  await scroll(deckTop + slotPx * at, 900);
-  return ev(`(function(){
-    var s=[].map.call(document.querySelectorAll('#deck .sheet'),function(e){var r=e.getBoundingClientRect();var cs=getComputedStyle(e);return {t:r.top,b:r.bottom,op:+cs.opacity};});
-    s=s.filter(function(x){return x.op>0.5;});
-    s.sort(function(a,b){return a.t-b.t;});
-    return [Math.round(s[0].t), Math.round(s[s.length-1].b)];
-  })()`);
-};
-const deckBox = await ev(`(function(){var r=document.getElementById('deck').getBoundingClientRect();return [Math.round(r.top), Math.round(r.bottom)];})()`);
-const fillStart = await railFill(0.04);
-check('rail reaches the top of the strip at the first card', fillStart[0] <= deckBox[0] + 24, true);
-const fillEnd = await railFill(7.02);
-check('rail reaches the bottom of the strip at the last card', fillEnd[1] >= deckBox[1] - 72, true);
+/* the cover → deck transition: a fixed GSAP timeline (fill, then card), which
+   hands over to the deck and reverses on the way back up */
+check('gsap is loaded for the transition', await ev(`typeof (window.gsap && window.gsap.version) === 'string'`), true);
+check('the fill is a gradient, not a flat block', await ev(`getComputedStyle(document.querySelector('.deck-intro .di-black')).backgroundImage.indexOf('linear-gradient') >= 0`), true);
+check('the layer never takes pointer events', await ev(`getComputedStyle(document.getElementById('deck-intro')).pointerEvents`), 'none');
 
-/* the last sheet never retreats: past its slot it stays out and leaves with the page */
-await scroll(deckTop + slotPx * 8.6, 1000);
-const lastState = await ev(`(function(){
-  var ss=document.querySelectorAll('#deck .sheet'), e=ss[ss.length-1];
-  var m=getComputedStyle(e).transform, p=m.slice(m.indexOf('(')+1,-1).split(',').map(parseFloat);
-  var r=e.getBoundingClientRect();
-  return {x:Math.round(p[4]), z:+getComputedStyle(e).zIndex, top:Math.round(r.top), vh:innerHeight};
-})()`);
-check('the last sheet stays out instead of going back', Math.abs(lastState.x) <= 20 && lastState.z >= 900, true);
-check('it leaves the screen by scrolling, not by shrinking back', lastState.top < 0, true);
+/* while the black is still rising the next section must not peek below the cover:
+   the fill starts at the bottom, so without the guard its first card shows as a strip */
+await scroll(0, 400);
+await scroll(200, 450);
+check('the deck stays out of sight while the black rises', await ev(`getComputedStyle(document.getElementById('bespoke')).visibility`), 'hidden');
 
-const beforeScroll = railState.map(s => s.top);
-await scroll(deckTop + slotPx * 5.02, 1000);
-const afterScroll = await ev(`[].map.call(document.querySelectorAll('#deck .sheet'), function(e){return Math.round(e.getBoundingClientRect().top);})`);
-check('the rail travels when the page scrolls', afterScroll.some((v, i) => Math.abs(v - beforeScroll[i]) > 40), true);
+/* a single jump must still land on the right state: position first, not state first */
+await scroll(deckTop, 900);
+check('the layer hands off once the deck is pinned', await ev(`getComputedStyle(document.getElementById('deck-intro')).visibility`), 'hidden');
+check('the deck is back in sight after the hand-off', await ev(`getComputedStyle(document.getElementById('bespoke')).visibility`), 'visible');
 
-/* hover: a parked card leans out of the stack, the displayed one keeps the top */
-await scroll(deckTop + slotPx * 3.02, 900);
-const before = await deckState();
-await ev(`document.querySelectorAll('#deck .sheet')[5].dispatchEvent(new PointerEvent('pointerenter'))`);
-await sleep(700);
-const after = await deckState();
-check('hovering pulls that card out of the stack', after[5].x < before[5].x - 20, true);
-check('hovering enlarges it', after[5].scale > before[5].scale + 0.005, true);
-check('the displayed card still owns the top of the stack', after[3].z >= 900 && after[5].z < 900, true);
-check('the neighbours of the hovered card step aside', Math.abs(after[4].y - before[4].y) > 3 || Math.abs(after[6].y - before[6].y) > 3, true);
-await ev(`document.querySelectorAll('#deck .sheet')[5].dispatchEvent(new PointerEvent('pointerleave'))`);
-await sleep(700);
-const reset = await deckState();
-check('leaving the card puts it back', Math.abs(reset[5].x - before[5].x) < 3, true);
+/* coming back up: the layer returns to play the reverse, then leaves again */
+const vhNow = await ev(`innerHeight`);
+await scroll(deckTop - vhNow * 0.62, 350);
+check('the layer comes back to play the reverse', await ev(`getComputedStyle(document.getElementById('deck-intro')).visibility`), 'visible');
+await waitFor(`getComputedStyle(document.getElementById('deck-intro')).visibility === 'hidden'`, 7000);
+check('the reverse ends with the layer gone again', await ev(`getComputedStyle(document.getElementById('deck-intro')).visibility`), 'hidden');
+
+await scroll(deckTop + slotPx * 3.02, 500);
+await waitIdx(3);
+
+/* the fill starts on the first few pixels of downward movement (it used to wait for
+   18% of the viewport, leaving a dead zone that read as a stall) */
+await scroll(0, 500);
+await scroll(20, 420);
+check('the fill starts on the first downward movement', await ev(`getComputedStyle(document.getElementById('deck-intro')).visibility`), 'visible');
+const firstY = await ev(`(function(){var m=getComputedStyle(document.querySelector('.di-black')).transform;return Math.round(parseFloat(m.split(',')[5]));})()`);
+check('the black has already left the bottom edge', firstY, (v) => v < 900);
+check('the started fill is not cancelled on the next frame', await ev(`getComputedStyle(document.getElementById('deck-intro')).visibility`), 'visible');
+
+/* a quick up-swipe while the fill is still playing must not leave the layer stuck
+   over the cover (it used to freeze at progress 1 with no way back) */
+await scroll(0, 400);
+await scroll(220, 220);
+await scroll(0, 220);
+await waitFor(`getComputedStyle(document.getElementById('deck-intro')).visibility === 'hidden'`, 9000);
+check('a quick up-swipe during the fill recovers', await ev(`getComputedStyle(document.getElementById('deck-intro')).visibility`), 'hidden');
+check('and the deck is not left hidden behind it', await ev(`getComputedStyle(document.getElementById('bespoke')).visibility`), 'visible');
+
+/* coming up from the deck the reverse plays progressively, it does not jump */
+await scroll(deckTop + 200, 700);
+await waitIdx(0);
+await scroll(0, 260);
+check('the reverse takes over when leaving the deck', await ev(`getComputedStyle(document.getElementById('deck-intro')).visibility`), 'visible');
+const blackY = () => ev(`(function(){var m=getComputedStyle(document.querySelector('.di-black')).transform;return Math.round(parseFloat(m.split(',')[5]));})()`);
+/* the reverse is 1.10 s now (card 0.42 + black 0.68), so sample while the black
+   is still travelling rather than after it has already landed */
+await sleep(600);
+const midY = await blackY();
+check('the black is still on its way out', midY, (v) => v > 0 && v < 900);
+await waitFor(`getComputedStyle(document.getElementById('deck-intro')).visibility === 'hidden'`, 9000);
+check('the reverse ends back at the cover', await ev(`getComputedStyle(document.getElementById('deck-intro')).visibility`), 'hidden');
+check('the cover is the page that is left on screen', await ev(`Math.round(scrollY)`), 0);
+await scroll(700, 500);   /* the scroll-spy block below expects to be off the very top */
 
 /* scroll-spy + bar */
-check('nav marks the active passage', await ev(`(function(){var a=document.querySelector('[data-spy][aria-current]');return a?a.textContent:'none';})()`), (v) => ['Cover', 'Bespoke', 'Atelier'].indexOf(v) >= 0);
+check('nav marks the active passage', await ev(`(function(){var a=document.querySelector('[data-spy][aria-current]');return a?a.textContent:'none';})()`), (v) => ['Home', 'Projects'].indexOf(v) >= 0);
 check('bar gains a ground below the cover', await ev(`document.body.classList.contains('scrolled')`), true);
 
 /* everything decodes, including the footer */
 await ev(`window.scrollTo(0, document.body.scrollHeight)`); await sleep(2200);
 check('all images decoded', await ev(`[].every.call(document.images, function(i){return i.naturalWidth>0;})`), true);
-check('credit line present', await ev(`/Wikimedia/.test(document.querySelector('.foot-credit').textContent)`), true);
+check('credit line present', await ev(`/Wikimedia/.test(document.querySelector('.ncl-foot-base').textContent)`), true);
+check('footer base row holds the small print', await ev(`document.querySelector('.ncl-foot-base').children.length`), 3);
+check('no duplicated deck-intro id', await ev(`document.querySelectorAll('#deck-intro').length`), 1);
+check('footer grid keeps exactly four columns', await ev(`document.querySelector('.ncl-foot-grid').children.length`), 4);
 check('enquiry CTA present', await ev(`!!document.querySelector('.craft-cta .cta')`), true);
 check('video still playing at the bottom', await ev(`(function(){var v=document.getElementById('film-video');return v && !v.paused;})()`), true);
 

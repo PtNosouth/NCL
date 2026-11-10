@@ -57,7 +57,7 @@ closing   询价
 
 ## 验证
 
-`home/_work/verify-collection.mjs`（headless Chrome + CDP）**36 项全过**：
+`home/_work/verify-collection.mjs`（headless Chrome + CDP）**37 项全过**：
 
 - 无 console 异常；标题、导航 4 项且本页高亮；hero 是第一节
 - 家族栏在**左侧**（x < 320）、五项、计数相加 = 118

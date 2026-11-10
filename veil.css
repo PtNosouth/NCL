@@ -1,0 +1,43 @@
+/* ── the shutter between pages ────────────────────────────────────────────
+   `index.html` carries these rules inside `style.css` (main.js drives them). The
+   sub-pages load this copy instead, so moving between pages feels the same
+   everywhere: two leaves close over the screen, then open onto the next page. */
+
+.page-veil {
+  position: fixed; inset: 0; z-index: 200; pointer-events: none;
+  background: transparent; overflow: hidden;
+}
+.page-veil::before,
+.page-veil::after {
+  content: ""; position: absolute; left: 0; right: 0; height: 52%;
+  background: #040303;
+  transition: transform .54s cubic-bezier(.72, 0, .24, 1);
+  will-change: transform;
+}
+.page-veil::before {
+  top: 0; transform: translate3d(0, -101%, 0);
+  box-shadow: 0 1px 0 rgba(199, 163, 102, .55), 0 0 34px rgba(199, 163, 102, .18);
+}
+.page-veil::after {
+  bottom: 0; transform: translate3d(0, 101%, 0);
+  box-shadow: 0 -1px 0 rgba(199, 163, 102, .55), 0 0 34px rgba(199, 163, 102, .18);
+}
+.page-veil.is-leaving::before,
+.page-veil.is-leaving::after { transform: translate3d(0, 0, 0) }
+.page-veil.is-leaving { pointer-events: auto }
+.page-veil.is-arriving::before,
+.page-veil.is-arriving::after { transform: translate3d(0, 0, 0); transition: none }
+.page-veil.is-arriving { pointer-events: auto }
+.page-veil.is-arriving.is-lifting::before {
+  transform: translate3d(0, -101%, 0);
+  transition: transform .6s cubic-bezier(.72, 0, .24, 1) .04s;
+}
+.page-veil.is-arriving.is-lifting::after {
+  transform: translate3d(0, 101%, 0);
+  transition: transform .6s cubic-bezier(.72, 0, .24, 1) .04s;
+}
+.page-veil.is-arriving.is-lifting { pointer-events: none }
+
+@media (prefers-reduced-motion: reduce) {
+  .page-veil { display: none }
+}

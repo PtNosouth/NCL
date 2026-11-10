@@ -148,7 +148,10 @@
   var stageEl = document.querySelector('.stage');
   var bespoke = document.getElementById('bespoke');
   var deckEl = document.getElementById('deck');
-  var cards = deckEl ? [].slice.call(deckEl.children) : [];
+  /* the sheets live in the stage now, so `children` would only be the stage, the rail
+     and the glow -- the list has to be the sheets themselves */
+  var cards = deckEl ? [].slice.call(deckEl.querySelectorAll('.sheet')) : [];
+  var veilEl = document.getElementById('deck-veil')
   var railName = document.getElementById('rail-name');
   var railLine = document.getElementById('rail-line');
   var lastY = window.scrollY;
@@ -156,27 +159,30 @@
     return { img: img, frame: img.closest('.px-frame'), speed: parseFloat(img.dataset.px) || 0.14 };
   });
 
-  /* ── hover preview: a parked card leans out of the stack ── */
-  var hoverIdx = -1;
-  var hoverAmt = cards ? cards.map(function () { return 0; }) : [];
-  var hoverTicking = false;
-
-  function hoverTick() {
-    var moving = false;
-    for (var i = 0; i < cards.length; i++) {
-      var target = i === hoverIdx ? 1 : 0;
-      var diff = target - hoverAmt[i];
-      if (Math.abs(diff) > 0.004) { hoverAmt[i] += diff * 0.18; moving = true; }
-      else hoverAmt[i] = target;
-    }
+  /* the entrance runs on its own clock: veil up, first card through it, rail in */
+  function stepEntry() {
+    entryP = Math.min(1, entryP + 1 / 90);
     paintScroll();
-    hoverTicking = moving;
-    if (moving) window.requestAnimationFrame(hoverTick);
+    if (entryP < 1) window.requestAnimationFrame(stepEntry);
   }
-  function nudgeHover() {
-    if (hoverTicking) return;
-    hoverTicking = true;
-    window.requestAnimationFrame(hoverTick);
+  /* the curtain fills by itself the moment the page starts to move */
+  function stepFill() {
+    fillP = Math.min(1, fillP + 1 / 30);
+    paintScroll();
+    if (fillP < 1) window.requestAnimationFrame(stepFill);
+  }
+  function startFill() {
+    if (fillStarted) return;
+    fillStarted = true;
+    fillP = 1;
+    if (veilEl) veilEl.classList.add('is-filled');
+  }
+
+  function startEntry() {
+    if (entryStarted) return;
+    entryStarted = true;
+    if (!reduce.matches) window.requestAnimationFrame(stepEntry);
+    else entryP = 1;
   }
 
   var DECISIONS = [
@@ -189,7 +195,12 @@
     { name: 'Scale', line: 'A lantern form needs more height than width; a wide room asks for a wider answer.' },
     { name: 'Finish', line: 'Crystal and brass are the same family in three temperatures; we send samples before drawing.' }
   ];
-  var activeCard = -1;
+  var activeCard = -1
+  var entryP = 0
+  var entryStarted = false
+  var fillP = 0;
+  var fillStarted = false;
+  var reachedDeck = false;
 
   /* the deck's progress is sprung: scrolling sets a target, the rail chases it with
      a little overshoot, so cards arrive instead of snapping */
@@ -242,111 +253,34 @@
 
     /* the deck: a rail of small sheets at the right edge. Scrolling pulls one out over
        the whole screen while the rail itself travels, so only the nearby cards show. */
-    if (bespoke && cards.length) {
-      var sheetScroll = parseFloat(getComputedStyle(bespoke).getPropertyValue('--sheet-scroll')) / 100 * vh || vh * 0.78;
-      deckTarget = Math.max(0, (y - bespoke.offsetTop) / sheetScroll);
-      if (!deckSettled) { deckT = deckTarget; deckSettled = true; }
-      if (reduce.matches) { deckT = deckTarget; deckV = 0; }
-      var t = deckT;
-      var n = cards.length;
-      var idx = Math.max(0, Math.min(n - 1, Math.round(t)));
-      var phone = window.innerWidth <= 900;
+          /* ── the commission deck ────────────────────────────────────────────
+         One card is expanded at a time — the topmost of the ones left. Scrolling
+         spends cards from the top: the expanded one leaves upward while the next
+         rises out of the rail. The rail holds what is still to come, so it is full
+         on the first card and empty on the last. */
+      if (bespoke && cards.length) {
+        var sheetScroll = (parseFloat(getComputedStyle(bespoke).getPropertyValue('--sheet-scroll')) / 100) * vh || vh * 0.78;
+        if (!fillStarted && y > 8) startFill();
+        if (!entryStarted && bespoke.offsetTop - y < vh * 0.55) startEntry();
 
-      // geometry of the rail: one whole step per card, so nothing ever overlaps
-            var sheetH = cards[0].offsetHeight || vh * 0.9;
-      var sheetW = cards[0].offsetWidth || window.innerWidth * 0.5;
-      var restCx = cards[0].offsetLeft;                      // translate:-50% centres the box here
-      var band = parseFloat(getComputedStyle(bespoke).getPropertyValue('--band')) || 120;
-      var restCy = band + (vh - band) / 2 - 18;
+        /* the curtain: it fills from the bottom once, then scroll lifts it away again */
+        var ct = (y - bespoke.offsetTop) / sheetScroll;
+        if (ct > 0.02) reachedDeck = true;
+        var lift = fillP >= 1 ? Math.max(0, Math.min(1, ct / 0.5)) : 0;
+        var retract = reachedDeck && y < bespoke.offsetTop
+          ? Math.min(1, (bespoke.offsetTop - y) / (vh * 0.6))
+          : 0;
 
-      // the rail: narrow horizontal slivers peeking in from the right edge
-      var span = phone ? 1.6 : 2.2;
-      var railStep = (vh * 0.86) / (span * 2);
-      var railGap = phone ? 8 : 10;
-      var stripH = Math.max(56, railStep - railGap);
-      var stripW = Math.min(window.innerWidth * (phone ? 0.46 : 0.30), phone ? 200 : 380);
-      var stripCx = window.innerWidth - stripW / 2 + (phone ? 12 : 26);
+        syncCarousel();
 
-      // the sheet at full open covers the viewport, 4:5 like its source
-      var coverH = Math.max(vh + band, window.innerWidth * (5 / 4));
-      var coverW = coverH * (4 / 5);
-
-      var railArea = phone ? vh - band - 216 : vh - band - 36;
-      var stripHalf = railArea / 2 - stripH / 2;
-      var stripShift = phone ? (railArea / 2 - (vh - band) / 2) : -18;
-      var slotTop = restCy + stripShift;
-      var edge = stripHalf;
-
-      // first pass: how open is each sheet, and which one leads
-      var opensArr = [];
-      var leadIdx = 0, leadOpen = -1;
-      for (var q = 0; q < n; q++) {
-        var dq = t - q;
-        var holdQ = q === 0 ? 0.45 : 0.2;
-        var outQ = q === n - 1 ? 0 : clamp01((dq - holdQ) / (1 - holdQ));
-        var oq = clamp01(1 + dq) * (1 - Math.min(1, outQ * 1.8));
-        oq = oq * oq * (3 - 2 * oq);
-        opensArr[q] = oq;
-        if (oq > leadOpen) { leadOpen = oq; leadIdx = q; }
-      }
-      /* a slot is the card's index minus the opening of everything above it: the rail
-         closes up behind the sheet that leaves, and never jumps when the lead changes */
-      var slotBase = [];
-      var accOpen = 0;
-      for (var q2 = 0; q2 < n; q2++) { slotBase[q2] = q2 - accOpen; accOpen += opensArr[q2]; }
-      var slotOf = function (i) { return slotBase[i]; };
-      var topY = (slotOf(0) - t) * railStep;
-      var botY = (slotOf(n - 1) - t) * railStep;
-      var hi = -edge - topY;
-      var lo = edge - botY;
-      var shift = Math.min(Math.max(0, Math.min(lo, hi)), Math.max(lo, hi));
-
-      for (var s2 = 0; s2 < n; s2++) {
-        var el = cards[s2];
-        var open = opensArr[s2];
-        var hv = hoverAmt[s2] || 0;
-
-        var slotY = slotTop + (slotOf(s2) - t) * railStep + shift;
-        if (hoverIdx >= 0 && s2 !== hoverIdx) {
-          var dh = s2 - hoverIdx;
-          slotY += (dh > 0 ? 1 : -1) * 6 * Math.exp(-(dh * dh) / 1.6) * (hoverAmt[hoverIdx] || 0);
+        /* the veil: it darkens, holds, then clears as the first card comes through */
+        if (veilEl) {
+          var park = lift * 100 - retract * 100;    /* -100: lifted away, +100: parked below */
+          veilEl.style.setProperty('--veil', park.toFixed(2));
         }
-
-        var w = stripW + (coverW - stripW) * open;
-        var h = stripH + (coverH - stripH) * open;
-        var cx = stripCx + (window.innerWidth / 2 - stripCx) * open;
-        var cy = slotY + (vh / 2 - slotY) * open;
-        var tx = cx - restCx;
-        var ty = cy - restCy;
-
-        el.style.width = w.toFixed(1) + 'px';
-        el.style.height = h.toFixed(1) + 'px';
-        var lift = 1 + hv * 0.05;
-        el.style.transform = 'translate3d(' + tx.toFixed(1) + 'px,' + ty.toFixed(1) + 'px,0) scale(' + lift.toFixed(3) + ')';
-        el.style.setProperty('--r', ((1 - open) * 18).toFixed(1) + 'px');
-        var isUp = open > 0.5;
-        if (el.classList.contains('is-open') !== isUp) el.classList.toggle('is-open', isUp);
-        // the parker rail rides above the filling sheet, so the right-hand strip never disappears
-        el.style.zIndex = String(Math.round(
-          open < 0.25
-            ? 900 - Math.abs(s2 - t) * 8 + hv * 40
-            : 600 + open * 120
-        ));
-        el.style.boxShadow = open > 0.5
-          ? '0 12px 28px rgba(0,0,0,.32)'
-          : '0 7px 16px rgba(0,0,0,.42), 0 2px 4px rgba(0,0,0,.28)';
       }
 
-      if (leadIdx !== activeCard) {
-        activeCard = leadIdx;
-        idx = leadIdx;
-        var d4 = DECISIONS[idx % DECISIONS.length] || DECISIONS[0];
-        if (railName) railName.textContent = d4.name;
-        if (railLine) railLine.textContent = d4.line;
-      }
-    }
-
-    /* the crystal plates drift */
+      /* the crystal plates drift */
     for (var i = 0; i < pxLayers.length; i++) {
       var l = pxLayers[i];
       var r = l.frame.getBoundingClientRect();
@@ -375,23 +309,406 @@
     });
   }
 
+  /* ── the carousel: positions live in CSS, a rotation is a DOM move ─────── */
+  var carouselActive = -1;
+
+  /* the carousel rotates DOM nodes, so it must own a container that holds nothing
+     else: the rail and the glow sit outside it and keep their positions */
+  var deckStage = document.getElementById('deck-stage') || deckEl;
+
+  function carouselItems() {
+    return deckEl ? deckEl.querySelectorAll('.sheet') : [];
+  }
+
+  var glowEl = deckEl ? deckEl.querySelector('.deck-glow') : null;
+  function syncGlow() {
+    if (!glowEl) return;
+    var items = carouselItems();
+    var act = items[1];
+    var img = act ? act.querySelector('img') : null;
+    if (img && glowEl.dataset.src !== img.getAttribute('src')) {
+      glowEl.dataset.src = img.getAttribute('src');
+      glowEl.style.backgroundImage = 'url("' + img.getAttribute('src') + '")';
+    }
+  }
+
+  /* the carousel is a sequence, not a loop: everything already shown leaves the list */
+  function markPast(active) {
+    var items = carouselItems();
+    for (var i = 0; i < items.length; i++) {
+      var id = parseInt(items[i].getAttribute('data-i') || '0', 10);
+      items[i].classList.toggle('is-past', id < active);
+    }
+    if (deckEl) deckEl.classList.toggle('is-empty', active >= items.length - 1);
+  }
+
+  function syncCarousel() {
+    if (!deckEl) return;
+    var items = carouselItems();
+    for (var i = 0; i < items.length; i++) {
+      var active = i === 1;                       /* the reference's nth-child(2) */
+      if (items[i].classList.contains('is-open') !== active) items[i].classList.toggle('is-open', active);
+      if (items[i].classList.contains('is-stage') !== (i <= 1)) items[i].classList.toggle('is-stage', i <= 1);
+    }
+
+    /* the copy belongs to the active card and replays on every change */
+    var act = items[1];
+    var id = act ? parseInt(act.getAttribute('data-i') || '0', 10) : 0;
+    markPast(id);
+    if (id !== carouselActive) {
+      carouselActive = id;
+      var d = DECISIONS[id % DECISIONS.length] || DECISIONS[0];
+      var tr = window.NCLtext || function (x) { return x; };
+      if (railName) railName.textContent = tr(d.name);
+      if (railLine) railLine.textContent = tr(d.line);
+      var copyEl = document.querySelector('.deck-copy');
+      if (copyEl) {
+        copyEl.classList.remove('is-swap');
+        void copyEl.offsetWidth;                  /* restart the animation */
+        copyEl.classList.add('is-swap');
+      }
+    }
+
+    /* publish the stage box (pinned viewport coordinates) for the cover→deck layer */
+    if (bespoke) {
+      var r = deckEl.getBoundingClientRect();
+      var pinOff = Math.max(0, bespoke.offsetTop - (window.scrollY || window.pageYOffset));
+      bespoke.style.setProperty('--card-l', r.left.toFixed(1) + 'px');
+      bespoke.style.setProperty('--card-t', (r.top - pinOff).toFixed(1) + 'px');
+      bespoke.style.setProperty('--card-w', r.width.toFixed(1) + 'px');
+      bespoke.style.setProperty('--card-h', r.height.toFixed(1) + 'px');
+    }
+  }
+
+  function activeId() {
+    var items = carouselItems();
+    var act = items[1];
+    return act ? parseInt(act.getAttribute('data-i') || '0', 10) : 0;
+  }
+
+  /* returns false when the deck is already at that end, so the caller can let the
+     page take over instead */
+  function rotate(dir) {
+    if (!deckEl) return false;
+    var items = carouselItems();
+    if (items.length < 2) return false;
+    var id = activeId();
+    if (dir > 0 && id >= items.length - 1) return false;   /* last room: no next */
+    if (dir < 0 && id <= 0) return false;                  /* first room: no previous */
+    if (dir > 0) deckStage.appendChild(items[0]);
+    else deckStage.insertBefore(items[items.length - 1], items[0]);
+    syncCarousel();
+    syncGlow();
+    return true;
+  }
+
+  /* the entrance beats are the deck's own: see `ncl:deck-open` in intro.js */
+  var openTimer = 0, closeTimer = 0;
+  var deckReady = false;
+  function deckPrime() {
+    if (!deckEl) return;
+    deckEl.classList.remove('is-closing');
+    deckEl.classList.add('is-primed');
+    /* decode every photograph before the curtain lifts: the opening used to play over
+       empty cards (black frame, holes in the list) while the lazy images were still on
+       their way */
+    deckReady = false;
+    var imgs = [].slice.call(deckEl.querySelectorAll('.sheet img'));
+    Promise.all(imgs.map(function (img) {
+      img.loading = 'eager';
+      return img.decode ? img.decode().catch(function () {}) : Promise.resolve();
+    })).then(function () { deckReady = true; });
+  }
+  function deckOpen() {
+    if (!deckEl) return;
+    /* wait (briefly) for the photographs, so the first beat is never an empty frame */
+    var waited = 0;
+    var go = function () {
+      window.clearTimeout(openTimer);
+      deckEl.classList.remove('is-closing', 'is-primed');
+      deckEl.classList.remove('is-opening');
+      void deckEl.offsetWidth;                  /* restart the animation */
+      deckEl.classList.add('is-opening');
+      openTimer = window.setTimeout(function () { deckEl.classList.remove('is-opening'); }, 620);
+    };
+    var wait = function () {
+      if (deckReady || waited > 900) return go();
+      waited += 80;
+      window.setTimeout(wait, 80);
+    };
+    wait();
+  }
+  function deckClose() {
+    if (!deckEl) return;
+    window.clearTimeout(closeTimer);
+    deckEl.classList.remove('is-opening');
+    deckEl.classList.remove('is-closing');
+    void deckEl.offsetWidth;
+    deckEl.classList.add('is-closing');
+    closeTimer = window.setTimeout(function () {
+      deckEl.classList.remove('is-closing');
+      /* hand over without moving the page: the black comes in first, and only then does
+         the cover get revealed -- otherwise the exit happened at whatever scroll
+         position the wheel had already reached and the deck slid away, dimmed */
+      document.dispatchEvent(new CustomEvent('ncl:deck-leave'));
+    }, 400);
+  }
+  document.addEventListener('ncl:deck-prime', deckPrime);
+  document.addEventListener('ncl:deck-open', deckOpen);
+
+  var nextBtn = document.querySelector('.deck-nav .next');
+  var prevBtn = document.querySelector('.deck-nav .prev');
+  if (nextBtn) nextBtn.addEventListener('click', function () { rotate(1); });
+  if (prevBtn) prevBtn.addEventListener('click', function () { rotate(-1); });
+
+  /* open on the first room: the front pair is [last, first], so `nth-child(2)` -- the
+     visible card -- is the first room instead of the second */
+  if (deckEl) { rotate(-1); syncGlow(); }
+
+  /* wheel and drag turn the carousel one card at a time, like the buttons */
+  var wheelLock = 0;
+  /* the trap listens on the document, not on the deck: while the visitor is on the
+     cover or in the craft section the pointer is not over the deck, so a deck-bound
+     listener never fired and a fast scroll sailed straight past this section */
+  if (deckEl) {
+    document.addEventListener('wheel', function (e) {
+      /* only while the section is near the top of the viewport */
+      var y = window.scrollY || window.pageYOffset || 0;
+      var top = bespoke ? bespoke.offsetTop : 0;
+      if (y < top - 240 || y > top + 240) return;
+
+      var vh = window.innerHeight;
+      var dir = e.deltaY > 0 ? 1 : -1;
+      var atLast = dir > 0 && activeId() >= carouselItems().length - 1;
+      var atFirst = dir < 0 && activeId() <= 0;
+      var pinned = Math.abs(y - top) <= 4;
+
+      /* An end only pulls the page back while the section is still *below* the pin (or,
+         going up, still below it) -- i.e. while the visitor is arriving. Once the page is
+         past the pin the gesture belongs to the page; snapping on every notch there is
+         what made the last card fight fast scrolling and jitter in place. */
+      if (atLast) {
+        if (y < top - 4) { e.preventDefault(); window.scrollTo(0, top); return; }
+        return;                                   /* already at/past the pin: let it go */
+      }
+      if (atFirst) {
+        if (y > top + 4) { e.preventDefault(); window.scrollTo(0, top); return; }
+        /* first card, still going up: close the deck, then hand back to the page */
+        if (deckEl && !deckEl.classList.contains('is-closing')) {
+          e.preventDefault();
+          deckClose();
+        }
+        return;
+      }
+
+      e.preventDefault();
+      /* the opening beat owns the stage */
+      if (deckEl.classList.contains('is-opening')) return;
+      if (!pinned) { window.scrollTo(0, top); return; }
+
+      if (Math.abs(e.deltaY) < 12) return;
+      var now = Date.now();
+      if (now - wheelLock < 320) return;
+      wheelLock = now;
+      rotate(dir);
+    }, { passive: false });
+
+    var dragY = 0, dragging = false;
+    deckEl.addEventListener('pointerdown', function (e) {
+      if (e.button !== 0) return;
+      dragging = true;
+      dragY = e.clientY;
+    });
+    deckEl.addEventListener('pointerup', function (e) {
+      if (!dragging) return;
+      dragging = false;
+      var dy = dragY - e.clientY;
+      if (Math.abs(dy) > 48) rotate(dy > 0 ? 1 : -1);   /* returns false at an end */
+    });
+    deckEl.addEventListener('pointerleave', function () { dragging = false; });
+  }
+
+  /* ── the gate: scrolling past the pin buys carousel turns ──────────────
+     A fling (or a trackpad's momentum, which keeps moving the page without any
+     wheel events) used to sail through this section. Any travel beyond the pin is
+     now absorbed: the page is pushed back to the pin and the distance is exchanged
+     for that many card turns, so a fast scroll spins the carousel quickly instead of
+     skipping it. The page only leaves once the carousel reaches an end. */
+  var OVERSTEP = 220;                 /* px of overshoot per card */
+  var gateArmed = false;
+  var gateLastY = -1;
+  function consumeOvershoot() {
+    if (!deckEl || !bespoke) return;
+    var top = bespoke.offsetTop;
+    var vh = window.innerHeight;
+    var y = window.scrollY || window.pageYOffset || 0;
+    var over = y - top;
+
+    if (gateLastY < 0) gateLastY = y;
+    /* arriving counts as a *crossing*, not as landing inside a narrow band: a fling
+       can jump from 600 to 1500 between two frames and never touch deckTop exactly */
+    var crossed = gateLastY !== y && (gateLastY - top) * (y - top) <= 0;
+    gateLastY = y;
+    if (crossed) gateArmed = true;
+
+    if (Math.abs(over) <= 1) { gateArmed = true; return; }
+    if (!gateArmed) return;                                       /* still travelling towards it */
+
+    var items = carouselItems();
+    var dir = over > 0 ? 1 : -1;
+    var id = activeId();
+    if (dir > 0 ? id >= items.length - 1 : id <= 0) { gateArmed = false; return; }
+    if (Math.abs(over) > vh * 3) { gateArmed = false; return; }   /* genuinely elsewhere */
+
+    window.scrollTo(0, top);
+    if (deckEl.classList.contains('is-opening') || deckEl.classList.contains('is-closing')) return;
+
+    var cards = Math.max(1, Math.round(Math.abs(over) / OVERSTEP));
+    for (var i = 0; i < cards; i++) { if (!rotate(dir)) break; }
+  }
+
   var scrollTick = false;
   function onScroll() {
     if (reduce.matches) { paintScroll(); return; }
     if (scrollTick) return;
     scrollTick = true;
-    window.requestAnimationFrame(function () { scrollTick = false; paintScroll(); });
+    window.requestAnimationFrame(function () {
+      scrollTick = false;
+      consumeOvershoot();
+      paintScroll();
+    });
     nudgeSpring();
   }
 
+  paintScroll();
+
+  /* the entrance runs on its own clock: veil up, first card through it, rail in */
+  function stepEntry() {
+    entryP = Math.min(1, entryP + 1 / 90);
+    paintScroll();
+    if (entryP < 1) window.requestAnimationFrame(stepEntry);
+  }
+  /* the curtain fills by itself the moment the page starts to move */
+  function stepFill() {
+    fillP = Math.min(1, fillP + 1 / 30);
+    paintScroll();
+    if (fillP < 1) window.requestAnimationFrame(stepFill);
+  }
+  function startFill() {
+    if (fillStarted) return;
+    fillStarted = true;
+    fillP = 1;
+    if (veilEl) veilEl.classList.add('is-filled');
+  }
+
+  function startEntry() {
+    if (entryStarted) return;
+    entryStarted = true;
+    if (!reduce.matches) window.requestAnimationFrame(stepEntry);
+    else entryP = 1;
+  }
+
+  var DECISIONS = [
+    { name: 'Lights', line: 'Twelve arms or thirty-six. The piece is drawn outward from the fixture count, never squeezed into a catalogue size.' },
+    { name: 'Scale', line: 'From a small pendant to a whole hall. At the far end the crystal pattern is redrawn, not enlarged.' },
+    { name: 'Drop', line: 'Set by the ceiling and by the height people stand under it. We cut the rods \u2014 the drawing does not change.' },
+    { name: 'Scale', line: 'The same drawing at three sizes; the crystal is re-pitched, never stretched.' },
+    { name: 'Finish', line: 'Brass, antique brass or polished chrome. One finish per piece, decided with a sample in your hand.' },
+    { name: 'Lights', line: 'A single drum, or forty arms on three tiers \u2014 the ceiling decides how far it can grow.' },
+    { name: 'Scale', line: 'A lantern form needs more height than width; a wide room asks for a wider answer.' },
+    { name: 'Finish', line: 'Crystal and brass are the same family in three temperatures; we send samples before drawing.' }
+  ];
+  var activeCard = -1
+  var entryP = 0
+  var entryStarted = false
+  var fillP = 0;
+  var fillStarted = false;
+  var reachedDeck = false;
+
+  /* the deck's progress is sprung: scrolling sets a target, the rail chases it with
+     a little overshoot, so cards arrive instead of snapping */
+  var deckTarget = 0;
+  var deckT = 0;
+  var deckV = 0;
+  var springRaf = 0;
+  var deckSettled = false;
+  var SPRING_K = 150;
+  var SPRING_DAMP = 0.80;
+
+  function stepSpring() {
+    springRaf = 0;
+    var dt = 1 / 60;
+    deckV = (deckV + (deckTarget - deckT) * SPRING_K * dt) * SPRING_DAMP;
+    deckT += deckV * dt;
+    paintScroll();
+    if (Math.abs(deckTarget - deckT) > 0.0008 || Math.abs(deckV) > 0.0008) {
+      springRaf = window.requestAnimationFrame(stepSpring);
+    } else {
+      deckT = deckTarget;
+      deckV = 0;
+      paintScroll();
+    }
+  }
+  function nudgeSpring() {
+    if (reduce.matches) { deckT = deckTarget; deckV = 0; return; }
+    if (!springRaf) springRaf = window.requestAnimationFrame(stepSpring);
+  }
+
+  function clamp01(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
+
+
+  /* dragging the deck turns it one card at a time, like the buttons */
+  if (deckEl) {
+    var dragY = 0, dragging = false;
+    deckEl.addEventListener('pointerdown', function (e) {
+      if (e.button !== 0) return;
+      dragging = true;
+      dragY = e.clientY;
+    });
+    deckEl.addEventListener('pointerup', function (e) {
+      if (!dragging) return;
+      dragging = false;
+      var dy = dragY - e.clientY;
+      if (Math.abs(dy) > 48) rotate(dy > 0 ? 1 : -1);
+    });
+    deckEl.addEventListener('pointerleave', function () { dragging = false; });
+  }
+
+  /* clicking a list card jumps straight to it: the nodes are re-ordered in one go, so the
+     deck plays a single transition from where it is to where that card belongs */
+  function rotateTo(target) {
+    var cur = activeId();
+    var step = target - cur;
+    if (!step) return;
+    var dir = step > 0 ? 1 : -1;
+    for (var i = 0; i < Math.abs(step); i++) {
+      var items = carouselItems();
+      if (items.length < 2) return;
+      if (dir > 0) deckStage.appendChild(items[0]);
+      else deckStage.insertBefore(items[items.length - 1], items[0]);
+    }
+    syncCarousel();
+    syncGlow();
+  }
+
   if (cards && cards.length) {
-    cards.forEach(function (el, i) {
-      el.addEventListener('pointerenter', function () { hoverIdx = i; nudgeHover(); });
-      el.addEventListener('pointerleave', function () { if (hoverIdx === i) hoverIdx = -1; nudgeHover(); });
-      el.addEventListener('focus', function () { hoverIdx = i; nudgeHover(); });
-      el.addEventListener('blur', function () { if (hoverIdx === i) hoverIdx = -1; nudgeHover(); });
+    cards.forEach(function (el) {
+      el.addEventListener('click', function (e) {
+        e.preventDefault();
+        if (!deckEl) return;
+        if (deckEl.classList.contains('is-opening') || deckEl.classList.contains('is-closing')) return;
+        var target = parseInt(el.getAttribute('data-i') || '0', 10);
+        rotateTo(target);
+      });
     });
   }
+
+  /* a language change re-renders the deck copy too */
+  document.addEventListener('ncl:lang', function () {
+    carouselActive = -1;
+    syncCarousel();
+    paintScroll();
+  });
 
   paintScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
@@ -433,152 +750,11 @@
   /* ── snap: a wheel gesture moves the deck exactly one sheet ────────────────
      Crossing into the section from the cover pulls it straight to its top, so the
      first commission lands full screen no matter how hard the wheel was spun. */
-  var snapBusy = false;
-  var snapTimer = 0;
-
-  function deckMetrics() {
-    if (!bespoke || !cards.length) return null;
-    var vpe = window.innerHeight;
-    var step = (parseFloat(getComputedStyle(bespoke).getPropertyValue('--sheet-scroll')) / 100) * vpe || vpe * 0.78;
-    return { top: bespoke.offsetTop, step: step, n: cards.length, vpe: vpe };
-  }
-
-  /* short push, long settle: fast enough to feel intentional, slow enough to land */
-  function snapTo(target, dur) {
-    dur = dur || 620;
-    snapBusy = true;
-    document.dispatchEvent(new Event('ncl:snap'));
-    var from = window.scrollY;
-    var dist = target - from;
-    var t0 = window.performance.now();
-    function step(now) {
-      var k = Math.min(1, (now - t0) / dur);
-      var e = k < 0.28
-        ? (k / 0.28) * (k / 0.28) * 0.22
-        : 0.22 + 0.78 * (1 - Math.pow(1 - (k - 0.28) / 0.72, 3));
-      window.scrollTo(0, from + dist * e);
-      if (k < 1) window.requestAnimationFrame(step);
-      else { snapBusy = false; window.clearTimeout(snapTimer); }
-    }
-    window.requestAnimationFrame(step);
-  }
-
-  function onWheelSnap(e) {
-    if (reduce.matches) return;
-    var m = deckMetrics();
-    if (!m) return;
-    var y = window.scrollY;
-    var lastTop = m.top + (m.n - 1) * m.step;
-    var inside = y >= m.top - 2 && y <= lastTop + 2;
-    var entering = y < m.top - 2 && e.deltaY > 0 && y > m.top - window.innerHeight;
-    if (!inside && !entering) return;
-    var dir = e.deltaY > 0 ? 1 : (e.deltaY < 0 ? -1 : 0);
-    if (!dir) return;
-    var idx = Math.round((y - m.top) / m.step);
-    /* the ends are open: going up from the first sheet hands back to the cover,
-       going down from the last one carries on to the rest of the page */
-    if (!entering && dir < 0 && idx <= 0) return;
-    if (!entering && dir > 0 && idx >= m.n - 1) return;
-    e.preventDefault();
-    if (snapBusy) return;
-    /* coming in from the cover always lands on the first sheet, never one past it */
-    var target = entering ? 0 : Math.max(0, Math.min(m.n - 1, idx + dir));
-    snapTo(m.top + target * m.step);
-    window.clearTimeout(snapTimer);
-    snapTimer = window.setTimeout(function () { snapBusy = false; }, 1100);
-  }
-
-  window.addEventListener('wheel', onWheelSnap, { passive: false });
 
 
   /* ── damped scrolling, on every page ──────────────────────────────────────
      Wheel input moves a target, and the page is pulled toward it by a
      critically damped spring: it leans in, glides, and settles without overshoot.
      Any handler that already claimed the event (the deck snap) wins. */
-  function initDampedScroll() {
-    var mq = window.matchMedia('(prefers-reduced-motion: reduce)');
-    if (mq.matches) return;
-    var OMEGA = 15;              // how fast it chases the target
-    var ZETA = 1;                // 1 = critically damped, no overshoot
-    var EASE = 0.9;              // a little resistance on the input itself
-    var target = window.scrollY;
-    var pos = target;
-    var vel = 0;
-    var raf = 0;
-    var running = false;
-    var last = 0;
-
-    function maxY() {
-      return Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
-    }
-
-    function frame(now) {
-      var dt = Math.min(0.05, Math.max(0.004, (now - last) / 1000));
-      last = now;
-      var steps = 4;
-      var h = dt / steps;
-      for (var i = 0; i < steps; i++) {
-        var a = -2 * ZETA * OMEGA * vel - OMEGA * OMEGA * (pos - target);
-        vel += a * h;
-        pos += vel * h;
-      }
-      var limit = maxY();
-      if (pos < 0) { pos = 0; vel = 0; }
-      if (pos > limit) { pos = limit; vel = 0; }
-      window.scrollTo(0, pos);
-      if (Math.abs(pos - target) < 0.4 && Math.abs(vel) < 2) {
-        pos = target;
-        window.scrollTo(0, target);
-        running = false;
-        return;
-      }
-      raf = window.requestAnimationFrame(frame);
-    }
-
-    function stop() {
-      if (raf) window.cancelAnimationFrame(raf);
-      raf = 0;
-      running = false;
-    }
-
-    function onWheel(e) {
-      if (e.defaultPrevented || e.ctrlKey || e.metaKey || e.altKey || e.shiftKey) return;
-      if (e.target && e.target.closest && e.target.closest('.menu, .detail, [data-native-scroll]')) return;
-      var limit = maxY();
-      if (limit <= 0) return;
-      if (!running) {
-        pos = window.scrollY;
-        vel = 0;
-        target = pos;
-      }
-      target = Math.min(limit, Math.max(0, target + e.deltaY * EASE));
-      if (Math.abs(target - window.scrollY) < 1) return;
-      e.preventDefault();
-      if (!running) {
-        running = true;
-        last = window.performance.now();
-        raf = window.requestAnimationFrame(frame);
-      }
-    }
-
-    window.addEventListener('wheel', onWheel, { passive: false });
-
-    /* anything else that moves the page takes it back from us */
-    window.addEventListener('scroll', function () {
-      if (!running) target = window.scrollY;
-    }, { passive: true });
-    window.addEventListener('keydown', function (ev) {
-      if (/^(ArrowUp|ArrowDown|PageUp|PageDown|Home|End| )$/.test(ev.key)) stop();
-    });
-    window.addEventListener('touchstart', stop, { passive: true });
-    mq.addEventListener && mq.addEventListener('change', function () {
-      if (mq.matches) stop();
-    });
-
-    /* the deck snap drives its own scroll: hand control over while it runs */
-    document.addEventListener('ncl:snap', stop);
-  }
-
   startIntro();
-  initDampedScroll();
 })();

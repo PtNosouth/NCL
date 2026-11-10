@@ -215,27 +215,41 @@ body.catalogue{
 .detail{position:fixed; inset:0; z-index:120; display:grid; place-items:center; padding:clamp(16px,4vh,48px)}
 .detail[hidden]{display:none}
 .detail-backdrop{
-  position:absolute; inset:0; background:rgba(0,0,0,.82);
-  backdrop-filter:blur(10px) saturate(.9);
+  /* lighter than before on purpose: the panel is glass now, so the page has to stay
+     readable through it */
+  position:absolute; inset:0; background:rgba(4,3,3,.52);
+  -webkit-backdrop-filter:blur(18px) saturate(1.05);
+  backdrop-filter:blur(18px) saturate(1.05);
   animation:fadein .35s var(--ease) both;
 }
 .detail-panel{
   position:relative; margin:0;
   width:min(1080px,100%); max-height:min(86vh,900px);
   display:grid; grid-template-columns:1.15fr .85fr;
-  background:var(--panel); border:1px solid var(--accent-2);
+  /* frosted glass: the page behind stays visible, heavily blurred and slightly
+     desaturated, with a brass hairline catching the edge */
+  background:linear-gradient(160deg, rgba(72,67,60,.40), rgba(20,18,15,.56));
+  -webkit-backdrop-filter:blur(28px) saturate(135%) brightness(1.02);
+  backdrop-filter:blur(28px) saturate(135%) brightness(1.02);
+  border:1px solid rgba(239,232,219,.16);
+  border-radius:18px;
   overflow:hidden;
   animation:panelin .42s var(--ease-soft) both;
-  box-shadow:0 40px 120px rgba(0,0,0,.7);
+  box-shadow:
+    0 40px 120px rgba(0,0,0,.62),
+    inset 0 1px 0 rgba(255,255,255,.14),
+    inset 0 0 90px rgba(255,255,255,.035);
 }
 @keyframes panelin{from{opacity:0; transform:translate3d(0,18px,0) scale(.985)} to{opacity:1; transform:none}}
 @keyframes fadein{from{opacity:0} to{opacity:1}}
-.detail-media{position:relative; background:var(--panel); overflow:hidden; min-height:0}
+.detail-media{position:relative; background:transparent; overflow:hidden; min-height:0}
 .detail-media img{width:100%; height:100%; object-fit:contain; display:block}
 .detail-copy{
   padding:clamp(22px,3.4vw,44px);
   display:grid; align-content:center; gap:clamp(10px,1.8vh,18px);
-  border-left:1px solid var(--rule);
+  border-left:1px solid rgba(239,232,219,.10);
+  /* a hint of the glass edge on the copy side, so the type never sits on nothing */
+  background:linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.012));
 }
 .detail-copy .mono{color:var(--accent); margin:0}
 .detail-copy h3{
@@ -318,4 +332,21 @@ body.catalogue{
 /* the rail already says it on wide screens: one note, not two */
 @media (min-width:901px){
   .col-family-note{display:none}
+}
+
+/* ── magnifier on the detail photograph ─────────────────── */
+.detail-media{position:relative}
+.detail-lens{
+  position:absolute; z-index:5; left:0; top:0;
+  width:190px; height:190px; border-radius:50%;
+  background-repeat:no-repeat; pointer-events:none;
+  border:1px solid rgba(233,212,166,.65);
+  box-shadow:0 14px 40px rgba(0,0,0,.55), inset 0 0 0 1px rgba(0,0,0,.4);
+  opacity:0; transform:translate3d(-9999px,-9999px,0);
+  transition:opacity .16s var(--ease);
+}
+.detail-media.is-zoom{cursor:zoom-in}
+.detail-media.is-zoom .detail-lens{opacity:1}
+@media (hover:none), (prefers-reduced-motion: reduce){
+  .detail-lens{display:none}
 }

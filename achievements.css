@@ -80,13 +80,31 @@
   height: clamp(460px, 74vh, 860px);
   padding: clamp(16px, 2.6vh, 30px) var(--pad);
   overflow: hidden;
-  border-top: 1px solid rgba(239, 232, 219, 0.09);
-  border-bottom: 1px solid rgba(239, 232, 219, 0.09);
-  /* the top and bottom edges fade, so the columns read as endless */
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 9%, #000 91%, transparent 100%);
-  mask-image: linear-gradient(to bottom, transparent 0, #000 9%, #000 91%, transparent 100%);
 }
 
+/* The edges dissolve into the page. This is an overlay rather than a mask: the columns
+   are composited (animated transforms), and a mask set at load time was not being
+   applied to them -- a painted ramp always is. The steps are dense so the ramp reads as
+   one continuous fade rather than a band. */
+.ach-wall::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 90;
+  pointer-events: none;
+  /* its own layer, so it cannot be painted under the composited columns */
+  transform: translateZ(0);
+  /* Only the top and bottom dissolve -- the sides stay as they are. The ramp still has
+     to reach full opacity before the columns are clipped, otherwise the cut shows. */
+  background:
+    linear-gradient(to bottom,
+      rgba(10,9,8,1) 0%, rgba(10,9,8,1) 3.5%, rgba(10,9,8,.92) 6%, rgba(10,9,8,.82) 9%,
+      rgba(10,9,8,.70) 12.5%, rgba(10,9,8,.57) 16%, rgba(10,9,8,.44) 19.5%, rgba(10,9,8,.32) 23%,
+      rgba(10,9,8,.21) 26.5%, rgba(10,9,8,.12) 30%, rgba(10,9,8,.05) 33.5%, rgba(10,9,8,0) 37%,
+      rgba(10,9,8,0) 63%, rgba(10,9,8,.05) 66.5%, rgba(10,9,8,.12) 70%, rgba(10,9,8,.21) 73.5%,
+      rgba(10,9,8,.32) 77%, rgba(10,9,8,.44) 80.5%, rgba(10,9,8,.57) 84%, rgba(10,9,8,.70) 87.5%,
+      rgba(10,9,8,.82) 91%, rgba(10,9,8,.92) 94%, rgba(10,9,8,1) 96.5%, rgba(10,9,8,1) 100%);
+}
 .ach-col {
   min-width: 0;
   overflow: hidden;
@@ -97,7 +115,8 @@
   animation-name: ach-walk;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
-  will-change: transform;
+  /* no will-change here: the animation already promotes this layer, and the extra hint
+     put it above the edge gradient that is painted over it */
 }
 .ach-wall.is-paused .ach-colrun {
   animation-play-state: paused;
@@ -281,10 +300,6 @@
   }
   .ach-col {
     overflow-y: auto;
-  }
-  .ach-wall {
-    -webkit-mask-image: none;
-    mask-image: none;
   }
   .ach-item,
   .ach-item img {

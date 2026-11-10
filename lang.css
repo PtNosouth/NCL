@@ -1,0 +1,87 @@
+/* ── language switcher + Arabic handling ──────────────────────────────────
+   The switcher sits with the other nav controls and reads as part of them: mono,
+   hairline separators, the current language marked. Switching languages never touches
+   the composition -- only the words change. */
+
+.lang-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  margin-inline-end: 14px;
+  font-family: var(--mono, ui-monospace, monospace);
+  font-size: 9.5px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.lang-switch button {
+  padding: 6px 8px;
+  border: 0;
+  background: none;
+  color: rgba(239, 232, 219, .52);
+  font: inherit;
+  letter-spacing: inherit;
+  cursor: pointer;
+  transition: color .35s cubic-bezier(.22, .61, .2, 1), opacity .35s ease;
+}
+.lang-switch button:hover { color: rgba(239, 232, 219, .9) }
+.lang-switch button.is-on {
+  color: var(--gilt-hi, #c7a366);
+  box-shadow: inset 0 -1px 0 currentColor;
+}
+.lang-switch button + button { border-inline-start: 1px solid rgba(239, 232, 219, .14) }
+.lang-switch button[data-lang="ar"] { letter-spacing: 0; font-size: 11px; text-transform: none }
+
+@media (max-width: 720px) {
+  .lang-switch { margin-inline-end: 8px; font-size: 9px }
+  .lang-switch button { padding: 6px 6px }
+}
+
+/* ── Arabic ───────────────────────────────────────────────────────────────
+   Arabic needs its own face and looser leading; the Latin display serif has no
+   Arabic coverage, so it falls through to a system naskh stack. */
+html[lang="ar"] body,
+html[dir="rtl"] body {
+  font-family: "Noto Naskh Arabic", "Geeza Pro", "Segoe UI", Tahoma, "Times New Roman", serif;
+}
+html[lang="ar"] p,
+html[lang="ar"] li,
+html[lang="ar"] dd {
+  line-height: 1.9;
+}
+html[lang="ar"] h1,
+html[lang="ar"] h2,
+html[lang="ar"] h3 {
+  line-height: 1.35;
+  letter-spacing: 0;
+}
+
+/* Arabic glyphs are much taller than Latin at the same font-size (deep descenders and
+   high ascenders), so the display sizes are stepped down and the leading opened up --
+   otherwise the cover headline grows upward into the nav. */
+html[lang="ar"] .hero-title {
+  font-size: clamp(32px, 5.6vw, 96px);
+  line-height: 1.14;
+  letter-spacing: 0;
+}
+html[lang="ar"] .craft-title {
+  font-size: clamp(28px, 4.2vw, 68px);
+  line-height: 1.28;
+  letter-spacing: 0;
+}
+html[lang="ar"] .col-hero h1,
+html[lang="ar"] .ach-hero h1 {
+  font-size: clamp(28px, 4.6vw, 78px);
+  line-height: 1.22;
+  letter-spacing: 0;
+}
+html[lang="ar"] .col-family-title,
+html[lang="ar"] .col-close h2,
+html[lang="ar"] .ach-note h2 {
+  letter-spacing: 0;
+  line-height: 1.3;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lang-switch button { transition: none }
+}

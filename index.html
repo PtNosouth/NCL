@@ -8,11 +8,17 @@
 <link rel="preload" href="fonts/InstrumentSerif-Regular.ttf" as="font" type="font/ttf" crossorigin>
 <link rel="preload" href="fonts/sora-latin-300-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="rise.css">
+<link rel="stylesheet" href="lang.css">
 <link rel="stylesheet" href="footer.css">
+<script src="i18n.js"></script>
 </head>
 <body class="preload">
 
 <div class="grain" aria-hidden="true"></div>
+<div class="deck-intro" id="deck-intro" aria-hidden="true">
+  <div class="di-black"></div>
+</div>
 <div class="page-veil" id="page-veil" aria-hidden="true"></div>
 
 <!-- ══ 01 · the cover ══════════════════════════════════════ -->
@@ -61,30 +67,34 @@
 <section class="bespoke" id="bespoke" aria-label="Commissions">
   <div class="bespoke-pin">
     <div class="deck" id="deck">
+      <div class="deck-stage" id="deck-stage">
       <figure class="sheet" data-i="0">
         <img src="media/rooms/room-01.webp" alt="A panelled drawing room with a twelve-arm crystal chandelier" width="1400" height="1750" loading="eager" decoding="async">
       </figure>
       <figure class="sheet" data-i="1">
-        <img src="media/rooms/room-05.webp" alt="A dining room with a long crystal bar fixture over the table" width="1400" height="1750" loading="lazy" decoding="async">
+        <img src="media/rooms/room-05.webp" alt="A dining room with a long crystal bar fixture over the table" width="1400" height="1750" loading="eager" decoding="async">
       </figure>
       <figure class="sheet" data-i="2">
-        <img src="media/rooms/room-02.webp" alt="A long sitting room with a deeper crystal fixture hung lower" width="1400" height="1750" loading="lazy" decoding="async">
+        <img src="media/rooms/room-02.webp" alt="A long sitting room with a deeper crystal fixture hung lower" width="1400" height="1750" loading="eager" decoding="async">
       </figure>
       <figure class="sheet" data-i="3">
-        <img src="media/rooms/room-06.webp" alt="A double-height entrance hall with a large tiered crystal chandelier" width="1400" height="1750" loading="lazy" decoding="async">
+        <img src="media/rooms/room-06.webp" alt="A double-height entrance hall with a large tiered crystal chandelier" width="1400" height="1750" loading="eager" decoding="async">
       </figure>
       <figure class="sheet" data-i="4">
-        <img src="media/rooms/room-03.webp" alt="A cream sitting room with a wide multi-arm crystal fixture" width="1400" height="1750" loading="lazy" decoding="async">
+        <img src="media/rooms/room-03.webp" alt="A cream sitting room with a wide multi-arm crystal fixture" width="1400" height="1750" loading="eager" decoding="async">
       </figure>
       <figure class="sheet" data-i="5">
-        <img src="media/rooms/room-07.webp" alt="A windowed living room with a crystal fixture over a long table" width="1400" height="1750" loading="lazy" decoding="async">
+        <img src="media/rooms/room-07.webp" alt="A windowed living room with a crystal fixture over a long table" width="1400" height="1750" loading="eager" decoding="async">
       </figure>
       <figure class="sheet" data-i="6">
-        <img src="media/rooms/room-04.webp" alt="A seating area with a single large lantern-form crystal fixture" width="1400" height="1750" loading="lazy" decoding="async">
+        <img src="media/rooms/room-04.webp" alt="A seating area with a single large lantern-form crystal fixture" width="1400" height="1750" loading="eager" decoding="async">
       </figure>
       <figure class="sheet" data-i="7">
-        <img src="media/rooms/room-08.webp" alt="A living room with a crystal drum fixture and a wide window" width="1400" height="1750" loading="lazy" decoding="async">
+        <img src="media/rooms/room-08.webp" alt="A living room with a crystal drum fixture and a wide window" width="1400" height="1750" loading="eager" decoding="async">
       </figure>
+      </div>
+      <div class="deck-rail" aria-hidden="true"></div>
+      <div class="deck-glow" aria-hidden="true"></div>
     </div>
 
     <div class="deck-copy">
@@ -92,6 +102,11 @@
       <p class="rail-claim">Every room here is a commission we built, delivered and hung —
         private houses, hotels, a few restaurants.</p>
       <p class="rail-now" id="rail-now"><b id="rail-name">Lights</b><span id="rail-line">Twelve arms or thirty-six. The piece is drawn outward from the fixture count.</span></p>
+    </div>
+
+    <div class="deck-nav">
+      <button class="prev" type="button" aria-label="Previous piece">&#8592;</button>
+      <button class="next" type="button" aria-label="Next piece">&#8594;</button>
     </div>
   </div>
 </section>
@@ -105,7 +120,7 @@
 
   <div class="craft-plate craft-plate-a">
     <div class="craft-media px-frame">
-      <img class="px" data-px="0.16" src="media/crystal/pendants.webp" alt="Cut-crystal pendants hanging from a gilt corona" width="1300" height="1099" loading="lazy" decoding="async">
+      <img class="px" data-px="0.16" src="media/crystal/pendants.webp" alt="Cut-crystal pendants hanging from a gilt corona" width="1300" height="1099" loading="eager" decoding="async">
     </div>
     <div class="craft-note">
       <p class="mono">Cut</p>
@@ -123,13 +138,13 @@
         run comes back down — there is no machine that makes that judgement.</p>
     </div>
     <div class="craft-media px-frame">
-      <img class="px" data-px="0.16" src="media/crystal/strung.webp" alt="Rows of crystal drops strung on wire, close up" width="1200" height="1126" loading="lazy" decoding="async">
+      <img class="px" data-px="0.16" src="media/crystal/strung.webp" alt="Rows of crystal drops strung on wire, close up" width="1200" height="1126" loading="eager" decoding="async">
     </div>
   </div>
 
   <div class="craft-close">
     <div class="craft-media craft-media-wide px-frame">
-      <img class="px" data-px="0.10" src="media/crystal/lit.webp" alt="The 70086 fixture switched on, its flame bulbs lit" width="1600" height="900" loading="lazy" decoding="async">
+      <img class="px" data-px="0.10" src="media/crystal/lit.webp" alt="The 70086 fixture switched on, its flame bulbs lit" width="1600" height="900" loading="eager" decoding="async">
     </div>
     <div class="craft-close-copy">
       <p class="mono">Lit</p>
@@ -178,14 +193,24 @@
         </a></li>
       </ul>
     </div>
-  </div>
 
-  <div class="ncl-foot-base">
-    <p>© 2024 NCL 新构思 · Guangdong — Worldwide</p>
-    <p>Photography — crystal stills via Wikimedia Commons (CC0)</p>
-    <p><a href="#top">Top ↑</a></p>
-  </div>
-</footer>
+    <div>
+      <h4>Useful information</h4>
+      <ul>
+        <li><a href="collection.html">Product photographs</a></li>
+        <li><a href="mailto:studio@ncl.example?subject=Care%20%26%20finishes">Care &amp; finishes</a></li>
+        <li><a href="mailto:studio@ncl.example?subject=Trade%20enquiry">Trade enquiries</a></li>
+        <li><a href="#top">Back to the top</a></li>
+      </ul>
+    </div>
+    </div>
+
+      <div class="ncl-foot-base">
+      <p>© 2024 NCL 新构思 · Guangdong — Worldwide</p>
+      <p>Photography — crystal stills via Wikimedia Commons (CC0)</p>
+      <p><a href="#top">Top ↑</a></p>
+    </div>
+  </footer>
 
 <header class="nav" id="nav">
   <a class="brand" href="#top" aria-label="NCL 新构思 — home">
@@ -221,6 +246,10 @@
   <p class="menu-foot">Trade and private commissions · worldwide delivery.</p>
 </div>
 
+<script src="vendor/gsap.min.js"></script>
 <script src="main.js"></script>
+<script src="intro.js"></script>
+<script src="damping.js"></script>
+<script src="rise.js"></script>
 </body>
 </html>

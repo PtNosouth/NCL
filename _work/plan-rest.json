@@ -1,0 +1,4 @@
+{"outDir":"review/rotate","shots":[
+ {"name":"rest","width":1440,"height":900,"wait":4200,"setup":"window.scrollTo(0, document.getElementById('bespoke').offsetTop + 60)","afterSetup":2400,
+  "evalScript":"JSON.stringify([].map.call(document.querySelectorAll('#deck .sheet'),function(e){var r=e.getBoundingClientRect();return [Math.round(r.left),Math.round(r.right),Math.round(r.top),Math.round(r.width),Math.round(r.height)]}))"}
+]}

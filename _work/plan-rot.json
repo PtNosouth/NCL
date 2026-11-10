@@ -1,0 +1,4 @@
+{"outDir":"review/rotate","shots":[
+ {"name":"seq","width":1440,"height":900,"wait":4200,"setup":"void 0",
+  "evalScript":"(function(){var w=function(ms){return new Promise(function(r){setTimeout(r,ms)})};var deck=document.getElementById('deck');function box(i){var e=deck.children[i];var r=e.getBoundingClientRect();return [Math.round(r.left),Math.round(r.top),Math.round(r.width),Math.round(r.height)]}return (async function(){window.scrollTo(0,document.getElementById('bespoke').offsetTop+30);await w(1800);var log=[['before',box(1),box(2)]];document.querySelector('.deck-nav .next').click();for(var i=0;i<7;i++){await w(80);log.push([i*80+80,box(1),box(2)])}return JSON.stringify(log)})()})()"}
+]}

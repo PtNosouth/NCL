@@ -148,7 +148,7 @@ body{
 .nav{
   position:fixed; inset:0 0 auto 0; z-index:30;
   transform:translateY(0);
-  transition:transform .5s var(--ease-soft),background .6s var(--ease);
+  transition:transform .22s cubic-bezier(.22,.61,.36,1),background .5s var(--ease);
   display:flex; align-items:center; gap:clamp(16px,3vw,44px);
   padding:0 var(--pad);
   height:var(--nav-h);
@@ -481,7 +481,7 @@ display:none}
   /* one screen at rest + a slot per sheet: JS reads --sheet-scroll */
   --sheet-scroll:78svh;
   --band:clamp(84px,13vh,150px);        /* blank top margin of the second page */
-  height:calc(100svh + 8 * var(--sheet-scroll));
+  height:100svh;
   margin-top:-100svh;
   background:transparent;
   box-shadow:none;
@@ -511,21 +511,101 @@ display:none}
     rgba(0,0,0,.66) 0%, rgba(0,0,0,.38) 42%, rgba(0,0,0,0) 74%);
 }
 .deck{
-  position:absolute; inset:var(--band) 0 0 0;
-  overflow:visible;   /* the sticky pin does the clipping, so a filling sheet can reach the top */
+  /* the card sits against the top of the viewport when it is shown */
+  position:absolute; inset:0 0 30px 0;
+  --tw:min(15vw,152px); --th:min(19vw,190px); --rail-pad:12px;
+  /* one slot = one card plus a real gap, so the list never overlaps itself */
+  --rail-gap:calc(var(--th) + 24px);
+  overflow:visible;   /* the sticky pin does the clipping */
+  user-select:none; -webkit-user-select:none;
 }
+.deck.is-dragging{cursor:grabbing}
+.deck.is-dragging .sheet{cursor:grabbing}
+/* The carousel works like the reference: every card is placed by its position in
+   the stack, so rotating is a DOM move and one transition animates everything. */
 .sheet{
-  position:absolute; left:55%;
-  top:calc((100svh - var(--band)) / 2 - 18px);
-  width:min(34vw,380px); height:120px; margin:0;   /* the engine sets both every frame */
-  translate:-50% -50%;
+  z-index:3;
+  /* every state gives the card an explicit `left` and `width`: `auto -> 0` cannot be
+     transitioned, so a thumbnail promoted to the frame used to jump to the left edge
+     first and then grow -- which read as "the card opens from the top-left corner" */
+  position:absolute;
+  left:calc(100% - var(--tw) - var(--rail-pad)); top:50%; transform:translateY(-50%);
+  width:var(--tw); height:var(--th); margin:0;
+  translate:none;
   overflow:hidden; background:#0a0908;
   transform-origin:50% 50%;
   cursor:pointer;
-  will-change:transform, border-radius;
-  border-radius:var(--r,4px);
+  will-change:top, width, height, opacity;
+  border-radius:16px;
   box-shadow:0 8px 20px rgba(0,0,0,.40), 0 2px 6px rgba(0,0,0,.26);
+  transition:left .5s cubic-bezier(.22,.68,.24,1), top .5s cubic-bezier(.22,.68,.24,1),
+             width .5s cubic-bezier(.22,.68,.24,1), height .5s cubic-bezier(.22,.68,.24,1),
+             opacity .5s cubic-bezier(.22,.68,.24,1), border-radius .5s cubic-bezier(.22,.68,.24,1),
+             transform .5s cubic-bezier(.22,.68,.24,1);
 }
+/* a list card floats when the pointer is over it, and lifts off the frosted pane */
+.sheet:not(.is-stage):not(.is-past):hover{
+  transform:translateY(calc(-50% - 10px)) scale(1.04);
+  box-shadow:0 28px 56px rgba(0,0,0,.58), 0 4px 12px rgba(0,0,0,.35);
+  z-index:4;
+}
+.sheet:not(.is-stage):not(.is-past):active{
+  transform:translateY(calc(-50% - 4px)) scale(1.01);
+}
+.deck.is-opening .sheet, .deck.is-closing .sheet{pointer-events:none}
+
+/* the front pair: both full size -- but the one *behind* stays invisible. Otherwise it
+   was fully on screen whenever the front card was still a thumbnail (the opening beat),
+   which read as "a random room flashes before the real card arrives". */
+.sheet:nth-child(1), .sheet:nth-child(2){
+  top:0; left:0; transform:none; z-index:1;
+  width:100%; height:100%; border-radius:0;
+}
+.sheet:nth-child(1){opacity:0; pointer-events:none}
+.sheet:nth-child(3){ top:20%; }
+.sheet:nth-child(4){ top:calc(20% + var(--rail-gap)); }
+.sheet:nth-child(5){ top:calc(20% + var(--rail-gap) * 2); }
+/* the sheets live in their own layer so the rail and the glow never enter the
+   nth-child sequence the carousel relies on */
+.deck-stage{position:absolute; inset:0}
+
+/* the carousel is a sequence, not a loop: cards already shown leave the list, so the
+   right rail is empty on the last one */
+.sheet.is-past{opacity:0; pointer-events:none}
+.deck.is-empty .deck-rail{opacity:0; border-color:transparent; box-shadow:none}
+.deck-rail{transition:opacity .35s ease, border-color .35s ease, box-shadow .35s ease}
+
+/* the frosted pane under the list: it blurs the photograph so the thumbnails read as a
+   list on glass instead of pictures floating on a picture */
+.deck-rail{
+  position:absolute; z-index:2; pointer-events:none;
+  left:calc(100% - var(--tw) - var(--rail-pad) * 2);
+  width:calc(var(--tw) + var(--rail-pad) * 2);
+  /* the thumbnails are centred on their slot (`translateY(-50%)`), so the pane has to
+     start half a card higher than the slot itself */
+  top:calc(20% - var(--th) / 2 - var(--rail-pad) - 6px);
+  height:calc(var(--rail-gap) * 2 + var(--th) + var(--rail-pad) * 2 + 12px);
+  border-radius:24px;
+  background:rgba(12,11,9,.30);
+  -webkit-backdrop-filter:blur(20px) saturate(120%);
+  backdrop-filter:blur(20px) saturate(120%);
+  border:1px solid rgba(239,232,219,.14);
+  box-shadow:0 28px 60px rgba(0,0,0,.48), inset 0 1px 0 rgba(255,255,255,.07);
+}
+
+/* a blurred copy of the active photograph fills the frame while the card is still
+   growing out of the stack -- otherwise the opening played against a black hole */
+.deck-glow{
+  position:absolute; inset:0; z-index:0; pointer-events:none;
+  background-position:center; background-size:cover;
+  filter:blur(30px) saturate(88%) brightness(.42);
+  transform:scale(1.03);
+  opacity:.9;
+  border-radius:16px;
+}
+
+/* everything past the third thumbnail waits at the end of the stack, invisible */
+.sheet:nth-child(n+6){ top:calc(20% + var(--rail-gap) * 3); opacity:0; pointer-events:none; }
 .sheet img{width:100%; height:100%; object-fit:cover}
 /* the photograph settles into the page instead of stopping on a hard edge */
 .sheet::before{
@@ -534,7 +614,7 @@ display:none}
   transition:opacity .5s var(--ease);
   background:linear-gradient(to top, rgba(3,3,2,.88) 0%, rgba(3,3,2,.52) 34%, rgba(3,3,2,.16) 64%, rgba(3,3,2,0) 100%);
 }
-.sheet.is-open::before{opacity:1}
+.sheet.is-open::before,.sheet.is-stage::before{opacity:1}
 /* and the same at the top: the photograph comes out of the page, not off a cut edge */
 .sheet::after{
   content:""; position:absolute; left:0; right:0; top:0; height:26%; z-index:1;
@@ -542,26 +622,132 @@ display:none}
   transition:opacity .5s var(--ease);
   background:linear-gradient(to bottom, rgba(3,3,2,.86) 0%, rgba(3,3,2,.48) 34%, rgba(3,3,2,.14) 64%, rgba(3,3,2,0) 100%);
 }
-.sheet.is-open::after{opacity:1}
+.sheet.is-open::after,.sheet.is-stage::after{opacity:1}
 /* every sheet carries its own edge, so the stack reads as paper */
 .sheet::after{
   content:""; position:absolute; inset:0; pointer-events:none;
   box-shadow:inset 1px 0 0 rgba(239,232,219,.10);
 }
 
+/* the black gradient that carries you into the section */
+/* the bridge between the cover and the first project: a black gradient rises to
+   fill the viewport, then the first photograph fades in on top of it. GSAP owns
+   the transform/opacity of these two layers (home/intro.js). */
+.deck-intro{
+  position:fixed; inset:0; z-index:1001; pointer-events:none;
+  overflow:hidden;
+  visibility:hidden; opacity:0;      /* shown by the timeline, never painted before */
+}
+.deck-intro .di-black{
+  position:absolute; left:0; right:0; top:0; bottom:-2px;
+  /* the fill is a gradient, and its leading edge is feathered so it reads as ink
+     rising rather than a panel sliding */
+  background:linear-gradient(to bottom,
+    #000 0%, #000 42%, #030302 74%, #060504 100%);
+  box-shadow:0 -26vh 74px rgba(0,0,0,.92), 0 -8vh 30px rgba(0,0,0,.85);
+  will-change:transform;
+}
+.deck-intro .di-black::after{
+  /* a soft band above the panel edge, only visible while it is rising */
+  content:""; position:absolute; left:0; right:0; top:-30vh; height:30vh;
+  background:linear-gradient(to top, rgba(0,0,0,.96), rgba(0,0,0,0));
+}
+.deck-intro .di-card{
+  /* sized and placed by the script to match the deck's open sheet exactly, so the
+     hand-over is the same picture in the same place */
+  position:absolute; left:0; top:0; width:100%; height:100%; z-index:1; overflow:hidden;
+  will-change:left, top, width, height, opacity;
+}
+.deck-intro .di-card img{width:100%; height:100%; object-fit:cover; display:block}
+/* the two scrims the open sheet carries, so nothing darkens or lightens on the swap */
+.deck-intro .di-card::before{
+  content:""; position:absolute; left:0; right:0; bottom:0; height:30%; z-index:1;
+  pointer-events:none;
+  background:linear-gradient(to top, rgba(3,3,2,.88) 0%, rgba(3,3,2,.52) 34%, rgba(3,3,2,.16) 64%, rgba(3,3,2,0) 100%);
+}
+.deck-intro .di-card::after{
+  content:""; position:absolute; left:0; right:0; top:0; height:26%; z-index:1;
+  pointer-events:none;
+  background:linear-gradient(to bottom, rgba(3,3,2,.86) 0%, rgba(3,3,2,.48) 34%, rgba(3,3,2,.14) 64%, rgba(3,3,2,0) 100%);
+}
+
+.deck-nav{
+  position:absolute; left:var(--pad); bottom:22px; z-index:960;
+  display:flex; gap:8px;
+}
+.deck-nav button{
+  width:44px; height:38px; border-radius:10px;
+  border:1px solid rgba(239,232,219,.34); background:rgba(6,5,5,.42);
+  color:var(--ivory); font-size:15px; line-height:1; cursor:pointer;
+  backdrop-filter:blur(6px);
+  transition:background .3s var(--ease), border-color .3s var(--ease), color .3s var(--ease);
+}
+.deck-nav button:hover, .deck-nav button:focus-visible{
+  background:rgba(199,163,102,.22); border-color:var(--gilt); color:#fff;
+}
+
+/* while the cover → deck timeline owns the screen the commissions section stays
+   invisible: the black rises from the bottom, so without this it would already be
+   sliding into view underneath */
+body.is-intro .bespoke{visibility:hidden}
+
 /* ── the words sit on the deck ──────────────────────────── */
 .deck-copy::before{
   content:""; position:absolute; z-index:-1;
-  left:0; top:-40vh; bottom:-40vh; width:min(52vw,640px);
-  background:linear-gradient(to right,rgba(4,3,3,.72) 0%,rgba(4,3,3,.5) 46%,rgba(4,3,3,0) 100%);
+  left:calc(-1 * var(--pad)); top:-46vh; bottom:-46vh; width:min(58vw,720px);
+  background:linear-gradient(to right,rgba(4,3,3,.9) 0%,rgba(4,3,3,.72) 42%,rgba(4,3,3,.34) 68%,rgba(4,3,3,0) 100%);
   pointer-events:none;
+  /* the shadow comes in on its own, much slower clock than the words */
+  opacity:1;
+  transition:opacity 1.6s cubic-bezier(.33,.72,.24,1);
 }
 .deck-copy{
   position:absolute; left:0; top:50%; translate:0 -50%; z-index:950;   /* above the open sheet */
   padding:0 var(--pad);
   width:min(34vw,440px);
   pointer-events:none;
+  text-shadow:0 2px 18px rgba(0,0,0,.55);
 }
+
+/* the deck's opening beat: the stack is already there, the active card grows out of
+   its thumbnail, and only then does the copy arrive */
+@keyframes cardOpen{
+  from{ left:calc(100% - var(--tw) - var(--rail-pad)); top:20%; width:var(--tw); height:var(--th); border-radius:16px; }
+  to{ left:0; top:0; width:100%; height:100%; border-radius:0; }
+}
+@keyframes cardClose{
+  from{ left:0; top:0; width:100%; height:100%; border-radius:0; }
+  to{ left:calc(100% - var(--tw) - var(--rail-pad)); top:20%; width:var(--tw); height:var(--th); border-radius:16px; }
+}
+/* before the black lifts, the active card is parked in its thumbnail slot so the deck
+   is never revealed with a full-frame card for a frame */
+.deck.is-primed .sheet:nth-child(2){
+  left:calc(100% - var(--tw) - var(--rail-pad)); top:20%; width:var(--tw); height:var(--th);
+  border-radius:16px; animation:none; transition:none;   /* snap, do not travel */
+}
+.deck.is-primed ~ .deck-copy{opacity:0}
+.deck.is-primed ~ .deck-copy::before{opacity:0; transition:none}
+.deck.is-closing ~ .deck-copy::before{opacity:0; transition:opacity .25s ease}
+
+.deck.is-opening .sheet:nth-child(2){animation:cardOpen .34s cubic-bezier(.22,.68,.24,1) both}
+.deck.is-opening ~ .deck-copy{animation:copyIn .3s cubic-bezier(.2,.7,.2,1) .34s both}
+.deck.is-closing .sheet:nth-child(2){animation:cardClose .3s cubic-bezier(.4,0,.3,1) both}
+.deck.is-closing ~ .deck-copy{animation:copyOut .22s ease both}
+
+@keyframes copyOut{
+  from{opacity:1}
+  to{opacity:0}
+}
+
+/* every card change replays the copy, the way the reference re-animates its text */
+@keyframes copyIn{
+  from{opacity:0; transform:translateY(16px); filter:blur(12px)}
+  to{opacity:1; transform:translateY(0); filter:blur(0)}
+}
+.deck-copy.is-swap .rail-kicker{animation:copyIn .46s cubic-bezier(.2,.7,.2,1) both}
+.deck-copy.is-swap .rail-claim{animation:copyIn .46s cubic-bezier(.2,.7,.2,1) .06s both}
+.deck-copy.is-swap .rail-now{animation:copyIn .5s cubic-bezier(.2,.7,.2,1) .12s both}
+
 .rail-kicker{
   margin:0 0 clamp(8px,1.4vh,14px);
   font-family:var(--mono); font-size:9.5px; letter-spacing:.22em; text-transform:uppercase;
@@ -651,8 +837,11 @@ display:none}
 
 /* ══ responsive ══════════════════════════════════════════════════════════ */
 @media (max-width:900px){
-  .bespoke{--sheet-scroll:88svh; --band:clamp(64px,10vh,96px); height:calc(100svh + 8 * var(--sheet-scroll))}
-  .sheet{left:45%; top:calc((100svh - var(--band)) / 2 - 13px); width:min(62vw, 340px); height:96px}
+  .bespoke{--sheet-scroll:88svh; --band:clamp(64px,10vh,96px); height:100svh}
+  .deck{--tw:min(30vw, 120px); --th:min(38vw, 152px)}
+  /* the copy owns the bottom of a phone screen, so the buttons move to the top */
+  .deck-nav{left:auto; right:var(--pad); bottom:auto; top:12px}
+  .deck-nav button{width:38px; height:34px}
   /* the rail is clipped above the copy instead of being hidden card by card */
   .deck::before{
   content:""; position:absolute; z-index:0; pointer-events:none;
@@ -698,7 +887,10 @@ body.scrolled .nav{
 }
 
 /* reading down: the bar steps aside so no heading ever sits under it */
-body.nav-away .nav{transform:translateY(-104%)}
+body.nav-away .nav{
+  transform:translateY(-104%);
+  transition:transform .34s var(--ease-soft),background .6s var(--ease);
+}
 
 
 /* a camera shutter: two black leaves slide in from above and below and meet on the

@@ -150,4 +150,53 @@
     }
     lastY = y;
   }, { passive: true });
+
+
+  /* ── magnifier: a lens that follows the cursor over the detail photograph ──
+     2.4x, mapped through the image's contain-fit box so the lens always shows
+     exactly what is under the pointer. */
+  (function initMagnifier() {
+    var ZOOM = 1.9;   /* the plates are 900px wide: stay close to native so the lens stays crisp */
+    var media = document.querySelector('.detail-media');
+    var img = document.getElementById('detail-img');
+    if (!media || !img) return;
+    if (window.matchMedia('(hover: none)').matches || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    var lens = document.createElement('div');
+    lens.className = 'detail-lens';
+    lens.setAttribute('aria-hidden', 'true');
+    media.appendChild(lens);
+
+    function contentBox() {
+      var box = img.getBoundingClientRect();
+      var nw = img.naturalWidth || 900;
+      var nh = img.naturalHeight || 1125;
+      if (!nw || !nh) return null;
+      var s = Math.min(box.width / nw, box.height / nh);
+      var w = nw * s;
+      var h = nh * s;
+      return { x: box.left + (box.width - w) / 2, y: box.top + (box.height - h) / 2, w: w, h: h };
+    }
+
+    media.addEventListener('pointermove', function (e) {
+      var c = contentBox();
+      if (!c || !c.w) return;
+      var nx = (e.clientX - c.x) / c.w;
+      var ny = (e.clientY - c.y) / c.h;
+      if (nx < 0 || nx > 1 || ny < 0 || ny > 1) { media.classList.remove('is-zoom'); return; }
+      media.classList.add('is-zoom');
+      var lw = lens.offsetWidth || 190;
+      var lh = lens.offsetHeight || 190;
+      var rect = media.getBoundingClientRect();
+      lens.style.transform = 'translate3d(' + (e.clientX - rect.left - lw / 2).toFixed(1) + 'px,' +
+        (e.clientY - rect.top - lh / 2).toFixed(1) + 'px,0)';
+      lens.style.backgroundImage = 'url("' + img.currentSrc + '")';
+      lens.style.backgroundSize = (c.w * ZOOM) + 'px ' + (c.h * ZOOM) + 'px';
+      lens.style.backgroundPosition = (-(nx * c.w * ZOOM - lw / 2)).toFixed(1) + 'px ' +
+        (-(ny * c.h * ZOOM - lh / 2)).toFixed(1) + 'px';
+    }, { passive: true });
+
+    media.addEventListener('pointerleave', function () { media.classList.remove('is-zoom'); });
+  })();
+
 })();

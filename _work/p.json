@@ -1,0 +1,1 @@
+{"outDir": "review/collection", "shots": [{"name": "cut-grid-1", "width": 1440, "height": 900, "path": "/home/collection.html", "wait": 3200, "setup": "window.scrollTo(0,2400)", "afterSetup": 1600}, {"name": "cut-grid-2", "width": 1440, "height": 900, "path": "/home/collection.html", "wait": 3200, "setup": "window.scrollTo(0,5200)", "afterSetup": 1600}]}
