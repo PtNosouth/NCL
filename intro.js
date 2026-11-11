@@ -17,6 +17,10 @@
   var bespoke = document.getElementById('bespoke')
   if (!layer || !bespoke || !window.gsap) return
 
+  /* phones show the eight plates in a plain list: there is no pinned section for a
+     curtain to hand over to */
+  if (window.matchMedia('(max-width:900px)').matches) return
+
   var gsap = window.gsap
   var black = layer.querySelector('.di-black')
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)')

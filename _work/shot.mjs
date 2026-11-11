@@ -92,7 +92,7 @@ for (const shot of plan.shots) {
   if (shot.reducedMotion) {
     await s('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-reduced-motion', value: 'reduce' }] });
   }
-  await s('Page.navigate', { url: `http://127.0.0.1:${PORT}${urlPath}` });
+  await s('Page.navigate', { url: `${process.env.BASE || `http://127.0.0.1:${PORT}`}${urlPath}` });
   await new Promise((r) => setTimeout(r, wait));
   if (setup) {
     await s('Runtime.evaluate', { expression: setup, awaitPromise: true });

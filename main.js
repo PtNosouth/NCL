@@ -195,6 +195,9 @@
     { name: 'Scale', line: 'A lantern form needs more height than width; a wide room asks for a wider answer.' },
     { name: 'Finish', line: 'Crystal and brass are the same family in three temperatures; we send samples before drawing.' }
   ];
+  /* phones get a flat list, not a carousel: one place to ask */
+  var narrow = window.matchMedia('(max-width:900px)')
+
   var activeCard = -1
   var entryP = 0
   var entryStarted = false
@@ -463,7 +466,18 @@
 
   /* open on the first room: the front pair is [last, first], so `nth-child(2)` -- the
      visible card -- is the first room instead of the second */
-  if (deckEl) { rotate(-1); syncGlow(); }
+  if (deckEl) {
+    if (narrow.matches) {
+      /* keep the plates in catalogue order and let the intro read the first one */
+      syncCarousel();
+      var tr0 = window.NCLtext || function (x) { return x; };
+      if (railName) railName.textContent = tr0(DECISIONS[0].name);
+      if (railLine) railLine.textContent = tr0(DECISIONS[0].line);
+    } else {
+      rotate(-1);
+      syncGlow();
+    }
+  }
 
   /* wheel and drag turn the carousel one card at a time, like the buttons */
   var wheelLock = 0;
@@ -472,6 +486,7 @@
      listener never fired and a fast scroll sailed straight past this section */
   if (deckEl) {
     document.addEventListener('wheel', function (e) {
+      if (narrow.matches) return;
       /* only while the section is near the top of the viewport */
       var y = window.scrollY || window.pageYOffset || 0;
       var top = bespoke ? bespoke.offsetTop : 0;
@@ -539,6 +554,8 @@
   var gateLastY = -1;
   function consumeOvershoot() {
     if (!deckEl || !bespoke) return;
+    /* on a phone the deck is a plain list: never hold the page for it */
+    if (narrow.matches) return;
     var top = bespoke.offsetTop;
     var vh = window.innerHeight;
     var y = window.scrollY || window.pageYOffset || 0;
