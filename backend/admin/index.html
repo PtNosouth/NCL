@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>NCL 后台 · Content</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<!-- ── login ─────────────────────────────────────────────────────────── -->
+<section id="login" class="login" hidden>
+  <form id="login-form" class="login-card" autocomplete="on" novalidate>
+    <p class="mono">NCL 新构思 · 内容后台</p>
+    <h1>登录</h1>
+    <label>邮箱<input id="login-email" name="email" type="email" autocomplete="username" spellcheck="false" autocapitalize="off" required></label>
+    <label>密码
+      <span class="pw">
+        <input id="login-password" name="password" type="password" autocomplete="current-password" required>
+        <button class="pw-eye" type="button" id="pw-eye" aria-label="显示密码">显示</button>
+      </span>
+    </label>
+    <p id="login-note" class="login-note" role="status" hidden></p>
+    <p id="login-error" class="error" role="alert"></p>
+    <button class="btn primary" type="submit" id="login-btn">进入</button>
+    <p class="login-hint">点「进入」没反应？先按 <b>Ctrl</b>+<b>F5</b> 强制刷新本页（或用手机浏览器 / Chrome 再试）。</p>
+    <p class="login-status" id="login-status">自检中…</p>
+  </form>
+</section>
+
+<!-- ── app ───────────────────────────────────────────────────────────── -->
+<div id="app" hidden>
+  <header class="top">
+    <div class="brand">NCL <span>内容后台</span></div>
+    <nav class="tabs" id="tabs">
+      <button data-view="cover" class="on">扉页</button>
+      <button data-view="projects">项目页</button>
+      <button data-view="craft">工艺段</button>
+      <button data-view="products">产品页</button>
+      <button data-view="patents">专利页</button>
+      <button data-view="footer">页脚</button>
+    </nav>
+    <div class="who">
+      <a class="btn ghost" href="/" target="_blank" rel="noopener">看网站 ↗</a>
+      <div class="account" id="account">
+        <button class="account-toggle" id="account-toggle" type="button"
+                aria-haspopup="menu" aria-expanded="false" aria-controls="account-menu">
+          <span id="who-email" class="mono"></span>
+          <span class="caret" aria-hidden="true"></span>
+        </button>
+        <div class="account-menu" id="account-menu" role="menu" hidden>
+          <button type="button" role="menuitem" id="menu-password">修改密码</button>
+          <button type="button" role="menuitem" id="menu-logout" class="danger">退出登录</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="view"></main>
+  <div id="toast" class="toast" hidden></div>
+</div>
+
+<template id="tpl-field">
+  <label class="field"><span class="field-label"></span><input type="text"></label>
+</template>
+
+<script src="admin.js" onerror="document.body.insertAdjacentHTML('afterbegin','<p class=&quot;bootbad&quot;>后台脚本加载失败：请按 Ctrl+F5 强制刷新，或换个浏览器（Chrome / Edge / Safari）。</p>')"></script>
+<noscript><p class="bootbad">这个页面需要 JavaScript。</p></noscript>
+</body>
+</html>

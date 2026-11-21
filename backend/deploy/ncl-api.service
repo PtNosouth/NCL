@@ -1,0 +1,27 @@
+[Unit]
+Description=NCL content API + admin
+After=network.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=nginx
+Group=nginx
+WorkingDirectory=/opt/ncl-api
+Environment=NCL_PORT=8787
+Environment=NCL_HOST=127.0.0.1
+Environment=NCL_DATA=/var/www/ncl-data
+Environment=NCL_ADMIN=/opt/ncl-api/admin
+Environment=NCL_SITE=/var/www/ncl/current
+ExecStart=/usr/bin/node /opt/ncl-api/app.js
+Restart=always
+RestartSec=2
+# the app writes only its data dir
+ReadWritePaths=/var/www/ncl-data
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=true
+
+[Install]
+WantedBy=multi-user.target

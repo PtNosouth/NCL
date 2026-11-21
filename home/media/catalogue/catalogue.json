@@ -1,0 +1,946 @@
+[
+ {
+  "family": "big",
+  "model": "70100-12+12L埃及φ1080H11",
+  "spec": "12+12L · ∅1080 · H1160",
+  "file": "media/catalogue/big/001-70100-12-12L埃及φ1080H1160.webp",
+  "src": "70100-12+12L埃及φ1080H1160.jpg",
+  "order": 1
+ },
+ {
+  "family": "big",
+  "model": "70100-12+12高杯φ1080H116",
+  "spec": "∅1080 · H1160",
+  "file": "media/catalogue/big/002-70100-12-12高杯φ1080H1160.webp",
+  "src": "70100-12+12高杯φ1080H1160.jpg",
+  "order": 2
+ },
+ {
+  "family": "big",
+  "model": "70100-16+16+8+8Lφ1400H",
+  "spec": "16+16+8+8L · ∅1400 · H1760",
+  "file": "media/catalogue/big/003-70100-16-16-8-8Lφ1400H1760.webp",
+  "src": "70100-16+16+8+8Lφ1400H1760.jpg",
+  "order": 3
+ },
+ {
+  "family": "big",
+  "model": "70100-3小吊灯φ320H700",
+  "spec": "∅320 · H700",
+  "file": "media/catalogue/big/004-70100-3小吊灯φ320H700.webp",
+  "src": "70100-3小吊灯φ320H700.jpg",
+  "order": 4
+ },
+ {
+  "family": "big",
+  "model": "70100-4L小吊灯φ400H750",
+  "spec": "∅400 · H750",
+  "file": "media/catalogue/big/005-70100-4L小吊灯φ400H750.webp",
+  "src": "70100-4L小吊灯φ400H750.jpg",
+  "order": 5
+ },
+ {
+  "family": "big",
+  "model": "70100-6+6L雨伞φ1250H1050",
+  "spec": "6+6L · ∅1250 · H1050",
+  "file": "media/catalogue/big/006-70100-6-6L雨伞φ1250H1050.webp",
+  "src": "70100-6+6L雨伞φ1250H1050.jpg",
+  "order": 6
+ },
+ {
+  "family": "big",
+  "model": "70100-6Lφ670H740",
+  "spec": "∅670 · H740",
+  "file": "media/catalogue/big/007-70100-6Lφ670H740.webp",
+  "src": "70100-6Lφ670H740.jpg",
+  "order": 7
+ },
+ {
+  "family": "big",
+  "model": "70100-72+35φ1800H2500",
+  "spec": "∅1800 · H2500",
+  "file": "media/catalogue/big/008-70100-72-35φ1800H2500.webp",
+  "src": "70100-72+35φ1800H2500.jpg",
+  "order": 8
+ },
+ {
+  "family": "big",
+  "model": "70100-9+6+3鹿头φ1050H120",
+  "spec": "∅1050 · H1200",
+  "file": "media/catalogue/big/009-70100-9-6-3鹿头φ1050H1200.webp",
+  "src": "70100-9+6+3鹿头φ1050H1200.jpg",
+  "order": 9
+ },
+ {
+  "family": "big",
+  "model": "70100-高杯φ1800H2280",
+  "spec": "∅1800 · H2280",
+  "file": "media/catalogue/big/010-70100-高杯φ1800H2280.webp",
+  "src": "70100-高杯φ1800H2280.jpg",
+  "order": 10
+ },
+ {
+  "family": "big",
+  "model": "70123-19L",
+  "spec": "L1600 · W240 · H400",
+  "file": "media/catalogue/big/011-70123-19L-L1600W240H400.webp",
+  "src": "70123-19L L1600W240H400.jpg",
+  "order": 11
+ },
+ {
+  "family": "big",
+  "model": "70124-800半圆",
+  "spec": "",
+  "file": "media/catalogue/big/012-70124-800半圆.webp",
+  "src": "70124-800半圆.jpg",
+  "order": 12
+ },
+ {
+  "family": "big",
+  "model": "70124-楼梯灯φ550H3000",
+  "spec": "∅550 · H3000",
+  "file": "media/catalogue/big/013-70124-楼梯灯φ550H3000.webp",
+  "src": "70124-楼梯灯φ550H3000.jpg",
+  "order": 13
+ },
+ {
+  "family": "big",
+  "model": "70124-楼梯灯φ800H3400",
+  "spec": "∅800 · H3400",
+  "file": "media/catalogue/big/014-70124-楼梯灯φ800H3400.webp",
+  "src": "70124-楼梯灯φ800H3400.jpg",
+  "order": 14
+ },
+ {
+  "family": "big",
+  "model": "70124-空中花园φ900H800",
+  "spec": "∅900 · H800",
+  "file": "media/catalogue/big/015-70124-空中花园φ900H800.webp",
+  "src": "70124-空中花园φ900H800.jpg",
+  "order": 15
+ },
+ {
+  "family": "big",
+  "model": "70124-飞碟φ600H300",
+  "spec": "∅600 · H300",
+  "file": "media/catalogue/big/016-70124-飞碟φ600H300.webp",
+  "src": "70124-飞碟φ600H300.jpg",
+  "order": 16
+ },
+ {
+  "family": "big",
+  "model": "70124-飞碟φ900H400",
+  "spec": "∅900 · H400",
+  "file": "media/catalogue/big/017-70124-飞碟φ900H400.webp",
+  "src": "70124-飞碟φ900H400.jpg",
+  "order": 17
+ },
+ {
+  "family": "big",
+  "model": "70129-19L",
+  "spec": "L1200 · W350 · H390",
+  "file": "media/catalogue/big/018-70129-19L-L1200W350H390.webp",
+  "src": "70129-19L L1200W350H390.jpg",
+  "order": 18
+ },
+ {
+  "family": "big",
+  "model": "70145-48+25L",
+  "spec": "48+25L · ∅1500 · H1800",
+  "file": "media/catalogue/big/019-70145-48-25L-1500H1800mm.webp",
+  "src": "70145-48+25L ∅1500H1800mm.jpg",
+  "order": 19
+ },
+ {
+  "family": "big",
+  "model": "70154-S型",
+  "spec": "L1200 · W350 · H320",
+  "file": "media/catalogue/big/020-70154-S型-L1200W350H320.webp",
+  "src": "70154-S型 L1200W350H320.jpg",
+  "order": 20
+ },
+ {
+  "family": "big",
+  "model": "70208-圆形φ1000",
+  "spec": "∅1000",
+  "file": "media/catalogue/big/021-70208-圆形φ1000.webp",
+  "src": "70208-圆形φ1000.jpg",
+  "order": 21
+ },
+ {
+  "family": "big",
+  "model": "70208-正方形W600H250",
+  "spec": "W600 · H250",
+  "file": "media/catalogue/big/022-70208-正方形W600H250.webp",
+  "src": "70208-正方形W600H250.jpg",
+  "order": 22
+ },
+ {
+  "family": "big",
+  "model": "70208-海星L1400",
+  "spec": "L1400",
+  "file": "media/catalogue/big/023-70208-海星L1400.webp",
+  "src": "70208-海星L1400.jpg",
+  "order": 23
+ },
+ {
+  "family": "big",
+  "model": "70208-长方形L1200W250H200",
+  "spec": "L1200 · W250 · H200",
+  "file": "media/catalogue/big/024-70208-长方形L1200W250H200.webp",
+  "src": "70208-长方形L1200W250H200.jpg",
+  "order": 24
+ },
+ {
+  "family": "big",
+  "model": "70208-长方形L1500W250H200",
+  "spec": "L1500 · W250 · H200",
+  "file": "media/catalogue/big/025-70208-长方形L1500W250H200.webp",
+  "src": "70208-长方形L1500W250H200.jpg",
+  "order": 25
+ },
+ {
+  "family": "big",
+  "model": "70216-106L",
+  "spec": "∅1800",
+  "file": "media/catalogue/big/026-70216-106L-φ1800h2500.webp",
+  "src": "70216-106L φ1800h2500.jpg",
+  "order": 26
+ },
+ {
+  "family": "big",
+  "model": "70216-1Lφ280H320",
+  "spec": "∅280 · H320",
+  "file": "media/catalogue/big/027-70216-1Lφ280H320.webp",
+  "src": "70216-1Lφ280H320.jpg",
+  "order": 27
+ },
+ {
+  "family": "big",
+  "model": "70216-6Lφ630H550",
+  "spec": "∅630 · H550",
+  "file": "media/catalogue/big/028-70216-6Lφ630H550.webp",
+  "src": "70216-6Lφ630H550.jpg",
+  "order": 28
+ },
+ {
+  "family": "big",
+  "model": "70216-8+8+8L",
+  "spec": "8+8+8L · ∅1000 · H1150",
+  "file": "media/catalogue/big/029-70216-8-8-8L-φ1000H1150.webp",
+  "src": "70216-8+8+8L φ1000H1150.jpg",
+  "order": 29
+ },
+ {
+  "family": "big",
+  "model": "70216-8+8+8L",
+  "spec": "8+8+8L · ∅1000 · H730",
+  "file": "media/catalogue/big/030-70216-8-8-8L-φ1000H730.webp",
+  "src": "70216-8+8+8L φ1000H730.jpg",
+  "order": 30
+ },
+ {
+  "family": "big",
+  "model": "70216-8Lφ710H550",
+  "spec": "∅710 · H550",
+  "file": "media/catalogue/big/031-70216-8Lφ710H550.webp",
+  "src": "70216-8Lφ710H550.jpg",
+  "order": 31
+ },
+ {
+  "family": "big",
+  "model": "70217-30Lφ1300H900",
+  "spec": "∅1300 · H900",
+  "file": "media/catalogue/big/032-70217-30Lφ1300H900.webp",
+  "src": "70217-30Lφ1300H900.jpg",
+  "order": 32
+ },
+ {
+  "family": "big",
+  "model": "70217-5+10+5L",
+  "spec": "5+10+5L · ∅780 · H590",
+  "file": "media/catalogue/big/033-70217-5-10-5L-φ780H590.webp",
+  "src": "70217-5+10+5L φ780H590.jpg",
+  "order": 33
+ },
+ {
+  "family": "big",
+  "model": "70217-6+12+6L",
+  "spec": "6+12+6L · ∅980 · H650",
+  "file": "media/catalogue/big/034-70217-6-12-6L-φ980H650.webp",
+  "src": "70217-6+12+6L φ980H650.jpg",
+  "order": 34
+ },
+ {
+  "family": "big",
+  "model": "70236-30L-φ800H1200",
+  "spec": "∅800 · H1200",
+  "file": "media/catalogue/big/035-70236-30L-φ800H1200.webp",
+  "src": "70236-30L-φ800H1200.jpg",
+  "order": 35
+ },
+ {
+  "family": "big",
+  "model": "70238-φ800H310",
+  "spec": "∅800 · H310",
+  "file": "media/catalogue/big/036-70238-φ800H310.webp",
+  "src": "70238-φ800H310.jpg",
+  "order": 36
+ },
+ {
+  "family": "big",
+  "model": "70238-吸顶φ600H310",
+  "spec": "∅600 · H310",
+  "file": "media/catalogue/big/037-70238-吸顶φ600H310.webp",
+  "src": "70238-吸顶φ600H310.jpg",
+  "order": 37
+ },
+ {
+  "family": "big",
+  "model": "70254-16L",
+  "spec": "∅560 · H600",
+  "file": "media/catalogue/big/038-70254-16L-φ560H600.webp",
+  "src": "70254-16L φ560H600.jpg",
+  "order": 38
+ },
+ {
+  "family": "big",
+  "model": "70254-17L",
+  "spec": "W450 · H600",
+  "file": "media/catalogue/big/039-70254-17L-W450H600.webp",
+  "src": "70254-17L W450H600.jpg",
+  "order": 39
+ },
+ {
+  "family": "big",
+  "model": "70255-10Lφ815H550",
+  "spec": "∅815 · H550",
+  "file": "media/catalogue/big/040-70255-10Lφ815H550.webp",
+  "src": "70255-10Lφ815H550.jpg",
+  "order": 40
+ },
+ {
+  "family": "big",
+  "model": "70255-12+12+12L",
+  "spec": "12+12+12L · ∅1500 · H1950",
+  "file": "media/catalogue/big/041-70255-12-12-12L-φ1500H1950.webp",
+  "src": "70255-12+12+12L φ1500H1950.jpg",
+  "order": 41
+ },
+ {
+  "family": "big",
+  "model": "70255-12+12L",
+  "spec": "12+12L · ∅1300 · H600",
+  "file": "media/catalogue/big/042-70255-12-12L-φ1300H600.webp",
+  "src": "70255-12+12L φ1300H600.jpg",
+  "order": 42
+ },
+ {
+  "family": "big",
+  "model": "70255-6+6+6L",
+  "spec": "6+6+6L · ∅1145 · H1520",
+  "file": "media/catalogue/big/043-70255-6-6-6L-φ1145H1520.webp",
+  "src": "70255-6+6+6L φ1145H1520.jpg",
+  "order": 43
+ },
+ {
+  "family": "big",
+  "model": "70255-6+6L",
+  "spec": "6+6L · ∅810 · H1100",
+  "file": "media/catalogue/big/044-70255-6-6L-φ810H1100.webp",
+  "src": "70255-6+6L φ810H1100.jpg",
+  "order": 44
+ },
+ {
+  "family": "big",
+  "model": "70255-6L",
+  "spec": "",
+  "file": "media/catalogue/big/045-70255-6L-重复.webp",
+  "src": "70255-6L 重复.jpg",
+  "order": 45
+ },
+ {
+  "family": "big",
+  "model": "70255-6Lφ680H760",
+  "spec": "∅680 · H760",
+  "file": "media/catalogue/big/046-70255-6Lφ680H760.webp",
+  "src": "70255-6Lφ680H760.jpg",
+  "order": 46
+ },
+ {
+  "family": "big",
+  "model": "70255-8+8L",
+  "spec": "8+8L · ∅1000 · H1850",
+  "file": "media/catalogue/big/047-70255-8-8L-φ1000H1850.webp",
+  "src": "70255-8+8L φ1000H1850.jpg",
+  "order": 47
+ },
+ {
+  "family": "big",
+  "model": "70255-8+8L",
+  "spec": "8+8L · ∅1100 · H600",
+  "file": "media/catalogue/big/048-70255-8-8L-φ1100H600.webp",
+  "src": "70255-8+8L φ1100H600.jpg",
+  "order": 48
+ },
+ {
+  "family": "big",
+  "model": "70256-12L",
+  "spec": "∅935 · H550",
+  "file": "media/catalogue/big/049-70256-12L-φ935H550.webp",
+  "src": "70256-12L φ935H550.jpg",
+  "order": 49
+ },
+ {
+  "family": "big",
+  "model": "70257-12+12L",
+  "spec": "12+12L · ∅1300 · H700",
+  "file": "media/catalogue/big/050-70257-12-12L-φ1300H700.webp",
+  "src": "70257-12+12L φ1300H700.jpg",
+  "order": 50
+ },
+ {
+  "family": "big",
+  "model": "70257-12L",
+  "spec": "∅900 · H680",
+  "file": "media/catalogue/big/051-70257-12L-φ900H680.webp",
+  "src": "70257-12L φ900H680.jpg",
+  "order": 51
+ },
+ {
+  "family": "big",
+  "model": "70257-8+8L",
+  "spec": "8+8L · ∅1120 · H700",
+  "file": "media/catalogue/big/052-70257-8-8L-φ1120H700.webp",
+  "src": "70257-8+8L φ1120H700.jpg",
+  "order": 52
+ },
+ {
+  "family": "big",
+  "model": "70266-13Lφ600H3000",
+  "spec": "∅600 · H3000",
+  "file": "media/catalogue/big/053-70266-13Lφ600H3000.webp",
+  "src": "70266-13Lφ600H3000.jpg",
+  "order": 53
+ },
+ {
+  "family": "big",
+  "model": "70266-1Lφ120H1500",
+  "spec": "∅120 · H1500",
+  "file": "media/catalogue/big/054-70266-1Lφ120H1500.webp",
+  "src": "70266-1Lφ120H1500.jpg",
+  "order": 54
+ },
+ {
+  "family": "big",
+  "model": "70268-7Lφ600H3000",
+  "spec": "∅600 · H3000",
+  "file": "media/catalogue/big/055-70268-7Lφ600H3000.webp",
+  "src": "70268-7Lφ600H3000.jpg",
+  "order": 55
+ },
+ {
+  "family": "big",
+  "model": "70268-φ300H480",
+  "spec": "∅300 · H480",
+  "file": "media/catalogue/big/056-70268-φ300H480.webp",
+  "src": "70268-φ300H480.jpg",
+  "order": 56
+ },
+ {
+  "family": "big",
+  "model": "70268-φ600H650",
+  "spec": "∅600 · H650",
+  "file": "media/catalogue/big/057-70268-φ600H650.webp",
+  "src": "70268-φ600H650.jpg",
+  "order": 57
+ },
+ {
+  "family": "big",
+  "model": "70270-φ800H220",
+  "spec": "∅800 · H220",
+  "file": "media/catalogue/big/058-70270-φ800H220.webp",
+  "src": "70270-φ800H220.jpg",
+  "order": 58
+ },
+ {
+  "family": "big",
+  "model": "90001-8L圆形",
+  "spec": "",
+  "file": "media/catalogue/big/059-90001-8L圆形.webp",
+  "src": "90001-8L圆形.jpg",
+  "order": 59
+ },
+ {
+  "family": "big",
+  "model": "90001-φ900W600H500",
+  "spec": "∅900 · H500",
+  "file": "media/catalogue/big/060-90001-φ900W600H500.webp",
+  "src": "90001-φ900W600H500.jpg",
+  "order": 60
+ },
+ {
+  "family": "big",
+  "model": "90237-13Lφ600H3000",
+  "spec": "∅600 · H3000",
+  "file": "media/catalogue/big/061-90237-13Lφ600H3000.webp",
+  "src": "90237-13Lφ600H3000.jpg",
+  "order": 61
+ },
+ {
+  "family": "big",
+  "model": "90265-5L",
+  "spec": "∅500 · H225",
+  "file": "media/catalogue/big/062-90265-5L-φ500H225.webp",
+  "src": "90265-5L φ500H225.jpg",
+  "order": 62
+ },
+ {
+  "family": "big",
+  "model": "90265-600",
+  "spec": "∅600 · H265",
+  "file": "media/catalogue/big/063-90265-600-φ600H265.webp",
+  "src": "90265-600 φ600H265.jpg",
+  "order": 63
+ },
+ {
+  "family": "big",
+  "model": "90265-8L",
+  "spec": "∅800 · H350",
+  "file": "media/catalogue/big/064-90265-8L-φ800H350.webp",
+  "src": "90265-8L φ800H350.jpg",
+  "order": 64
+ },
+ {
+  "family": "big",
+  "model": "90288-10条L1800W600H125",
+  "spec": "L1800 · W600 · H1250",
+  "file": "media/catalogue/big/065-90288-10条L1800W600H1250.webp",
+  "src": "90288-10条L1800W600H1250.jpg",
+  "order": 65
+ },
+ {
+  "family": "big",
+  "model": "90335-9+6φ1100H12500",
+  "spec": "∅1100 · H12500",
+  "file": "media/catalogue/big/066-90335-9-6φ1100H12500.webp",
+  "src": "90335-9+6φ1100H12500.jpg",
+  "order": 66
+ },
+ {
+  "family": "big",
+  "model": "90429-12Lφ1150H750",
+  "spec": "∅1150 · H750",
+  "file": "media/catalogue/big/067-90429-12Lφ1150H750.webp",
+  "src": "90429-12Lφ1150H750.jpg",
+  "order": 67
+ },
+ {
+  "family": "big",
+  "model": "hero-cascade",
+  "spec": "",
+  "file": "media/catalogue/big/068-hero-cascade.webp",
+  "src": "hero-cascade.jpg",
+  "order": 68
+ },
+ {
+  "family": "big",
+  "model": "lamp-0620",
+  "spec": "",
+  "file": "media/catalogue/big/069-lamp-0620.webp",
+  "src": "lamp-0620.jpg",
+  "order": 69
+ },
+ {
+  "family": "big",
+  "model": "lamp-0620",
+  "spec": "",
+  "file": "media/catalogue/big/070-lamp-0620.webp",
+  "src": "lamp-0620.webp",
+  "order": 70
+ },
+ {
+  "family": "big",
+  "model": "lamp-1450",
+  "spec": "",
+  "file": "media/catalogue/big/071-lamp-1450.webp",
+  "src": "lamp-1450.jpg",
+  "order": 71
+ },
+ {
+  "family": "big",
+  "model": "lamp-1450",
+  "spec": "",
+  "file": "media/catalogue/big/072-lamp-1450.webp",
+  "src": "lamp-1450.webp",
+  "order": 72
+ },
+ {
+  "family": "big",
+  "model": "lamp-1500",
+  "spec": "",
+  "file": "media/catalogue/big/073-lamp-1500.webp",
+  "src": "lamp-1500.jpg",
+  "order": 73
+ },
+ {
+  "family": "big",
+  "model": "lamp-1500",
+  "spec": "",
+  "file": "media/catalogue/big/074-lamp-1500.webp",
+  "src": "lamp-1500.webp",
+  "order": 74
+ },
+ {
+  "family": "big",
+  "model": "lamp-3000",
+  "spec": "",
+  "file": "media/catalogue/big/075-lamp-3000.webp",
+  "src": "lamp-3000.jpg",
+  "order": 75
+ },
+ {
+  "family": "big",
+  "model": "lamp-3000",
+  "spec": "",
+  "file": "media/catalogue/big/076-lamp-3000.webp",
+  "src": "lamp-3000.webp",
+  "order": 76
+ },
+ {
+  "family": "big",
+  "model": "lamp-5800",
+  "spec": "",
+  "file": "media/catalogue/big/077-lamp-5800.webp",
+  "src": "lamp-5800.jpg",
+  "order": 77
+ },
+ {
+  "family": "big",
+  "model": "lit-70048",
+  "spec": "",
+  "file": "media/catalogue/big/078-lit-70048.webp",
+  "src": "lit-70048.jpg",
+  "order": 78
+ },
+ {
+  "family": "big",
+  "model": "lit-70089",
+  "spec": "",
+  "file": "media/catalogue/big/079-lit-70089.webp",
+  "src": "lit-70089.jpg",
+  "order": 79
+ },
+ {
+  "family": "big",
+  "model": "m-0780c",
+  "spec": "",
+  "file": "media/catalogue/big/080-m-0780c.webp",
+  "src": "m-0780c.webp",
+  "order": 80
+ },
+ {
+  "family": "big",
+  "model": "m-1045c",
+  "spec": "",
+  "file": "media/catalogue/big/081-m-1045c.webp",
+  "src": "m-1045c.webp",
+  "order": 81
+ },
+ {
+  "family": "big",
+  "model": "m-1700c",
+  "spec": "",
+  "file": "media/catalogue/big/082-m-1700c.webp",
+  "src": "m-1700c.webp",
+  "order": 82
+ },
+ {
+  "family": "big",
+  "model": "series-crystal",
+  "spec": "",
+  "file": "media/catalogue/big/083-series-crystal.webp",
+  "src": "series-crystal.jpg",
+  "order": 83
+ },
+ {
+  "family": "big",
+  "model": "series-floral",
+  "spec": "",
+  "file": "media/catalogue/big/084-series-floral.webp",
+  "src": "series-floral.jpg",
+  "order": 84
+ },
+ {
+  "family": "big",
+  "model": "series-gilt",
+  "spec": "",
+  "file": "media/catalogue/big/085-series-gilt.webp",
+  "src": "series-gilt.jpg",
+  "order": 85
+ },
+ {
+  "family": "big",
+  "model": "壁灯台灯70208-W350",
+  "spec": "W350",
+  "file": "media/catalogue/big/086-壁灯-台灯_70208-W350小号.webp",
+  "src": "壁灯 台灯_70208-W350小号.jpg",
+  "order": 86
+ },
+ {
+  "family": "big",
+  "model": "壁灯台灯70208-W500",
+  "spec": "W500",
+  "file": "media/catalogue/big/087-壁灯-台灯_70208-W500大号.webp",
+  "src": "壁灯 台灯_70208-W500大号.jpg",
+  "order": 87
+ },
+ {
+  "family": "wall",
+  "model": "壁灯台灯24",
+  "spec": "",
+  "file": "media/catalogue/wall/001-壁灯-台灯_24.webp",
+  "src": "壁灯 台灯_24.jpg",
+  "order": 1
+ },
+ {
+  "family": "wall",
+  "model": "壁灯台灯70100-1BW",
+  "spec": "W170 · L130 · H630",
+  "file": "media/catalogue/wall/002-壁灯-台灯_70100-1B-W170L130H630方形壁座.webp",
+  "src": "壁灯 台灯_70100-1B W170L130H630方形壁座.jpg",
+  "order": 2
+ },
+ {
+  "family": "wall",
+  "model": "壁灯台灯70100-2BW",
+  "spec": "W420 · L320 · H400",
+  "file": "media/catalogue/wall/003-壁灯-台灯_70100-2B-W420L320H400.webp",
+  "src": "壁灯 台灯_70100-2B W420L320H400.jpg",
+  "order": 3
+ },
+ {
+  "family": "wall",
+  "model": "壁灯台灯70100-3BW",
+  "spec": "W420 · L320 · H400",
+  "file": "media/catalogue/wall/004-壁灯-台灯_70100-3B-W420L320H400.webp",
+  "src": "壁灯 台灯_70100-3B W420L320H400.jpg",
+  "order": 4
+ },
+ {
+  "family": "wall",
+  "model": "壁灯台灯70100-4+3",
+  "spec": "W520 · H930",
+  "file": "media/catalogue/wall/005-壁灯-台灯_70100-4-3-W520S370H930.webp",
+  "src": "壁灯 台灯_70100-4+3 W520S370H930.jpg",
+  "order": 5
+ },
+ {
+  "family": "wall",
+  "model": "壁灯台灯70109-2B",
+  "spec": "W240220 · H550",
+  "file": "media/catalogue/wall/006-壁灯-台灯_70109--2B-W240220H550.webp",
+  "src": "壁灯 台灯_70109- 2B W240220H550.jpg",
+  "order": 6
+ },
+ {
+  "family": "wall",
+  "model": "壁灯台灯70123-3BW",
+  "spec": "W200 · H400",
+  "file": "media/catalogue/wall/007-壁灯-台灯_70123-3B-W200S120H400.webp",
+  "src": "壁灯 台灯_70123-3B W200S120H400.jpg",
+  "order": 7
+ },
+ {
+  "family": "wall",
+  "model": "壁灯台灯70216-2BW",
+  "spec": "W420 · H550",
+  "file": "media/catalogue/wall/008-壁灯-台灯_70216-2B-W420-E350-H550.webp",
+  "src": "壁灯 台灯_70216-2B W420 E350 H550.jpg",
+  "order": 8
+ },
+ {
+  "family": "wall",
+  "model": "壁灯台灯70216-3+5",
+  "spec": "W580360 · H1080",
+  "file": "media/catalogue/wall/009-壁灯-台灯_70216-3-5-W580360H1080.webp",
+  "src": "壁灯 台灯_70216-3+5 W580360H1080.jpg",
+  "order": 9
+ },
+ {
+  "family": "wall",
+  "model": "壁灯台灯70216-3BW",
+  "spec": "W460 · H550",
+  "file": "media/catalogue/wall/010-壁灯-台灯_70216-3B-W460-E340-H550.webp",
+  "src": "壁灯 台灯_70216-3B W460 E340 H550.jpg",
+  "order": 10
+ },
+ {
+  "family": "wall",
+  "model": "壁灯台灯70217-1BW",
+  "spec": "W200 · L210 · H570",
+  "file": "media/catalogue/wall/011-壁灯-台灯_70217-1B-W200L210H570.webp",
+  "src": "壁灯 台灯_70217-1B W200L210H570.jpg",
+  "order": 11
+ },
+ {
+  "family": "wall",
+  "model": "壁灯台灯70254-5BW",
+  "spec": "W240 · L123 · H560",
+  "file": "media/catalogue/wall/012-壁灯-台灯_70254-5B-W240L123H560.webp",
+  "src": "壁灯 台灯_70254-5B W240L123H560.jpg",
+  "order": 12
+ },
+ {
+  "family": "wall",
+  "model": "壁灯台灯70254-6BW",
+  "spec": "W280 · L150 · H580",
+  "file": "media/catalogue/wall/013-壁灯-台灯_70254-6B-W280L150H580.webp",
+  "src": "壁灯 台灯_70254-6B W280L150H580.jpg",
+  "order": 13
+ },
+ {
+  "family": "wall",
+  "model": "壁灯台灯90360-1Bφ",
+  "spec": "∅130 · H450",
+  "file": "media/catalogue/wall/014-壁灯-台灯_90360-1B-φ130H450.webp",
+  "src": "壁灯 台灯_90360-1B φ130H450.jpg",
+  "order": 14
+ },
+ {
+  "family": "table",
+  "model": "桌子70188",
+  "spec": "",
+  "file": "media/catalogue/table/001-桌子_70188.webp",
+  "src": "桌子_70188.jpg",
+  "order": 1
+ },
+ {
+  "family": "table",
+  "model": "桌子70201圆几",
+  "spec": "",
+  "file": "media/catalogue/table/002-桌子_70201圆几.webp",
+  "src": "桌子_70201圆几.jpg",
+  "order": 2
+ },
+ {
+  "family": "table",
+  "model": "桌子70201圆桌",
+  "spec": "",
+  "file": "media/catalogue/table/003-桌子_70201圆桌.webp",
+  "src": "桌子_70201圆桌.jpg",
+  "order": 3
+ },
+ {
+  "family": "table",
+  "model": "桌子91",
+  "spec": "",
+  "file": "media/catalogue/table/004-桌子_91.webp",
+  "src": "桌子_91.jpg",
+  "order": 4
+ },
+ {
+  "family": "land",
+  "model": "lamp-1600",
+  "spec": "",
+  "file": "media/catalogue/land/001-lamp-1600.webp",
+  "src": "lamp-1600.jpg",
+  "order": 1
+ },
+ {
+  "family": "land",
+  "model": "lamp-2150",
+  "spec": "",
+  "file": "media/catalogue/land/002-lamp-2150.webp",
+  "src": "lamp-2150.jpg",
+  "order": 2
+ },
+ {
+  "family": "land",
+  "model": "lamp-2150",
+  "spec": "",
+  "file": "media/catalogue/land/003-lamp-2150.webp",
+  "src": "lamp-2150.webp",
+  "order": 3
+ },
+ {
+  "family": "land",
+  "model": "lit-lamp",
+  "spec": "",
+  "file": "media/catalogue/land/004-lit-lamp.webp",
+  "src": "lit-lamp.jpg",
+  "order": 4
+ },
+ {
+  "family": "land",
+  "model": "m-0650t",
+  "spec": "",
+  "file": "media/catalogue/land/005-m-0650t.webp",
+  "src": "m-0650t.webp",
+  "order": 5
+ },
+ {
+  "family": "land",
+  "model": "m-0800t",
+  "spec": "",
+  "file": "media/catalogue/land/006-m-0800t.webp",
+  "src": "m-0800t.webp",
+  "order": 6
+ },
+ {
+  "family": "land",
+  "model": "m-1600f",
+  "spec": "",
+  "file": "media/catalogue/land/007-m-1600f.webp",
+  "src": "m-1600f.webp",
+  "order": 7
+ },
+ {
+  "family": "land",
+  "model": "m-2180f",
+  "spec": "",
+  "file": "media/catalogue/land/008-m-2180f.webp",
+  "src": "m-2180f.webp",
+  "order": 8
+ },
+ {
+  "family": "land",
+  "model": "壁灯台灯70100-1TΦ",
+  "spec": "H640",
+  "file": "media/catalogue/land/009-壁灯-台灯_70100-1T-Φ350H640.webp",
+  "src": "壁灯 台灯_70100-1T Φ350H640.jpg",
+  "order": 9
+ },
+ {
+  "family": "land",
+  "model": "壁灯台灯70124-φ30",
+  "spec": "∅300 · H1550",
+  "file": "media/catalogue/land/010-壁灯-台灯_70124--φ300H1550落地灯.webp",
+  "src": "壁灯 台灯_70124 -φ300H1550落地灯.jpg",
+  "order": 10
+ },
+ {
+  "family": "land",
+  "model": "壁灯台灯70216-8+8+",
+  "spec": "8+8+8L · ∅850 · H2150",
+  "file": "media/catalogue/land/011-壁灯-台灯_70216-8-8-8L-φ850H2150.webp",
+  "src": "壁灯 台灯_70216-8+8+8L φ850H2150.jpg",
+  "order": 11
+ },
+ {
+  "family": "land",
+  "model": "壁灯台灯88",
+  "spec": "",
+  "file": "media/catalogue/land/012-壁灯-台灯_88.webp",
+  "src": "壁灯 台灯_88.jpg",
+  "order": 12
+ },
+ {
+  "family": "others",
+  "model": "工艺品",
+  "spec": "",
+  "file": "media/catalogue/others/001-工艺品.webp",
+  "src": "工艺品.jpg",
+  "order": 1
+ }
+]

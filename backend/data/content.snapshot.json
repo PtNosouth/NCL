@@ -1,0 +1,2344 @@
+{
+  "version": 1,
+  "cover": {
+    "titleLines": [
+      "Light,",
+      "kept in <em>gold</em>."
+    ],
+    "sub": "Cast brass, hand-set crystal, flame-shaped glass - bent, set and polished by hand in Guangdong. Made to order for interiors and hospitality.",
+    "cta": "Follow the light down",
+    "eyebrow": "",
+    "video": {
+      "720": "media/ncl-70086-720-v2.mp4",
+      "1080": "media/ncl-70086-1080-v2.mp4",
+      "poster": "media/ncl-70086-poster.jpg"
+    }
+  },
+  "projects": [
+    {
+      "id": "p1",
+      "name": "Lights",
+      "line": "Twelve arms or thirty-six. The piece is drawn outward from the fixture count, never squeezed into a catalogue size.",
+      "image": "media/rooms/room-01.webp",
+      "alt": "A panelled drawing room with a twelve-arm crystal chandelier",
+      "displayed": true,
+      "displayOrder": 0,
+      "createdAt": "2026-11-21T09:06:40.058Z"
+    },
+    {
+      "id": "p2",
+      "name": "Scale",
+      "line": "From a small pendant to a whole hall. At the far end the crystal pattern is redrawn, not enlarged.",
+      "image": "media/rooms/room-05.webp",
+      "alt": "A dining room with a long crystal bar fixture over the table",
+      "displayed": true,
+      "displayOrder": 1,
+      "createdAt": "2026-11-21T09:06:40.059Z"
+    },
+    {
+      "id": "p3",
+      "name": "Drop",
+      "line": "Set by the ceiling and by the height people stand under it. We cut the rods — the drawing does not change.",
+      "image": "media/rooms/room-02.webp",
+      "alt": "A long sitting room with a deeper crystal fixture hung lower",
+      "displayed": true,
+      "displayOrder": 2,
+      "createdAt": "2026-11-21T09:06:40.059Z"
+    },
+    {
+      "id": "p4",
+      "name": "Scale",
+      "line": "The same drawing at three sizes; the crystal is re-pitched, never stretched.",
+      "image": "media/rooms/room-06.webp",
+      "alt": "A double-height entrance hall with a large tiered crystal chandelier",
+      "displayed": true,
+      "displayOrder": 3,
+      "createdAt": "2026-11-21T09:06:40.059Z"
+    },
+    {
+      "id": "p5",
+      "name": "Finish",
+      "line": "Brass, antique brass or polished chrome. One finish per piece, decided with a sample in your hand.",
+      "image": "media/rooms/room-03.webp",
+      "alt": "A cream sitting room with a wide multi-arm crystal fixture",
+      "displayed": true,
+      "displayOrder": 4,
+      "createdAt": "2026-11-21T09:06:40.059Z"
+    },
+    {
+      "id": "p6",
+      "name": "Lights",
+      "line": "A single drum, or forty arms on three tiers — the ceiling decides how far it can grow.",
+      "image": "media/rooms/room-07.webp",
+      "alt": "A windowed living room with a crystal fixture over a long table",
+      "displayed": true,
+      "displayOrder": 5,
+      "createdAt": "2026-11-21T09:06:40.059Z"
+    },
+    {
+      "id": "p7",
+      "name": "Scale",
+      "line": "A lantern form needs more height than width; a wide room asks for a wider answer.",
+      "image": "media/rooms/room-04.webp",
+      "alt": "A seating area with a single large lantern-form crystal fixture",
+      "displayed": true,
+      "displayOrder": 6,
+      "createdAt": "2026-11-21T09:06:40.059Z"
+    },
+    {
+      "id": "p8",
+      "name": "Finish",
+      "line": "Crystal and brass are the same family in three temperatures; we send samples before drawing.",
+      "image": "media/rooms/room-08.webp",
+      "alt": "A living room with a crystal drum fixture and a wide window",
+      "displayed": true,
+      "displayOrder": 7,
+      "createdAt": "2026-11-21T09:06:40.059Z"
+    }
+  ],
+  "groups": [
+    {
+      "id": "big",
+      "anchor": "big",
+      "title": "Chandeliers",
+      "note": "Ceiling pieces, from a single drop to a hall twelve metres up."
+    },
+    {
+      "id": "wall",
+      "anchor": "wall",
+      "title": "Wall lights",
+      "note": "Sconces drawn to a mirror line, a doorway or a stair."
+    },
+    {
+      "id": "table",
+      "anchor": "table",
+      "title": "Table lamps",
+      "note": "Small pieces for a console, a desk, a bedside."
+    },
+    {
+      "id": "land",
+      "anchor": "land",
+      "title": "Floor lamps",
+      "note": "Standing pieces, balanced on a single stem."
+    },
+    {
+      "id": "others",
+      "anchor": "others",
+      "title": "Objects",
+      "note": "The pieces that refuse a category."
+    }
+  ],
+  "products": [
+    {
+      "id": "pr1",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "70100-12+12L",
+      "spec": "∅1080 · H1160",
+      "image": "media/catalogue/big/001-70100-12-12L埃及φ1080H1160.webp",
+      "alt": "Chandeliers 70100-12+12L ∅1080 · H1160",
+      "displayed": true,
+      "displayOrder": 1,
+      "createdAt": "2026-11-21T13:31:41.772Z"
+    },
+    {
+      "id": "pr2",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "70100-12+12",
+      "spec": "∅1080 · H1160",
+      "image": "media/catalogue/big/002-70100-12-12高杯φ1080H1160.webp",
+      "alt": "Chandeliers 70100-12+12 ∅1080 · H1160",
+      "displayed": true,
+      "displayOrder": 0,
+      "createdAt": "2026-11-21T13:33:06.888Z"
+    },
+    {
+      "id": "pr3",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "70100-16+16+8+8L",
+      "spec": "∅1400 · H1760",
+      "image": "media/catalogue/big/003-70100-16-16-8-8Lφ1400H1760.webp",
+      "alt": "Chandeliers 70100-16+16+8+8L ∅1400 · H1760",
+      "displayed": true,
+      "displayOrder": 3,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr4",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "70100-3",
+      "spec": "∅320 · H700",
+      "image": "media/catalogue/big/004-70100-3小吊灯φ320H700.webp",
+      "alt": "Chandeliers 70100-3 ∅320 · H700",
+      "displayed": true,
+      "displayOrder": 2,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr5",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "70100-4L",
+      "spec": "∅400 · H750",
+      "image": "media/catalogue/big/005-70100-4L小吊灯φ400H750.webp",
+      "alt": "Chandeliers 70100-4L ∅400 · H750",
+      "displayed": true,
+      "displayOrder": 4,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr6",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "70100-6+6L",
+      "spec": "∅1250 · H1050",
+      "image": "media/catalogue/big/006-70100-6-6L雨伞φ1250H1050.webp",
+      "alt": "Chandeliers 70100-6+6L ∅1250 · H1050",
+      "displayed": true,
+      "displayOrder": 5,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr7",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "70100-6L",
+      "spec": "∅670 · H740",
+      "image": "media/catalogue/big/007-70100-6Lφ670H740.webp",
+      "alt": "Chandeliers 70100-6L ∅670 · H740",
+      "displayed": true,
+      "displayOrder": 6,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr8",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "70100-72+35",
+      "spec": "∅1800 · H2500",
+      "image": "media/catalogue/big/008-70100-72-35φ1800H2500.webp",
+      "alt": "Chandeliers 70100-72+35 ∅1800 · H2500",
+      "displayed": true,
+      "displayOrder": 7,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr9",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "70100-9+6+3",
+      "spec": "∅1050 · H1200",
+      "image": "media/catalogue/big/009-70100-9-6-3鹿头φ1050H1200.webp",
+      "alt": "Chandeliers 70100-9+6+3 ∅1050 · H1200",
+      "displayed": true,
+      "displayOrder": 8,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr10",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "70100",
+      "spec": "∅1800 · H2280",
+      "image": "media/catalogue/big/010-70100-高杯φ1800H2280.webp",
+      "alt": "Chandeliers 70100 ∅1800 · H2280",
+      "displayed": true,
+      "displayOrder": 9,
+      "createdAt": "2026-11-21T13:33:06.433Z"
+    },
+    {
+      "id": "pr11",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "70123-19L",
+      "spec": "L1600 · W240 · H400",
+      "image": "media/catalogue/big/011-70123-19L-L1600W240H400.webp",
+      "alt": "Chandeliers 70123-19L L1600 · W240 · H400",
+      "displayed": true,
+      "displayOrder": 10,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr12",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "70124-800",
+      "spec": "",
+      "image": "media/catalogue/big/012-70124-800半圆.webp",
+      "alt": "Chandeliers 70124-800",
+      "displayed": true,
+      "displayOrder": 11,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr13",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "70124",
+      "spec": "∅550 · H3000",
+      "image": "media/catalogue/big/013-70124-楼梯灯φ550H3000.webp",
+      "alt": "Chandeliers 70124 ∅550 · H3000",
+      "displayed": true,
+      "displayOrder": 12,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr14",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "70124",
+      "spec": "∅800 · H3400",
+      "image": "media/catalogue/big/014-70124-楼梯灯φ800H3400.webp",
+      "alt": "Chandeliers 70124 ∅800 · H3400",
+      "displayed": true,
+      "displayOrder": 13,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr15",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "70124",
+      "spec": "∅900 · H800",
+      "image": "media/catalogue/big/015-70124-空中花园φ900H800.webp",
+      "alt": "Chandeliers 70124 ∅900 · H800",
+      "displayed": true,
+      "displayOrder": 14,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr16",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "70124",
+      "spec": "∅600 · H300",
+      "image": "media/catalogue/big/016-70124-飞碟φ600H300.webp",
+      "alt": "Chandeliers 70124 ∅600 · H300",
+      "displayed": true,
+      "displayOrder": 15,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr17",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "70124",
+      "spec": "∅900 · H400",
+      "image": "media/catalogue/big/017-70124-飞碟φ900H400.webp",
+      "alt": "Chandeliers 70124 ∅900 · H400",
+      "displayed": true,
+      "displayOrder": 16,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr18",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "70129-19L",
+      "spec": "L1200 · W350 · H390",
+      "image": "media/catalogue/big/018-70129-19L-L1200W350H390.webp",
+      "alt": "Chandeliers 70129-19L L1200 · W350 · H390",
+      "displayed": true,
+      "displayOrder": 17,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr19",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "70145-48+25L",
+      "spec": "∅1500 · H1800",
+      "image": "media/catalogue/big/019-70145-48-25L-1500H1800mm.webp",
+      "alt": "Chandeliers 70145-48+25L ∅1500 · H1800",
+      "displayed": true,
+      "displayOrder": 18,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr20",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "70154-S",
+      "spec": "L1200 · W350 · H320",
+      "image": "media/catalogue/big/020-70154-S型-L1200W350H320.webp",
+      "alt": "Chandeliers 70154-S L1200 · W350 · H320",
+      "displayed": true,
+      "displayOrder": 19,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr21",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "70208",
+      "spec": "∅1000",
+      "image": "media/catalogue/big/021-70208-圆形φ1000.webp",
+      "alt": "Chandeliers 70208 ∅1000",
+      "displayed": true,
+      "displayOrder": 20,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr22",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "70208",
+      "spec": "W600 · H250",
+      "image": "media/catalogue/big/022-70208-正方形W600H250.webp",
+      "alt": "Chandeliers 70208 W600 · H250",
+      "displayed": true,
+      "displayOrder": 21,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr23",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "70208",
+      "spec": "L1400",
+      "image": "media/catalogue/big/023-70208-海星L1400.webp",
+      "alt": "Chandeliers 70208 L1400",
+      "displayed": true,
+      "displayOrder": 22,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr24",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "70208",
+      "spec": "L1200 · W250 · H200",
+      "image": "media/catalogue/big/024-70208-长方形L1200W250H200.webp",
+      "alt": "Chandeliers 70208 L1200 · W250 · H200",
+      "displayed": true,
+      "displayOrder": 23,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr25",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "70208",
+      "spec": "L1500 · W250 · H200",
+      "image": "media/catalogue/big/025-70208-长方形L1500W250H200.webp",
+      "alt": "Chandeliers 70208 L1500 · W250 · H200",
+      "displayed": true,
+      "displayOrder": 24,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr26",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "70216-106L",
+      "spec": "∅1800",
+      "image": "media/catalogue/big/026-70216-106L-φ1800h2500.webp",
+      "alt": "Chandeliers 70216-106L ∅1800",
+      "displayed": true,
+      "displayOrder": 25,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr27",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "70216-1L",
+      "spec": "∅280 · H320",
+      "image": "media/catalogue/big/027-70216-1Lφ280H320.webp",
+      "alt": "Chandeliers 70216-1L ∅280 · H320",
+      "displayed": true,
+      "displayOrder": 26,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr28",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "70216-6L",
+      "spec": "∅630 · H550",
+      "image": "media/catalogue/big/028-70216-6Lφ630H550.webp",
+      "alt": "Chandeliers 70216-6L ∅630 · H550",
+      "displayed": true,
+      "displayOrder": 27,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr29",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "70216-8+8+8L",
+      "spec": "∅1000 · H1150",
+      "image": "media/catalogue/big/029-70216-8-8-8L-φ1000H1150.webp",
+      "alt": "Chandeliers 70216-8+8+8L ∅1000 · H1150",
+      "displayed": true,
+      "displayOrder": 28,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr30",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "70216-8+8+8L",
+      "spec": "∅1000 · H730",
+      "image": "media/catalogue/big/030-70216-8-8-8L-φ1000H730.webp",
+      "alt": "Chandeliers 70216-8+8+8L ∅1000 · H730",
+      "displayed": true,
+      "displayOrder": 29,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr31",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "70216-8L",
+      "spec": "∅710 · H550",
+      "image": "media/catalogue/big/031-70216-8Lφ710H550.webp",
+      "alt": "Chandeliers 70216-8L ∅710 · H550",
+      "displayed": true,
+      "displayOrder": 30,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr32",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "70217-30L",
+      "spec": "∅1300 · H900",
+      "image": "media/catalogue/big/032-70217-30Lφ1300H900.webp",
+      "alt": "Chandeliers 70217-30L ∅1300 · H900",
+      "displayed": true,
+      "displayOrder": 31,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr33",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "70217-5+10+5L",
+      "spec": "∅780 · H590",
+      "image": "media/catalogue/big/033-70217-5-10-5L-φ780H590.webp",
+      "alt": "Chandeliers 70217-5+10+5L ∅780 · H590",
+      "displayed": true,
+      "displayOrder": 32,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr34",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "70217-6+12+6L",
+      "spec": "∅980 · H650",
+      "image": "media/catalogue/big/034-70217-6-12-6L-φ980H650.webp",
+      "alt": "Chandeliers 70217-6+12+6L ∅980 · H650",
+      "displayed": true,
+      "displayOrder": 33,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr35",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "70236-30L",
+      "spec": "∅800 · H1200",
+      "image": "media/catalogue/big/035-70236-30L-φ800H1200.webp",
+      "alt": "Chandeliers 70236-30L ∅800 · H1200",
+      "displayed": true,
+      "displayOrder": 34,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr36",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "70238",
+      "spec": "∅800 · H310",
+      "image": "media/catalogue/big/036-70238-φ800H310.webp",
+      "alt": "Chandeliers 70238 ∅800 · H310",
+      "displayed": true,
+      "displayOrder": 35,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr37",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "70238",
+      "spec": "∅600 · H310",
+      "image": "media/catalogue/big/037-70238-吸顶φ600H310.webp",
+      "alt": "Chandeliers 70238 ∅600 · H310",
+      "displayed": true,
+      "displayOrder": 36,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr38",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "70254-16L",
+      "spec": "∅560 · H600",
+      "image": "media/catalogue/big/038-70254-16L-φ560H600.webp",
+      "alt": "Chandeliers 70254-16L ∅560 · H600",
+      "displayed": true,
+      "displayOrder": 37,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr39",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "70254-17L",
+      "spec": "W450 · H600",
+      "image": "media/catalogue/big/039-70254-17L-W450H600.webp",
+      "alt": "Chandeliers 70254-17L W450 · H600",
+      "displayed": true,
+      "displayOrder": 38,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr40",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "70255-10L",
+      "spec": "∅815 · H550",
+      "image": "media/catalogue/big/040-70255-10Lφ815H550.webp",
+      "alt": "Chandeliers 70255-10L ∅815 · H550",
+      "displayed": true,
+      "displayOrder": 39,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr41",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "70255-12+12+12L",
+      "spec": "∅1500 · H1950",
+      "image": "media/catalogue/big/041-70255-12-12-12L-φ1500H1950.webp",
+      "alt": "Chandeliers 70255-12+12+12L ∅1500 · H1950",
+      "displayed": true,
+      "displayOrder": 40,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr42",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "70255-12+12L",
+      "spec": "∅1300 · H600",
+      "image": "media/catalogue/big/042-70255-12-12L-φ1300H600.webp",
+      "alt": "Chandeliers 70255-12+12L ∅1300 · H600",
+      "displayed": true,
+      "displayOrder": 41,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr43",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "70255-6+6+6L",
+      "spec": "∅1145 · H1520",
+      "image": "media/catalogue/big/043-70255-6-6-6L-φ1145H1520.webp",
+      "alt": "Chandeliers 70255-6+6+6L ∅1145 · H1520",
+      "displayed": true,
+      "displayOrder": 42,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr44",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "70255-6+6L",
+      "spec": "∅810 · H1100",
+      "image": "media/catalogue/big/044-70255-6-6L-φ810H1100.webp",
+      "alt": "Chandeliers 70255-6+6L ∅810 · H1100",
+      "displayed": true,
+      "displayOrder": 43,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr45",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "70255-6L",
+      "spec": "",
+      "image": "media/catalogue/big/045-70255-6L-重复.webp",
+      "alt": "Chandeliers 70255-6L",
+      "displayed": true,
+      "displayOrder": 44,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr46",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "70255-6L",
+      "spec": "∅680 · H760",
+      "image": "media/catalogue/big/046-70255-6Lφ680H760.webp",
+      "alt": "Chandeliers 70255-6L ∅680 · H760",
+      "displayed": true,
+      "displayOrder": 45,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr47",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "70255-8+8L",
+      "spec": "∅1000 · H1850",
+      "image": "media/catalogue/big/047-70255-8-8L-φ1000H1850.webp",
+      "alt": "Chandeliers 70255-8+8L ∅1000 · H1850",
+      "displayed": true,
+      "displayOrder": 46,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr48",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "70255-8+8L",
+      "spec": "∅1100 · H600",
+      "image": "media/catalogue/big/048-70255-8-8L-φ1100H600.webp",
+      "alt": "Chandeliers 70255-8+8L ∅1100 · H600",
+      "displayed": true,
+      "displayOrder": 47,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr49",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "70256-12L",
+      "spec": "∅935 · H550",
+      "image": "media/catalogue/big/049-70256-12L-φ935H550.webp",
+      "alt": "Chandeliers 70256-12L ∅935 · H550",
+      "displayed": true,
+      "displayOrder": 48,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr50",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "70257-12+12L",
+      "spec": "∅1300 · H700",
+      "image": "media/catalogue/big/050-70257-12-12L-φ1300H700.webp",
+      "alt": "Chandeliers 70257-12+12L ∅1300 · H700",
+      "displayed": true,
+      "displayOrder": 49,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr51",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "70257-12L",
+      "spec": "∅900 · H680",
+      "image": "media/catalogue/big/051-70257-12L-φ900H680.webp",
+      "alt": "Chandeliers 70257-12L ∅900 · H680",
+      "displayed": true,
+      "displayOrder": 50,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr52",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "70257-8+8L",
+      "spec": "∅1120 · H700",
+      "image": "media/catalogue/big/052-70257-8-8L-φ1120H700.webp",
+      "alt": "Chandeliers 70257-8+8L ∅1120 · H700",
+      "displayed": true,
+      "displayOrder": 51,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr53",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "70266-13L",
+      "spec": "∅600 · H3000",
+      "image": "media/catalogue/big/053-70266-13Lφ600H3000.webp",
+      "alt": "Chandeliers 70266-13L ∅600 · H3000",
+      "displayed": true,
+      "displayOrder": 52,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr54",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "70266-1L",
+      "spec": "∅120 · H1500",
+      "image": "media/catalogue/big/054-70266-1Lφ120H1500.webp",
+      "alt": "Chandeliers 70266-1L ∅120 · H1500",
+      "displayed": true,
+      "displayOrder": 53,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr55",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "70268-7L",
+      "spec": "∅600 · H3000",
+      "image": "media/catalogue/big/055-70268-7Lφ600H3000.webp",
+      "alt": "Chandeliers 70268-7L ∅600 · H3000",
+      "displayed": true,
+      "displayOrder": 54,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr56",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "70268",
+      "spec": "∅300 · H480",
+      "image": "media/catalogue/big/056-70268-φ300H480.webp",
+      "alt": "Chandeliers 70268 ∅300 · H480",
+      "displayed": true,
+      "displayOrder": 55,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr57",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "70268",
+      "spec": "∅600 · H650",
+      "image": "media/catalogue/big/057-70268-φ600H650.webp",
+      "alt": "Chandeliers 70268 ∅600 · H650",
+      "displayed": true,
+      "displayOrder": 56,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr58",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "70270",
+      "spec": "∅800 · H220",
+      "image": "media/catalogue/big/058-70270-φ800H220.webp",
+      "alt": "Chandeliers 70270 ∅800 · H220",
+      "displayed": true,
+      "displayOrder": 57,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr59",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "90001-8L",
+      "spec": "",
+      "image": "media/catalogue/big/059-90001-8L圆形.webp",
+      "alt": "Chandeliers 90001-8L",
+      "displayed": true,
+      "displayOrder": 58,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr60",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "90001",
+      "spec": "∅900 · H500",
+      "image": "media/catalogue/big/060-90001-φ900W600H500.webp",
+      "alt": "Chandeliers 90001 ∅900 · H500",
+      "displayed": true,
+      "displayOrder": 59,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr61",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "90237-13L",
+      "spec": "∅600 · H3000",
+      "image": "media/catalogue/big/061-90237-13Lφ600H3000.webp",
+      "alt": "Chandeliers 90237-13L ∅600 · H3000",
+      "displayed": true,
+      "displayOrder": 60,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr62",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "90265-5L",
+      "spec": "∅500 · H225",
+      "image": "media/catalogue/big/062-90265-5L-φ500H225.webp",
+      "alt": "Chandeliers 90265-5L ∅500 · H225",
+      "displayed": true,
+      "displayOrder": 61,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr63",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "90265-600",
+      "spec": "∅600 · H265",
+      "image": "media/catalogue/big/063-90265-600-φ600H265.webp",
+      "alt": "Chandeliers 90265-600 ∅600 · H265",
+      "displayed": true,
+      "displayOrder": 62,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr64",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "90265-8L",
+      "spec": "∅800 · H350",
+      "image": "media/catalogue/big/064-90265-8L-φ800H350.webp",
+      "alt": "Chandeliers 90265-8L ∅800 · H350",
+      "displayed": true,
+      "displayOrder": 63,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr65",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "90288-10",
+      "spec": "L1800 · W600 · H1250",
+      "image": "media/catalogue/big/065-90288-10条L1800W600H1250.webp",
+      "alt": "Chandeliers 90288-10 L1800 · W600 · H1250",
+      "displayed": true,
+      "displayOrder": 64,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr66",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "90335-9+6",
+      "spec": "∅1100 · H12500",
+      "image": "media/catalogue/big/066-90335-9-6φ1100H12500.webp",
+      "alt": "Chandeliers 90335-9+6 ∅1100 · H12500",
+      "displayed": true,
+      "displayOrder": 65,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr67",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "90429-12L",
+      "spec": "∅1150 · H750",
+      "image": "media/catalogue/big/067-90429-12Lφ1150H750.webp",
+      "alt": "Chandeliers 90429-12L ∅1150 · H750",
+      "displayed": true,
+      "displayOrder": 66,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr68",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "hero-cascade",
+      "spec": "",
+      "image": "media/catalogue/big/068-hero-cascade.webp",
+      "alt": "Chandeliers hero-cascade",
+      "displayed": true,
+      "displayOrder": 67,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr69",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "lamp-0620",
+      "spec": "",
+      "image": "media/catalogue/big/069-lamp-0620.webp",
+      "alt": "Chandeliers lamp-0620",
+      "displayed": true,
+      "displayOrder": 68,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr70",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "lamp-0620",
+      "spec": "",
+      "image": "media/catalogue/big/070-lamp-0620.webp",
+      "alt": "Chandeliers lamp-0620",
+      "displayed": true,
+      "displayOrder": 69,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr71",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "lamp-1450",
+      "spec": "",
+      "image": "media/catalogue/big/071-lamp-1450.webp",
+      "alt": "Chandeliers lamp-1450",
+      "displayed": true,
+      "displayOrder": 70,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr72",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "lamp-1450",
+      "spec": "",
+      "image": "media/catalogue/big/072-lamp-1450.webp",
+      "alt": "Chandeliers lamp-1450",
+      "displayed": true,
+      "displayOrder": 71,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr73",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "lamp-1500",
+      "spec": "",
+      "image": "media/catalogue/big/073-lamp-1500.webp",
+      "alt": "Chandeliers lamp-1500",
+      "displayed": true,
+      "displayOrder": 72,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr74",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "lamp-1500",
+      "spec": "",
+      "image": "media/catalogue/big/074-lamp-1500.webp",
+      "alt": "Chandeliers lamp-1500",
+      "displayed": true,
+      "displayOrder": 73,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr75",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "lamp-3000",
+      "spec": "",
+      "image": "media/catalogue/big/075-lamp-3000.webp",
+      "alt": "Chandeliers lamp-3000",
+      "displayed": true,
+      "displayOrder": 74,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr76",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "lamp-3000",
+      "spec": "",
+      "image": "media/catalogue/big/076-lamp-3000.webp",
+      "alt": "Chandeliers lamp-3000",
+      "displayed": true,
+      "displayOrder": 75,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr77",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "lamp-5800",
+      "spec": "",
+      "image": "media/catalogue/big/077-lamp-5800.webp",
+      "alt": "Chandeliers lamp-5800",
+      "displayed": true,
+      "displayOrder": 76,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr78",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "lit-70048",
+      "spec": "",
+      "image": "media/catalogue/big/078-lit-70048.webp",
+      "alt": "Chandeliers lit-70048",
+      "displayed": true,
+      "displayOrder": 77,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr79",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "lit-70089",
+      "spec": "",
+      "image": "media/catalogue/big/079-lit-70089.webp",
+      "alt": "Chandeliers lit-70089",
+      "displayed": true,
+      "displayOrder": 78,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr80",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "m-0780c",
+      "spec": "",
+      "image": "media/catalogue/big/080-m-0780c.webp",
+      "alt": "Chandeliers m-0780c",
+      "displayed": true,
+      "displayOrder": 79,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr81",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "m-1045c",
+      "spec": "",
+      "image": "media/catalogue/big/081-m-1045c.webp",
+      "alt": "Chandeliers m-1045c",
+      "displayed": true,
+      "displayOrder": 80,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr82",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "m-1700c",
+      "spec": "",
+      "image": "media/catalogue/big/082-m-1700c.webp",
+      "alt": "Chandeliers m-1700c",
+      "displayed": true,
+      "displayOrder": 81,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr83",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "series-crystal",
+      "spec": "",
+      "image": "media/catalogue/big/083-series-crystal.webp",
+      "alt": "Chandeliers series-crystal",
+      "displayed": true,
+      "displayOrder": 82,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr84",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "series-floral",
+      "spec": "",
+      "image": "media/catalogue/big/084-series-floral.webp",
+      "alt": "Chandeliers series-floral",
+      "displayed": true,
+      "displayOrder": 83,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr85",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "series-gilt",
+      "spec": "",
+      "image": "media/catalogue/big/085-series-gilt.webp",
+      "alt": "Chandeliers series-gilt",
+      "displayed": true,
+      "displayOrder": 84,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr86",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "70208-W350",
+      "spec": "W350",
+      "image": "media/catalogue/big/086-壁灯-台灯_70208-W350小号.webp",
+      "alt": "Chandeliers 70208-W350 W350",
+      "displayed": true,
+      "displayOrder": 85,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr87",
+      "groupIds": [
+        "big"
+      ],
+      "groupId": "big",
+      "model": "70208-W500",
+      "spec": "W500",
+      "image": "media/catalogue/big/087-壁灯-台灯_70208-W500大号.webp",
+      "alt": "Chandeliers 70208-W500 W500",
+      "displayed": true,
+      "displayOrder": 86,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr88",
+      "groupIds": [
+        "wall"
+      ],
+      "groupId": "wall",
+      "model": "No. 24",
+      "spec": "",
+      "image": "media/catalogue/wall/001-壁灯-台灯_24.webp",
+      "alt": "Wall lights No. 24",
+      "displayed": true,
+      "displayOrder": 87,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr89",
+      "groupIds": [
+        "wall"
+      ],
+      "groupId": "wall",
+      "model": "70100-1B",
+      "spec": "W170 · L130 · H630",
+      "image": "media/catalogue/wall/002-壁灯-台灯_70100-1B-W170L130H630方形壁座.webp",
+      "alt": "Wall lights 70100-1B W170 · L130 · H630",
+      "displayed": true,
+      "displayOrder": 88,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr90",
+      "groupIds": [
+        "wall"
+      ],
+      "groupId": "wall",
+      "model": "70100-2B",
+      "spec": "W420 · L320 · H400",
+      "image": "media/catalogue/wall/003-壁灯-台灯_70100-2B-W420L320H400.webp",
+      "alt": "Wall lights 70100-2B W420 · L320 · H400",
+      "displayed": true,
+      "displayOrder": 89,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr91",
+      "groupIds": [
+        "wall"
+      ],
+      "groupId": "wall",
+      "model": "70100-3B",
+      "spec": "W420 · L320 · H400",
+      "image": "media/catalogue/wall/004-壁灯-台灯_70100-3B-W420L320H400.webp",
+      "alt": "Wall lights 70100-3B W420 · L320 · H400",
+      "displayed": true,
+      "displayOrder": 90,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr92",
+      "groupIds": [
+        "wall"
+      ],
+      "groupId": "wall",
+      "model": "70100-4+3",
+      "spec": "W520 · H930",
+      "image": "media/catalogue/wall/005-壁灯-台灯_70100-4-3-W520S370H930.webp",
+      "alt": "Wall lights 70100-4+3 W520 · H930",
+      "displayed": true,
+      "displayOrder": 91,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr93",
+      "groupIds": [
+        "wall"
+      ],
+      "groupId": "wall",
+      "model": "70109",
+      "spec": "W240220 · H550",
+      "image": "media/catalogue/wall/006-壁灯-台灯_70109--2B-W240220H550.webp",
+      "alt": "Wall lights 70109 W240220 · H550",
+      "displayed": true,
+      "displayOrder": 92,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr94",
+      "groupIds": [
+        "wall"
+      ],
+      "groupId": "wall",
+      "model": "70123-3B",
+      "spec": "W200 · H400",
+      "image": "media/catalogue/wall/007-壁灯-台灯_70123-3B-W200S120H400.webp",
+      "alt": "Wall lights 70123-3B W200 · H400",
+      "displayed": true,
+      "displayOrder": 93,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr95",
+      "groupIds": [
+        "wall"
+      ],
+      "groupId": "wall",
+      "model": "70216-2B",
+      "spec": "W420 · H550",
+      "image": "media/catalogue/wall/008-壁灯-台灯_70216-2B-W420-E350-H550.webp",
+      "alt": "Wall lights 70216-2B W420 · H550",
+      "displayed": true,
+      "displayOrder": 94,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr96",
+      "groupIds": [
+        "wall"
+      ],
+      "groupId": "wall",
+      "model": "70216-3+5",
+      "spec": "W580360 · H1080",
+      "image": "media/catalogue/wall/009-壁灯-台灯_70216-3-5-W580360H1080.webp",
+      "alt": "Wall lights 70216-3+5 W580360 · H1080",
+      "displayed": true,
+      "displayOrder": 95,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr97",
+      "groupIds": [
+        "wall"
+      ],
+      "groupId": "wall",
+      "model": "70216-3B",
+      "spec": "W460 · H550",
+      "image": "media/catalogue/wall/010-壁灯-台灯_70216-3B-W460-E340-H550.webp",
+      "alt": "Wall lights 70216-3B W460 · H550",
+      "displayed": true,
+      "displayOrder": 96,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr98",
+      "groupIds": [
+        "wall"
+      ],
+      "groupId": "wall",
+      "model": "70217-1B",
+      "spec": "W200 · L210 · H570",
+      "image": "media/catalogue/wall/011-壁灯-台灯_70217-1B-W200L210H570.webp",
+      "alt": "Wall lights 70217-1B W200 · L210 · H570",
+      "displayed": true,
+      "displayOrder": 97,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr99",
+      "groupIds": [
+        "wall"
+      ],
+      "groupId": "wall",
+      "model": "70254-5B",
+      "spec": "W240 · L123 · H560",
+      "image": "media/catalogue/wall/012-壁灯-台灯_70254-5B-W240L123H560.webp",
+      "alt": "Wall lights 70254-5B W240 · L123 · H560",
+      "displayed": true,
+      "displayOrder": 98,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr100",
+      "groupIds": [
+        "wall"
+      ],
+      "groupId": "wall",
+      "model": "70254-6B",
+      "spec": "W280 · L150 · H580",
+      "image": "media/catalogue/wall/013-壁灯-台灯_70254-6B-W280L150H580.webp",
+      "alt": "Wall lights 70254-6B W280 · L150 · H580",
+      "displayed": true,
+      "displayOrder": 99,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr101",
+      "groupIds": [
+        "wall"
+      ],
+      "groupId": "wall",
+      "model": "90360-1B",
+      "spec": "∅130 · H450",
+      "image": "media/catalogue/wall/014-壁灯-台灯_90360-1B-φ130H450.webp",
+      "alt": "Wall lights 90360-1B ∅130 · H450",
+      "displayed": true,
+      "displayOrder": 100,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr102",
+      "groupIds": [
+        "table"
+      ],
+      "groupId": "table",
+      "model": "70188",
+      "spec": "",
+      "image": "media/catalogue/table/001-桌子_70188.webp",
+      "alt": "Table lamps 70188",
+      "displayed": true,
+      "displayOrder": 101,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr103",
+      "groupIds": [
+        "table"
+      ],
+      "groupId": "table",
+      "model": "70201",
+      "spec": "",
+      "image": "media/catalogue/table/002-桌子_70201圆几.webp",
+      "alt": "Table lamps 70201",
+      "displayed": true,
+      "displayOrder": 102,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr104",
+      "groupIds": [
+        "table"
+      ],
+      "groupId": "table",
+      "model": "70201",
+      "spec": "",
+      "image": "media/catalogue/table/003-桌子_70201圆桌.webp",
+      "alt": "Table lamps 70201",
+      "displayed": true,
+      "displayOrder": 103,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr105",
+      "groupIds": [
+        "table"
+      ],
+      "groupId": "table",
+      "model": "No. 91",
+      "spec": "",
+      "image": "media/catalogue/table/004-桌子_91.webp",
+      "alt": "Table lamps No. 91",
+      "displayed": true,
+      "displayOrder": 104,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr106",
+      "groupIds": [
+        "land"
+      ],
+      "groupId": "land",
+      "model": "lamp-1600",
+      "spec": "",
+      "image": "media/catalogue/land/001-lamp-1600.webp",
+      "alt": "Floor lamps lamp-1600",
+      "displayed": true,
+      "displayOrder": 105,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr107",
+      "groupIds": [
+        "land"
+      ],
+      "groupId": "land",
+      "model": "lamp-2150",
+      "spec": "",
+      "image": "media/catalogue/land/002-lamp-2150.webp",
+      "alt": "Floor lamps lamp-2150",
+      "displayed": true,
+      "displayOrder": 106,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr108",
+      "groupIds": [
+        "land"
+      ],
+      "groupId": "land",
+      "model": "lamp-2150",
+      "spec": "",
+      "image": "media/catalogue/land/003-lamp-2150.webp",
+      "alt": "Floor lamps lamp-2150",
+      "displayed": true,
+      "displayOrder": 107,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr109",
+      "groupIds": [
+        "land"
+      ],
+      "groupId": "land",
+      "model": "lit-lamp",
+      "spec": "",
+      "image": "media/catalogue/land/004-lit-lamp.webp",
+      "alt": "Floor lamps lit-lamp",
+      "displayed": true,
+      "displayOrder": 108,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr110",
+      "groupIds": [
+        "land"
+      ],
+      "groupId": "land",
+      "model": "m-0650t",
+      "spec": "",
+      "image": "media/catalogue/land/005-m-0650t.webp",
+      "alt": "Floor lamps m-0650t",
+      "displayed": true,
+      "displayOrder": 109,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr111",
+      "groupIds": [
+        "land"
+      ],
+      "groupId": "land",
+      "model": "m-0800t",
+      "spec": "",
+      "image": "media/catalogue/land/006-m-0800t.webp",
+      "alt": "Floor lamps m-0800t",
+      "displayed": true,
+      "displayOrder": 110,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr112",
+      "groupIds": [
+        "land"
+      ],
+      "groupId": "land",
+      "model": "m-1600f",
+      "spec": "",
+      "image": "media/catalogue/land/007-m-1600f.webp",
+      "alt": "Floor lamps m-1600f",
+      "displayed": true,
+      "displayOrder": 111,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr113",
+      "groupIds": [
+        "land"
+      ],
+      "groupId": "land",
+      "model": "m-2180f",
+      "spec": "",
+      "image": "media/catalogue/land/008-m-2180f.webp",
+      "alt": "Floor lamps m-2180f",
+      "displayed": true,
+      "displayOrder": 112,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr114",
+      "groupIds": [
+        "land"
+      ],
+      "groupId": "land",
+      "model": "70100-1T",
+      "spec": "H640",
+      "image": "media/catalogue/land/009-壁灯-台灯_70100-1T-Φ350H640.webp",
+      "alt": "Floor lamps 70100-1T H640",
+      "displayed": true,
+      "displayOrder": 113,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr115",
+      "groupIds": [
+        "land"
+      ],
+      "groupId": "land",
+      "model": "70124",
+      "spec": "∅300 · H1550",
+      "image": "media/catalogue/land/010-壁灯-台灯_70124--φ300H1550落地灯.webp",
+      "alt": "Floor lamps 70124 ∅300 · H1550",
+      "displayed": true,
+      "displayOrder": 114,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr116",
+      "groupIds": [
+        "land"
+      ],
+      "groupId": "land",
+      "model": "70216-8+8+8L",
+      "spec": "∅850 · H2150",
+      "image": "media/catalogue/land/011-壁灯-台灯_70216-8-8-8L-φ850H2150.webp",
+      "alt": "Floor lamps 70216-8+8+8L ∅850 · H2150",
+      "displayed": true,
+      "displayOrder": 115,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr117",
+      "groupIds": [
+        "land"
+      ],
+      "groupId": "land",
+      "model": "No. 88",
+      "spec": "",
+      "image": "media/catalogue/land/012-壁灯-台灯_88.webp",
+      "alt": "Floor lamps No. 88",
+      "displayed": true,
+      "displayOrder": 116,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    },
+    {
+      "id": "pr118",
+      "groupIds": [
+        "others"
+      ],
+      "groupId": "others",
+      "model": "No. 1",
+      "spec": "",
+      "image": "media/catalogue/others/001-工艺品.webp",
+      "alt": "Objects No. 1",
+      "displayed": true,
+      "displayOrder": 117,
+      "createdAt": "2026-11-21T13:31:41.773Z"
+    }
+  ],
+  "patents": [
+    {
+      "id": "d1",
+      "image": "media/patents/patent-chandelier.webp",
+      "title": "Chandelier",
+      "meta": "ZL 2014 3 0498744.1 · 2015",
+      "alt": "Chandelier ZL 2014 3 0498744.1 · 2015",
+      "displayed": true,
+      "displayOrder": 0,
+      "createdAt": "2026-11-21T13:12:04.979Z"
+    },
+    {
+      "id": "d2",
+      "image": "media/patents/piece-01.webp",
+      "title": "Chandelier 70100 · 6 + 6L",
+      "meta": "Design patent",
+      "alt": "Chandelier 70100 · 6 + 6L Design patent",
+      "displayed": true,
+      "displayOrder": 1,
+      "createdAt": "2026-11-21T13:12:04.980Z"
+    },
+    {
+      "id": "d3",
+      "image": "media/patents/patent-70202-notice-12.webp",
+      "title": "Long table 70202",
+      "meta": "Grant notice · 2026",
+      "alt": "Long table 70202 Grant notice · 2026",
+      "displayed": true,
+      "displayOrder": 2,
+      "createdAt": "2026-11-21T13:12:04.980Z"
+    },
+    {
+      "id": "d4",
+      "image": "media/patents/patent-lamp-base.webp",
+      "title": "Lamp base",
+      "meta": "ZL 2014 3 0498926.9 · 2015",
+      "alt": "Lamp base ZL 2014 3 0498926.9 · 2015",
+      "displayed": true,
+      "displayOrder": 3,
+      "createdAt": "2026-11-21T13:12:04.980Z"
+    },
+    {
+      "id": "d5",
+      "image": "media/patents/patent-70290-notice.webp",
+      "title": "Long table 70290",
+      "meta": "Grant notice · 2026",
+      "alt": "Long table 70290 Grant notice · 2026",
+      "displayed": true,
+      "displayOrder": 4,
+      "createdAt": "2026-11-21T13:12:04.980Z"
+    },
+    {
+      "id": "d6",
+      "image": "media/patents/piece-02.webp",
+      "title": "Chandelier 70100 · 6L",
+      "meta": "Design patent",
+      "alt": "Chandelier 70100 · 6L Design patent",
+      "displayed": true,
+      "displayOrder": 5,
+      "createdAt": "2026-11-21T13:12:04.980Z"
+    },
+    {
+      "id": "d7",
+      "image": "media/patents/piece-03.webp",
+      "title": "Chandelier 70100 · 9 + 6 + 3",
+      "meta": "Design patent",
+      "alt": "Chandelier 70100 · 9 + 6 + 3 Design patent",
+      "displayed": true,
+      "displayOrder": 6,
+      "createdAt": "2026-11-21T13:12:04.980Z"
+    },
+    {
+      "id": "d8",
+      "image": "media/patents/patent-crystal-lamp-fitting.webp",
+      "title": "Crystal lamp fitting",
+      "meta": "ZL 2017 3 0145750.2 · 2018",
+      "alt": "Crystal lamp fitting ZL 2017 3 0145750.2 · 2018",
+      "displayed": true,
+      "displayOrder": 7,
+      "createdAt": "2026-11-21T13:12:04.980Z"
+    },
+    {
+      "id": "d9",
+      "image": "media/patents/patent-70262-certificate.webp",
+      "title": "Table 70262",
+      "meta": "ZL 2024 3 0627851 · 2025",
+      "alt": "Table 70262 ZL 2024 3 0627851 · 2025",
+      "displayed": true,
+      "displayOrder": 8,
+      "createdAt": "2026-11-21T13:12:04.980Z"
+    },
+    {
+      "id": "d10",
+      "image": "media/patents/patent-70202-notice.webp",
+      "title": "Round table 70202",
+      "meta": "Grant notice · 2026",
+      "alt": "Round table 70202 Grant notice · 2026",
+      "displayed": true,
+      "displayOrder": 9,
+      "createdAt": "2026-11-21T13:12:04.980Z"
+    },
+    {
+      "id": "d11",
+      "image": "media/patents/patent-70260-certificate.webp",
+      "title": "Table 70260",
+      "meta": "ZL 2024 3 0569394 · 2025",
+      "alt": "Table 70260 ZL 2024 3 0569394 · 2025",
+      "displayed": true,
+      "displayOrder": 10,
+      "createdAt": "2026-11-21T13:12:04.980Z"
+    },
+    {
+      "id": "d12",
+      "image": "media/patents/piece-05.webp",
+      "title": "Floor lamp 70124",
+      "meta": "Design patent",
+      "alt": "Floor lamp 70124 Design patent",
+      "displayed": true,
+      "displayOrder": 11,
+      "createdAt": "2026-11-21T13:12:04.980Z"
+    },
+    {
+      "id": "d13",
+      "image": "media/patents/piece-20.webp",
+      "title": "Round table 70201",
+      "meta": "Design patent",
+      "alt": "Round table 70201 Design patent",
+      "displayed": true,
+      "displayOrder": 12,
+      "createdAt": "2026-11-21T13:12:04.980Z"
+    },
+    {
+      "id": "d14",
+      "image": "media/patents/piece-06.webp",
+      "title": "Piece 88",
+      "meta": "Design patent",
+      "alt": "Piece 88 Design patent",
+      "displayed": true,
+      "displayOrder": 13,
+      "createdAt": "2026-11-21T13:12:04.980Z"
+    },
+    {
+      "id": "d15",
+      "image": "media/patents/patent-70264R-certificate.webp",
+      "title": "Table 70264R",
+      "meta": "ZL 2024 3 0557149 · 2025",
+      "alt": "Table 70264R ZL 2024 3 0557149 · 2025",
+      "displayed": true,
+      "displayOrder": 14,
+      "createdAt": "2026-11-21T13:12:04.980Z"
+    },
+    {
+      "id": "d16",
+      "image": "media/patents/patent-70290-certificate.webp",
+      "title": "Long table 70290",
+      "meta": "ZL 2025 3 0522291 · 2026",
+      "alt": "Long table 70290 ZL 2025 3 0522291 · 2026",
+      "displayed": true,
+      "displayOrder": 15,
+      "createdAt": "2026-11-21T13:12:04.980Z"
+    },
+    {
+      "id": "d17",
+      "image": "media/patents/patent-70202-certificate.webp",
+      "title": "Round table 70202",
+      "meta": "ZL 2025 3 0451965 · 2026",
+      "alt": "Round table 70202 ZL 2025 3 0451965 · 2026",
+      "displayed": true,
+      "displayOrder": 16,
+      "createdAt": "2026-11-21T13:12:04.980Z"
+    },
+    {
+      "id": "d18",
+      "image": "media/patents/piece-19.webp",
+      "title": "Side table 70201",
+      "meta": "Design patent",
+      "alt": "Side table 70201 Design patent",
+      "displayed": true,
+      "displayOrder": 17,
+      "createdAt": "2026-11-21T13:12:04.980Z"
+    },
+    {
+      "id": "d19",
+      "image": "media/patents/piece-18.webp",
+      "title": "Table 70188",
+      "meta": "Design patent",
+      "alt": "Table 70188 Design patent",
+      "displayed": true,
+      "displayOrder": 18,
+      "createdAt": "2026-11-21T13:12:04.980Z"
+    },
+    {
+      "id": "d20",
+      "image": "media/patents/patent-lamp-base.webp",
+      "title": "Lamp base",
+      "meta": "ZL 2014 3 0498926.9 · 2015",
+      "alt": "Lamp base ZL 2014 3 0498926.9 · 2015",
+      "displayed": true,
+      "displayOrder": 19,
+      "createdAt": "2026-11-21T13:12:04.980Z"
+    },
+    {
+      "id": "d21",
+      "image": "media/patents/patent-chandelier.webp",
+      "title": "Chandelier",
+      "meta": "ZL 2014 3 0498744.1 · 2015",
+      "alt": "Chandelier ZL 2014 3 0498744.1 · 2015",
+      "displayed": true,
+      "displayOrder": 20,
+      "createdAt": "2026-11-21T13:12:04.980Z"
+    },
+    {
+      "id": "d22",
+      "image": "media/patents/piece-04.webp",
+      "title": "Wall light 70100 · 1T",
+      "meta": "Design patent",
+      "alt": "Wall light 70100 · 1T Design patent",
+      "displayed": true,
+      "displayOrder": 21,
+      "createdAt": "2026-11-21T13:12:04.980Z"
+    },
+    {
+      "id": "d23",
+      "image": "media/patents/patent-70202-notice-12.webp",
+      "title": "Long table 70202",
+      "meta": "Grant notice · 2026",
+      "alt": "Long table 70202 Grant notice · 2026",
+      "displayed": true,
+      "displayOrder": 22,
+      "createdAt": "2026-11-21T13:12:04.980Z"
+    },
+    {
+      "id": "d24",
+      "image": "media/patents/patent-crystal-lamp-fitting.webp",
+      "title": "Crystal lamp fitting",
+      "meta": "ZL 2017 3 0145750.2 · 2018",
+      "alt": "Crystal lamp fitting ZL 2017 3 0145750.2 · 2018",
+      "displayed": true,
+      "displayOrder": 23,
+      "createdAt": "2026-11-21T13:12:04.980Z"
+    },
+    {
+      "id": "d25",
+      "image": "media/patents/patent-70290-notice.webp",
+      "title": "Long table 70290",
+      "meta": "Grant notice · 2026",
+      "alt": "Long table 70290 Grant notice · 2026",
+      "displayed": true,
+      "displayOrder": 24,
+      "createdAt": "2026-11-21T13:12:04.980Z"
+    },
+    {
+      "id": "d26",
+      "image": "media/patents/piece-01.webp",
+      "title": "Chandelier 70100 · 6 + 6L",
+      "meta": "Design patent",
+      "alt": "Chandelier 70100 · 6 + 6L Design patent",
+      "displayed": true,
+      "displayOrder": 25,
+      "createdAt": "2026-11-21T13:12:04.980Z"
+    },
+    {
+      "id": "d27",
+      "image": "media/patents/piece-03.webp",
+      "title": "Chandelier 70100 · 9 + 6 + 3",
+      "meta": "Design patent",
+      "alt": "Chandelier 70100 · 9 + 6 + 3 Design patent",
+      "displayed": true,
+      "displayOrder": 26,
+      "createdAt": "2026-11-21T13:12:04.980Z"
+    },
+    {
+      "id": "d28",
+      "image": "media/patents/piece-05.webp",
+      "title": "Floor lamp 70124",
+      "meta": "Design patent",
+      "alt": "Floor lamp 70124 Design patent",
+      "displayed": true,
+      "displayOrder": 27,
+      "createdAt": "2026-11-21T13:12:04.980Z"
+    },
+    {
+      "id": "d29",
+      "image": "media/patents/patent-70262-certificate.webp",
+      "title": "Table 70262",
+      "meta": "ZL 2024 3 0627851 · 2025",
+      "alt": "Table 70262 ZL 2024 3 0627851 · 2025",
+      "displayed": true,
+      "displayOrder": 28,
+      "createdAt": "2026-11-21T13:12:04.980Z"
+    },
+    {
+      "id": "d30",
+      "image": "media/patents/piece-02.webp",
+      "title": "Chandelier 70100 · 6L",
+      "meta": "Design patent",
+      "alt": "Chandelier 70100 · 6L Design patent",
+      "displayed": true,
+      "displayOrder": 29,
+      "createdAt": "2026-11-21T13:12:04.980Z"
+    },
+    {
+      "id": "d31",
+      "image": "media/patents/patent-70260-certificate.webp",
+      "title": "Table 70260",
+      "meta": "ZL 2024 3 0569394 · 2025",
+      "alt": "Table 70260 ZL 2024 3 0569394 · 2025",
+      "displayed": true,
+      "displayOrder": 30,
+      "createdAt": "2026-11-21T13:12:04.980Z"
+    },
+    {
+      "id": "d32",
+      "image": "media/patents/patent-70290-certificate.webp",
+      "title": "Long table 70290",
+      "meta": "ZL 2025 3 0522291 · 2026",
+      "alt": "Long table 70290 ZL 2025 3 0522291 · 2026",
+      "displayed": true,
+      "displayOrder": 31,
+      "createdAt": "2026-11-21T13:12:04.980Z"
+    },
+    {
+      "id": "d33",
+      "image": "media/patents/piece-20.webp",
+      "title": "Round table 70201",
+      "meta": "Design patent",
+      "alt": "Round table 70201 Design patent",
+      "displayed": true,
+      "displayOrder": 32,
+      "createdAt": "2026-11-21T13:12:04.980Z"
+    },
+    {
+      "id": "d34",
+      "image": "media/patents/patent-70202-notice.webp",
+      "title": "Round table 70202",
+      "meta": "Grant notice · 2026",
+      "alt": "Round table 70202 Grant notice · 2026",
+      "displayed": true,
+      "displayOrder": 33,
+      "createdAt": "2026-11-21T13:12:04.980Z"
+    },
+    {
+      "id": "d35",
+      "image": "media/patents/patent-70264R-certificate.webp",
+      "title": "Table 70264R",
+      "meta": "ZL 2024 3 0557149 · 2025",
+      "alt": "Table 70264R ZL 2024 3 0557149 · 2025",
+      "displayed": true,
+      "displayOrder": 34,
+      "createdAt": "2026-11-21T13:12:04.980Z"
+    },
+    {
+      "id": "d36",
+      "image": "media/patents/patent-70202-certificate.webp",
+      "title": "Round table 70202",
+      "meta": "ZL 2025 3 0451965 · 2026",
+      "alt": "Round table 70202 ZL 2025 3 0451965 · 2026",
+      "displayed": true,
+      "displayOrder": 35,
+      "createdAt": "2026-11-21T13:12:04.980Z"
+    },
+    {
+      "id": "d37",
+      "image": "media/patents/piece-06.webp",
+      "title": "Piece 88",
+      "meta": "Design patent",
+      "alt": "Piece 88 Design patent",
+      "displayed": true,
+      "displayOrder": 36,
+      "createdAt": "2026-11-21T13:12:04.980Z"
+    },
+    {
+      "id": "d38",
+      "image": "media/patents/piece-18.webp",
+      "title": "Table 70188",
+      "meta": "Design patent",
+      "alt": "Table 70188 Design patent",
+      "displayed": true,
+      "displayOrder": 37,
+      "createdAt": "2026-11-21T13:12:04.980Z"
+    },
+    {
+      "id": "d39",
+      "image": "media/patents/piece-19.webp",
+      "title": "Side table 70201",
+      "meta": "Design patent",
+      "alt": "Side table 70201 Design patent",
+      "displayed": true,
+      "displayOrder": 38,
+      "createdAt": "2026-11-21T13:12:04.980Z"
+    },
+    {
+      "id": "d40",
+      "image": "media/patents/piece-04.webp",
+      "title": "Wall light 70100 · 1T",
+      "meta": "Design patent",
+      "alt": "Wall light 70100 · 1T Design patent",
+      "displayed": true,
+      "displayOrder": 39,
+      "createdAt": "2026-11-21T13:12:04.980Z"
+    }
+  ],
+  "updatedAt": "2026-11-21T14:58:01.775Z",
+  "craft": {
+    "eyebrow": {
+      "lead": "The hand",
+      "items": "Cut · strung · lit"
+    },
+    "title": [
+      "A chandelier is",
+      "a thousand decisions",
+      "made by hand."
+    ],
+    "plates": [
+      {
+        "id": "ca",
+        "layout": "media-left",
+        "label": "Cut",
+        "title": [
+          "Every facet is cut,",
+          "then polished"
+        ],
+        "body": "The edge has to hold light on one side and shadow on the other. Cut too shallow and the crystal turns to glass; cut too deep and it swallows the room.",
+        "image": "media/crystal/pendants.webp",
+        "alt": "Cut-crystal pendants hanging from a gilt corona",
+        "parallax": 0.16
+      },
+      {
+        "id": "cb",
+        "layout": "media-right",
+        "label": "Strung",
+        "title": [
+          "Each drop is drilled,",
+          "checked, then hung"
+        ],
+        "body": "In the order the drawing calls for. One row out of line and the whole run comes back down - there is no machine that makes that judgement.",
+        "image": "media/crystal/strung.webp",
+        "alt": "Rows of crystal drops strung on wire, close up",
+        "parallax": 0.16
+      }
+    ],
+    "close": {
+      "label": "Lit",
+      "title": [
+        "It is only finished",
+        "once it is lit"
+      ],
+      "body": "Frame, balance, switch on. In the light the piece either holds together or it does not - and that is the moment we judge the work, not the drawing.",
+      "image": "media/crystal/lit.webp",
+      "alt": "The 70086 fixture switched on, its flame bulbs lit",
+      "parallax": 0.1,
+      "cta": {
+        "label": "Start an enquiry",
+        "href": "#enquire"
+      }
+    }
+  },
+  "footer": {
+    "brand": "NCL 新构思",
+    "columns": [
+      {
+        "title": "",
+        "links": [
+          {
+            "label": "Our story",
+            "href": "#atelier"
+          },
+          {
+            "label": "Made to order",
+            "href": "#bespoke"
+          },
+          {
+            "label": "Projects",
+            "href": "#bespoke"
+          },
+          {
+            "label": "The collection",
+            "href": "collection.html"
+          }
+        ]
+      },
+      {
+        "title": "Factory address",
+        "lines": [
+          "Guangdong, China",
+          "Workshop visits by appointment",
+          "Mon — Fri · 09:00–18:00 CST"
+        ]
+      },
+      {
+        "title": "Connect with us",
+        "socials": [
+          {
+            "kind": "facebook",
+            "href": "https://www.facebook.com/satellite.liu",
+            "aria": "NCL on Facebook",
+            "name": "Facebook",
+            "note": ""
+          },
+          {
+            "kind": "whatsapp",
+            "href": "https://wa.me/8618938772757",
+            "aria": "NCL on WhatsApp — +86 189 3877 2757",
+            "name": "WhatsApp",
+            "note": ""
+          },
+          {
+            "kind": "instagram",
+            "href": "https://www.instagram.com/new_concepton_lighting/",
+            "aria": "NCL on Instagram",
+            "name": "Instagram",
+            "note": ""
+          },
+          {
+            "kind": "douyin",
+            "href": "https://www.douyin.com/user/MS4wLjABAAAA6-nMW5dyxShDw0qKkLhPcCdm7kp9LKvlH04NBT9qAxo?from_tab_name=main",
+            "aria": "NCL on TikTok",
+            "name": "抖音 / TikTok",
+            "note": ""
+          }
+        ]
+      },
+      {
+        "title": "",
+        "links": [
+          {
+            "label": "Product photographs",
+            "href": "collection.html"
+          },
+          {
+            "label": "Care & finishes",
+            "href": "mailto:studio@ncl.example?subject=Care%20%26%20finishes"
+          },
+          {
+            "label": "Trade enquiries",
+            "href": "mailto:studio@ncl.example?subject=Trade%20enquiry"
+          },
+          {
+            "label": "Back to the top",
+            "href": "#top"
+          }
+        ]
+      }
+    ],
+    "base": [
+      {
+        "text": "© 2024 NCL 新构思 · Guangdong — Worldwide",
+        "href": ""
+      },
+      {
+        "text": "Photography — crystal stills via Wikimedia Commons (CC0)",
+        "href": ""
+      },
+      {
+        "text": "Top ↑",
+        "href": "#top"
+      }
+    ]
+  }
+}

@@ -1,0 +1,222 @@
+[
+ {
+  "file": "patent-chandelier.webp",
+  "w": 800,
+  "h": 1104,
+  "kind": "certificate",
+  "title": "Chandelier",
+  "model": "",
+  "granted": "2015",
+  "number": "ZL 2014 3 0498744.1",
+  "source": "微信图片_20261109152735_75_10.jpg"
+ },
+ {
+  "file": "patent-lamp-base.webp",
+  "w": 800,
+  "h": 1104,
+  "kind": "certificate",
+  "title": "Lamp base",
+  "model": "",
+  "granted": "2015",
+  "number": "ZL 2014 3 0498926.9",
+  "source": "微信图片_20261109152734_73_10.jpg"
+ },
+ {
+  "file": "patent-crystal-lamp-fitting.webp",
+  "w": 800,
+  "h": 1088,
+  "kind": "certificate",
+  "title": "Crystal lamp fitting",
+  "model": "",
+  "granted": "2018",
+  "number": "ZL 2017 3 0145750.2",
+  "source": "微信图片_20261109152735_74_10.jpg"
+ },
+ {
+  "file": "patent-70260-certificate.webp",
+  "w": 1406,
+  "h": 1988,
+  "kind": "certificate",
+  "title": "Table 70260",
+  "model": "70260",
+  "granted": "2025",
+  "number": "ZL 2024 3 0569394",
+  "source": "广东新构思照明科技有限公司-桌子（70260）-外观设计专利证书(1).pdf"
+ },
+ {
+  "file": "patent-70262-certificate.webp",
+  "w": 1406,
+  "h": 1988,
+  "kind": "certificate",
+  "title": "Table 70262",
+  "model": "70262",
+  "granted": "2025",
+  "number": "ZL 2024 3 0627851",
+  "source": "广东新构思照明科技有限公司-桌子（70262）-外观设计专利证书(1).pdf"
+ },
+ {
+  "file": "patent-70264R-certificate.webp",
+  "w": 1406,
+  "h": 1988,
+  "kind": "certificate",
+  "title": "Table 70264R",
+  "model": "70264R",
+  "granted": "2025",
+  "number": "ZL 2024 3 0557149",
+  "source": "广东新构思照明科技有限公司-桌子（70264R）-外观设计专利证书(1).pdf"
+ },
+ {
+  "file": "patent-70290-certificate.webp",
+  "w": 1406,
+  "h": 1988,
+  "kind": "certificate",
+  "title": "Long table 70290",
+  "model": "70290",
+  "granted": "2026",
+  "number": "ZL 2025 3 0522291",
+  "source": "广东新构思照明科技有限公司-长桌子（70290）-外观设计专利证书.pdf"
+ },
+ {
+  "file": "patent-70202-certificate.webp",
+  "w": 1406,
+  "h": 1988,
+  "kind": "certificate",
+  "title": "Round table 70202",
+  "model": "70202",
+  "granted": "2026",
+  "number": "ZL 2025 3 0451965",
+  "source": "广东新构思照明科技有限公司-圆桌（70202）-外观设计专利证书(1).pdf"
+ },
+ {
+  "file": "patent-70202-notice-12.webp",
+  "w": 1406,
+  "h": 1988,
+  "kind": "notice",
+  "title": "Long table 70202",
+  "model": "70202",
+  "granted": "2026",
+  "number": "",
+  "source": "广东新构思照明科技有限公司-长桌子（70202）-授予外观设计专利权通知书-1.pdf"
+ },
+ {
+  "file": "patent-70290-notice.webp",
+  "w": 1406,
+  "h": 1988,
+  "kind": "notice",
+  "title": "Long table 70290",
+  "model": "70290",
+  "granted": "2026",
+  "number": "",
+  "source": "广东新构思照明科技有限公司-长桌子（70290）-授予外观设计专利权通知书-1.pdf"
+ },
+ {
+  "file": "patent-70202-notice.webp",
+  "w": 1406,
+  "h": 1988,
+  "kind": "notice",
+  "title": "Round table 70202",
+  "model": "70202",
+  "granted": "2026",
+  "number": "",
+  "source": "广东新构思照明科技有限公司-圆桌（70202）-授予外观设计专利权通知书-1.pdf"
+ },
+ {
+  "file": "piece-01.webp",
+  "w": 1500,
+  "h": 1712,
+  "kind": "piece",
+  "title": "Chandelier 70100 · 6 + 6L",
+  "model": "70100 · 6 + 6L",
+  "granted": "",
+  "number": "",
+  "source": "70100-6+6L雨伞φ1250H1050.jpg"
+ },
+ {
+  "file": "piece-02.webp",
+  "w": 1500,
+  "h": 1851,
+  "kind": "piece",
+  "title": "Chandelier 70100 · 6L",
+  "model": "70100 · 6L",
+  "granted": "",
+  "number": "",
+  "source": "70100-6Lφ670H740.jpg"
+ },
+ {
+  "file": "piece-03.webp",
+  "w": 1500,
+  "h": 1857,
+  "kind": "piece",
+  "title": "Chandelier 70100 · 9 + 6 + 3",
+  "model": "70100 · 9 + 6 + 3",
+  "granted": "",
+  "number": "",
+  "source": "70100-9+6+3鹿头φ1050H1200.jpg"
+ },
+ {
+  "file": "piece-05.webp",
+  "w": 1033,
+  "h": 2000,
+  "kind": "piece",
+  "title": "Floor lamp 70124",
+  "model": "70124",
+  "granted": "",
+  "number": "",
+  "source": "壁灯 台灯_70124 -φ300H1550落地灯.jpg"
+ },
+ {
+  "file": "piece-06.webp",
+  "w": 1500,
+  "h": 1524,
+  "kind": "piece",
+  "title": "Piece 88",
+  "model": "88",
+  "granted": "",
+  "number": "",
+  "source": "壁灯 台灯_88.jpg"
+ },
+ {
+  "file": "piece-20.webp",
+  "w": 1500,
+  "h": 1734,
+  "kind": "piece",
+  "title": "Round table 70201",
+  "model": "70201",
+  "granted": "",
+  "number": "",
+  "source": "桌子_70201圆桌.jpg"
+ },
+ {
+  "file": "piece-19.webp",
+  "w": 1500,
+  "h": 1389,
+  "kind": "piece",
+  "title": "Side table 70201",
+  "model": "70201",
+  "granted": "",
+  "number": "",
+  "source": "桌子_70201圆几.jpg"
+ },
+ {
+  "file": "piece-18.webp",
+  "w": 1500,
+  "h": 1161,
+  "kind": "piece",
+  "title": "Table 70188",
+  "model": "70188",
+  "granted": "",
+  "number": "",
+  "source": "桌子_70188.jpg"
+ },
+ {
+  "file": "piece-04.webp",
+  "w": 1500,
+  "h": 1894,
+  "kind": "piece",
+  "title": "Wall light 70100 · 1T",
+  "model": "70100 · 1T",
+  "granted": "",
+  "number": "",
+  "source": "壁灯 台灯_70100-1T Φ350H640.jpg"
+ }
+]
